@@ -1,0 +1,60 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: opportunity-briefing
+description: One-page meeting prep brief — pulls CRM + meetings + emails + battlecards
+trigger_intent:
+  - "prep me for"
+  - "brief me on"
+  - "meeting prep"
+  - "walking into a meeting"
+  - "give me context on"
+  - "in 30 minutes I'm meeting"
+audience: seller-internal
+output_format: markdown
+time_budget_seconds: 90
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - crm_opportunity_record
+      - recent_meetings_60_days
+      - recent_emails_30_days
+      - account_memory
+      - relevant_battlecard_for_competitor
+      - relevant_industry_playbook
+    parallel: true
+    timeout_seconds: 30
+
+  - name: analyst
+    agent: aveva-analyst
+    depends_on: [research]
+    output_template: "templates/opportunity-briefing-outline.yaml"
+    timeout_seconds: 20
+
+  - name: writer
+    agent: aveva-writer
+    depends_on: [analyst]
+    output_format: markdown
+    target_word_count: 1000
+    timeout_seconds: 25
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    parallel_with_formatter: true
+    rules:
+      - all_numeric_claims_tagged
+      - audience_filter_seller-internal
+    timeout_seconds: 10
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer]
+    output_format: markdown
+    output_path: "outputs/briefings/{account-slug}-{date}.md"
+    also_update: "accounts/{ae-slug}/{account-slug}.md"
+    timeout_seconds: 5

@@ -1,0 +1,59 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: industry-playbook
+description: Refresh or generate a full industry playbook (WWW UPDATED archetype) — verified-edition, three-axis tagged, multi-section formal document
+trigger_intent:
+  - "refresh the {industry} playbook"
+  - "generate playbook for {industry}"
+  - "verified edition"
+  - "update industry playbook"
+audience: seller-internal              # base version; partner-channel and customer-facing-executive subsets re-rendered separately
+output_format: pdf                     # primary; DOCX optional
+time_budget_seconds: 480
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - docs_aveva_com_industry_pages
+      - aveva_corporate_industry_case_studies
+      - aveva_blog_industry_posts
+      - schneider_resource_center
+      - applicable_battlecards
+      - regulatory_landscape_for_industry
+      - existing_industry_playbook        # for diff-style refresh
+    parallel: true
+    timeout_seconds: 90
+
+  - name: analyst
+    agent: aveva-analyst
+    depends_on: [research]
+    structure: "www_updated_archetype"   # Document Version, Confidence Protocol declared, Executive Overview, Industry Landscape with sub-segments, Regulatory, Primary Competitors, Talk Tracks, Solution Tiers, Wins, Verification Notes
+    timeout_seconds: 45
+
+  - name: writer
+    agent: aveva-writer
+    depends_on: [analyst]
+    output_format: pdf_ready_markdown
+    confidence_protocol: explicit         # tag every claim VERIFIED / PROPOSED / BENCHMARK
+    timeout_seconds: 90
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    rules:
+      - all_numeric_claims_tagged
+      - confidence_protocol_explicit
+      - audience_filter_seller-internal
+    timeout_seconds: 30
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer, verifier]
+    output_format: pdf
+    secondary_format: docx
+    output_path: "outputs/industry-playbooks/{industry-slug}-v{version}-{date}.pdf"
+    timeout_seconds: 30

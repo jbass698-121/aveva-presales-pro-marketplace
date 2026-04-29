@@ -1,0 +1,66 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: strategic-account-brief
+description: Tier-1 strategic account brief (Baker Hughes archetype) — 4 parts, citation-footnoted, 30-50 page PDF
+trigger_intent:
+  - "Tier 1 account brief"
+  - "strategic account brief"
+  - "executive meeting prep for"
+  - "deep brief on"
+  - "CEO meeting brief"
+  - "$50M opportunity"
+  - "strategic account analysis"
+audience: seller-internal              # internal first; can re-render customer-facing-executive subset
+output_format: pdf
+time_budget_seconds: 600
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - deep_web_search                 # 10-y company history, recent earnings calls
+      - investor_relations_filings
+      - press_releases_180_days
+      - partnerships_ledger
+      - account_memory
+      - aveva_corporate_case_studies
+      - schneider_resource_center
+      - relevant_industry_playbook
+      - applicable_battlecards
+    parallel: true
+    timeout_seconds: 90
+
+  - name: analyst
+    agent: aveva-analyst
+    depends_on: [research]
+    output_template: "templates/strategic-account-outline.yaml"
+    structure: "4_part_baker_hughes_archetype"  # Market, Solution Alignment, Engagement Strategy, ROI
+    timeout_seconds: 60
+
+  - name: writer
+    agent: aveva-writer
+    depends_on: [analyst]
+    output_format: pdf_ready_markdown
+    target_page_count: 30-50
+    citation_footnoting: true
+    timeout_seconds: 180
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    rules:
+      - all_numeric_claims_tagged
+      - all_footnoted_claims_traceable
+      - audience_filter_seller-internal
+      - pricing_claims_require_high_confidence_for_customer_facing
+    timeout_seconds: 60
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer, verifier]
+    output_format: pdf
+    output_path: "outputs/strategic-account-briefs/{account-slug}-{date}.pdf"
+    timeout_seconds: 30

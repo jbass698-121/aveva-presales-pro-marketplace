@@ -1,0 +1,10 @@
+{
+  "name": "local-marketplace",
+  "plugins": [
+    {
+      "name": "aveva-presales-pro",
+      "source": "./plugins/aveva-presales-pro",
+      "version": "0.3.1"
+    }
+  ]
+}

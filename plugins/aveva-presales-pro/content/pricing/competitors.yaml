@@ -1,0 +1,14 @@
+# Optional slot per SPEC §6 — competitor pricing benchmarks.
+# Fill in if your team has visibility into competitor pricing for ROI/TCO comparisons.
+metadata:
+  effective_date: "2026-04-29"
+  status: "stub"
+  confidence: "LOW (empty stub; distributor must populate)"
+
+competitors: {}
+# Example structure:
+# competitors:
+#   ignition:
+#     unlimited_tag_license: 9000
+#     module_avg_per_year: 2500
+#     confidence: "MEDIUM (public list price; verify against quote)"

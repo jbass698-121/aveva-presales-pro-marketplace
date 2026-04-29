@@ -1,0 +1,142 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+# Canonical AVEVA + Schneider public sources — shipped with the framework.
+# 8-tier intelligence graph with retrieval pattern, confidence default,
+# and update cadence per source.
+#
+# v0.2.0 expansion: added YouTube, AVEVA blog, AVEVA World, partner portal,
+# Schneider resource center.
+
+# =========================================================================
+# TIER 1 — Authoritative AVEVA technical and corporate sources
+# =========================================================================
+sources:
+
+  docs_aveva_com:
+    base_url: "https://docs.aveva.com"
+    confidence_default:
+      freshness: "HIGH"
+      semantic: "VERIFIED"
+      provenance: "PRIMARY"
+    citation_format: "[docs.aveva.com → {bundle} → {page}, last verified {date}]"
+    update_cadence: "daily_diff"
+    bundles:
+      system_platform:
+        url: "https://docs.aveva.com/bundle/sp-install/"
+        topics: ["installation", "architecture", "redundancy", "scaling", "security"]
+      system_platform_runtime:
+        url: "https://docs.aveva.com/bundle/sp-development-guide/"
+      intouch_hmi:
+        url: "https://docs.aveva.com/bundle/intouch-hmi/"
+      intouch_2023_r2:
+        url: "https://docs.aveva.com/bundle/intouch-2023-r2"
+      pi_system:
+        url: "https://docs.aveva.com/bundle/pi-system/"
+      pi_web_api:
+        url: "https://docs.aveva.com/bundle/pi-web-api-reference/"
+      operations_control:
+        url: "https://docs.aveva.com/bundle/operations-control/"
+      unified_operations_center:
+        url: "https://docs.aveva.com/bundle/unified-operations/"
+      mes:
+        url: "https://docs.aveva.com/bundle/mes/"
+      aveva_connect:
+        url: "https://connect.aveva.com"
+
+  github_aveva:
+    base_url: "https://github.com/AVEVA"
+    confidence_default:
+      freshness: "HIGH"
+      semantic: "VERIFIED"             # for code samples
+      provenance: "PRIMARY"
+    confidence_default_for_community_issues:
+      freshness: "MEDIUM"
+      semantic: "INFERRED"
+      provenance: "SECONDARY"
+    citation_format: "[github.com/AVEVA/{repo} → {file_or_release}, {date}]"
+    update_cadence: "biweekly_watch"
+    repos_of_interest:
+      - name: "AVEVA-Samples"
+        url: "https://github.com/AVEVA/AVEVA-Samples"
+        purpose: "Multi-product integration samples"
+      - name: "AVEVA-Samples-PI-System"
+        url: "https://github.com/AVEVA/AVEVA-Samples-PI-System"
+        purpose: "PI Web API examples"
+      - name: "OSIsoft.Samples"
+        url: "https://github.com/AVEVA/OSIsoft.Samples"
+        purpose: "Legacy OSIsoft samples (pre-acquisition)"
+      - name: "AVEVA-Samples-System-Platform"
+        url: "https://github.com/AVEVA/AVEVA-Samples-System-Platform"
+        purpose: "System Platform integration patterns"
+
+  aveva_corporate:
+    base_url: "https://www.aveva.com"
+    confidence_default:
+      freshness: "HIGH"
+      semantic: "VERIFIED"
+      provenance: "PRIMARY"
+    update_cadence: "weekly"
+    sub_paths:
+      products: "https://www.aveva.com/en/products/"
+      press_releases: "https://www.aveva.com/en/about/news/press-releases/"
+      case_studies: "https://www.aveva.com/en/customers/case-studies/"
+      partners: "https://www.aveva.com/en/about/partners/"
+      industries: "https://www.aveva.com/en/industries/"
+    use_for: ["product positioning", "press announcements", "verifiable customer references"]
+
+  aveva_blog:
+    base_url: "https://www.aveva.com/en/perspectives/blog/"
+    confidence_default:
+      freshness: "HIGH"
+      semantic: "BENCHMARK"             # editorial content
+      provenance: "PRIMARY"
+    update_cadence: "daily_rss"
+    feed_url: "https://www.aveva.com/en/perspectives/blog/rss/"
+    use_for: ["industry trends", "customer perspectives", "executive thought leadership"]
+
+  schneider_resource_center:
+    base_url: "https://www.se.com/us/en/work/products/industrial-automation-control/"
+    confidence_default:
+      freshness: "HIGH"
+      semantic: "VERIFIED"
+      provenance: "PRIMARY"
+    update_cadence: "weekly"
+    sub_paths:
+      ecostruxure: "https://www.se.com/us/en/work/campaign/innovation/overview.jsp"
+      industrial_automation: "https://www.se.com/us/en/work/products/industrial-automation-control/"
+      modicon: "https://www.se.com/us/en/product-range/2226-modicon-m580/"
+      ecostruxure_automation_expert: "https://www.se.com/us/en/work/products/automation-expert/"
+      ecostruxure_power_monitoring: "https://www.se.com/ww/en/work/solutions/system/s4/data-center-power-management/"
+    use_for: ["unified portfolio narrative", "Schneider hardware specs", "EcoStruxure positioning"]
+
+# =========================================================================
+# TIER 2 — Multimedia and conference sources
+# =========================================================================
+
+  aveva_youtube:
+    base_url: "https://www.youtube.com/@AVEVA"
+    confidence_default:
+      freshness: "MEDIUM"
+      semantic: "VERIFIED"             # for product demos
+      provenance: "PRIMARY"
+    update_cadence: "weekly"
+    use_for: ["product demos", "customer testimonials", "executive presentations"]
+    notes: "YouTube Data API for new uploads; transcripts via youtube-transcript-api"
+
+  aveva_world:
+    base_url: "https://world.aveva.com"
+    confidence_default:
+      freshness: "HIGH for current year, MEDIUM for prior years"
+      semantic: "VERIFIED"
+      provenance: "PRIMARY"
+    update_cadence: "annual_post_conference_ingest"
+    use_for: ["customer presentations", "product roadmap reveals", "partner announcements"]
+    notes: "Annual user conference; recordings available post-event"
+
+  aveva_partner_portal:
+    base_url: "https://partner.aveva.com"
+    confidence_default:
+      freshness:

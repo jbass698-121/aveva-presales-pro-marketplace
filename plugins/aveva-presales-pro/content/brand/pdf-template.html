@@ -1,0 +1,29 @@
+<!--
+Default PDF template used by tools/render-pdf.py.
+Distributors customize by replacing this file with their own HTML.
+
+Placeholder convention: string.Template ($var) — CSS curly braces are NOT
+escaped. Available variables:
+  $title $primary $accent $distributor $date $cover $body $plugin_version $watermark
+-->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>$title</title>
+<style>
+@page { size: letter; margin: 1in; @bottom-center { content: counter(page); font-size: 9pt; color: #888; } @top-right { content: "$distributor"; font-size: 9pt; color: #888; } }
+body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #222; line-height: 1.5; font-size: 11pt; }
+h1 { color: $primary; border-bottom: 3px solid $primary; padding-bottom: 0.3em; font-size: 22pt; }
+h2 { color: $primary; font-size: 16pt; margin-top: 1.5em; }
+h3 { color: $accent; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #ccc; padding: 0.4em 0.6em; text-align: left; font-size: 10pt; }
+th { background: $primary; color: white; }
+blockquote { border-left: 4px solid $accent; padding-left: 1em; color: #555; }
+.cover { text-align: center; padding-top: 3in; page-break-after: always; }
+.cover h1 { border: none; font-size: 32pt; }
+.cover .subtitle { color: #666; font-size: 14pt; margin-top: 1em; }
+.footer-note { font-size: 9pt; color: #666; margin-top: 2em; border-top: 1px solid #ccc; padding-top: 0.5em; }
+</style></head><body>
+$cover
+$body
+<div class="footer-note">$distributor | Generated $date | aveva-presales-pro v$plugin_version</div>
+</body></html>

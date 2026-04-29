@@ -1,0 +1,27 @@
+{
+  "name": "aveva-presales-pro",
+  "version": "0.3.1",
+  "description": "AI presales content factory for Schneider Electric direct sellers and AVEVA distributors. v0.3.1 adds HTML live artifacts: interactive ROI calculator, content health dashboard, battlecard viewer, and briefing dashboard skeleton (activates with CRM + Fireflies + M365 connectors). Built on v0.3.0's regulatory + AI content refresh.",
+  "author": {
+    "name": "Jason Bass"
+  },
+  "license": "BUSL-1.1",
+  "keywords": [
+    "aveva",
+    "schneider-electric",
+    "ecostruxure",
+    "presales",
+    "industrial-automation",
+    "scada",
+    "hmi",
+    "dcs",
+    "mes",
+    "competitive-intelligence",
+    "roi",
+    "tco",
+    "battlecard",
+    "opportunity-briefing",
+    "strategic-account",
+    "enablement"
+  ]
+}

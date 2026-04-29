@@ -1,0 +1,228 @@
+<!--
+Copyright (c) 2026 Jason Bass. All rights reserved.
+Licensed under the Business Source License 1.1. See LICENSE.md.
+Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AVEVA Battlecard Viewer</title>
+<style>
+  :root {
+    --bg: var(--background, #fafafa);
+    --fg: var(--foreground, #1a1a1a);
+    --muted: var(--muted-foreground, #6b6b6b);
+    --primary: var(--primary, #0F4C81);
+    --accent: var(--accent, #00B5B0);
+    --border: var(--border, #e0e0e0);
+    --card-bg: var(--card, #ffffff);
+    --good: #157f3a;
+    --warn: #c97f0a;
+    --bad: #b33020;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 18px; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.5; font-size: 10pt; }
+  h1 { color: var(--primary); margin: 0 0 6px 0; font-size: 18pt; }
+  h2 { color: var(--primary); font-size: 12pt; margin: 16px 0 8px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  .top-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
+  select, button { padding: 6px 10px; font-size: 10pt; border: 1px solid var(--border); border-radius: 4px; background: var(--card-bg); color: var(--fg); }
+  button.primary { background: var(--primary); color: white; border-color: var(--primary); cursor: pointer; }
+  button:hover { opacity: 0.92; }
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .stub-banner { background: #fbf3df; color: var(--warn); padding: 10px; border-left: 4px solid var(--warn); border-radius: 4px; margin-bottom: 10px; font-weight: 600; }
+  .ai-callout { background: rgba(0, 181, 176, 0.08); border-left: 4px solid var(--accent); padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+  .ai-callout strong { color: var(--primary); }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; font-size: 9pt; }
+  .meta-grid .item { background: rgba(0,0,0,0.02); padding: 8px; border-radius: 4px; }
+  .meta-grid .item strong { display: block; color: var(--muted); font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; font-weight: 600; margin-right: 4px; }
+  .pill.primary { background: #e3eef9; color: var(--primary); }
+  .pill.danger { background: #f7e1dd; color: var(--bad); }
+  .pill.warn { background: #fbf3df; color: var(--warn); }
+  .audience-block { background: rgba(0,0,0,0.02); padding: 12px; border-radius: 6px; margin: 10px 0; }
+  .audience-block .label { font-size: 9pt; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .audience-active { border: 2px solid var(--accent); }
+  .section { margin: 14px 0; padding: 10px 0; border-top: 1px solid var(--border); }
+  .section h3 { font-size: 10.5pt; margin: 0 0 6px; color: var(--primary); }
+  .section pre { white-space: pre-wrap; font-family: inherit; font-size: 10pt; margin: 0; }
+  .source-list { font-size: 8.5pt; color: var(--muted); }
+  .source-list a { color: var(--primary); text-decoration: none; }
+  .source-list a:hover { text-decoration: underline; }
+  .footer-note { margin-top: 16px; padding: 10px; border-top: 1px solid var(--border); font-size: 8.5pt; color: var(--muted); }
+  .freshness-badge { font-size: 8.5pt; padding: 2px 8px; border-radius: 10px; }
+  .freshness-fresh { background: #e8f4eb; color: var(--good); }
+  .freshness-stale { background: #fbf3df; color: var(--warn); }
+  .freshness-very-stale { background: #f7e1dd; color: var(--bad); }
+</style>
+</head>
+<body>
+
+<h1>AVEVA Battlecard Viewer <span style="font-size: 10pt; color: var(--muted);" id="ver"></span></h1>
+<div style="font-size: 9.5pt; color: var(--muted); margin-bottom: 12px;">
+  Browse the plugin's competitor battlecards interactively. Audience-signals selector toggles framing per buyer posture. Refresh button opens the competitor's official source in a new tab.
+</div>
+
+<div class="top-bar">
+  <label><strong>Competitor:</strong></label>
+  <select id="picker" onchange="render()"></select>
+  <span>
+    <label style="font-size: 9pt; color: var(--muted);"><strong>Audience:</strong></label>
+    <select id="audience" onchange="render()" style="margin-left: 4px;">
+      <option value="multi_vendor_friendly">Multi-vendor-friendly</option>
+      <option value="single_vendor_friendly">Single-vendor-friendly</option>
+      <option value="cost_sensitive">Cost-sensitive</option>
+      <option value="enterprise_inclined">Enterprise-inclined</option>
+    </select>
+  </span>
+</div>
+
+<div id="cardArea"></div>
+
+<div class="footer-note">
+  AVEVA, part of Schneider Electric &middot; Watermark: <code>appro-ca96e5c3-e535-40b4-a502-9e85523f608e</code> &middot; aveva-presales-pro v0.3.1<br>
+  Battlecard data sourced from <code>artifacts/battlecards-snapshot.json</code>, regenerated at plugin build time. To check for freshness: each card carries a <code>last_validated</code> field; values older than 90 days surface as "stale" and trigger a content-health audit recommendation.
+</div>
+
+<script>
+let SNAP = null;
+
+fetch('battlecards-snapshot.json')
+  .then(r => r.json())
+  .then(s => { SNAP = s; init(); })
+  .catch(err => {
+    document.getElementById('cardArea').innerHTML = '<div class="card"><strong>Could not load battlecards-snapshot.json:</strong> ' + err.message + '</div>';
+  });
+
+function init() {
+  document.getElementById('ver').textContent = 'v' + (SNAP.plugin_version || '?');
+  const picker = document.getElementById('picker');
+  picker.innerHTML = '';
+  const slugs = Object.keys(SNAP.cards).sort((a, b) => {
+    const fa = !SNAP.cards[a].is_stub, fb = !SNAP.cards[b].is_stub;
+    if (fa !== fb) return fa ? -1 : 1;   // full first, stubs last
+    return a.localeCompare(b);
+  });
+  slugs.forEach(slug => {
+    const c = SNAP.cards[slug];
+    const opt = document.createElement('option');
+    opt.value = slug;
+    opt.textContent = c.name + (c.is_stub ? ' (stub)' : '');
+    picker.appendChild(opt);
+  });
+  const remembered = localStorage.getItem('aveva-bc-current');
+  if (remembered && SNAP.cards[remembered]) picker.value = remembered;
+  render();
+}
+
+function render() {
+  if (!SNAP) return;
+  const slug = document.getElementById('picker').value;
+  const audKey = document.getElementById('audience').value;
+  localStorage.setItem('aveva-bc-current', slug);
+  const c = SNAP.cards[slug];
+
+  const freshness = c.last_validated ? freshnessClass(c.last_validated) : 'freshness-very-stale';
+
+  let html = '<div class="card">';
+
+  if (c.is_stub) {
+    html += '<div class="stub-banner">This is a stub battlecard. Distributor must populate before customer-facing use. See <code>content/competitors/_template.md</code> for the layout.</div>';
+  }
+
+  html += '<h2 style="margin-top:0;">' + escapeHTML(c.name) + '</h2>';
+
+  // Threat tier + verticals
+  const threatColor = c.threat_tier === 'primary' ? 'danger' : 'warn';
+  html += '<div style="margin-bottom: 10px;">';
+  html += '<span class="pill ' + threatColor + '">Threat tier: ' + escapeHTML(String(c.threat_tier)) + '</span>';
+  if (Array.isArray(c.verticals)) {
+    c.verticals.forEach(v => {
+      html += '<span class="pill primary">' + escapeHTML(v) + '</span>';
+    });
+  }
+  html += '<span class="freshness-badge ' + freshness + '">last_validated: ' + (c.last_validated || '—') + '</span>';
+  html += '</div>';
+
+  // AI callout
+  if (c.their_AI_offering) {
+    html += '<div class="ai-callout"><strong>Their AI offering:</strong> ' + escapeHTML(c.their_AI_offering) + '<br>' +
+            '<strong>AVEVA counter:</strong> AVEVA Industrial AI Assistant (GA January 2026) — natural-language query in CONNECT, role-based permissions, never trained on customer data.</div>';
+  }
+
+  // Recent corporate change (used for Emerson / AspenTech)
+  if (c.recent_corporate_change) {
+    html += '<div class="ai-callout" style="background: rgba(180, 50, 30, 0.06); border-left-color: var(--bad);"><strong>Recent corporate change:</strong> ' + escapeHTML(c.recent_corporate_change) + '</div>';
+  }
+
+  // Audience signals
+  if (c.audience_signals && Object.keys(c.audience_signals).length) {
+    html += '<div class="audience-block ' + (c.audience_signals[audKey] ? 'audience-active' : '') + '">';
+    html += '<div class="label">Audience-tailored framing for: ' + audKey.replace(/_/g, '-') + '</div>';
+    if (c.audience_signals[audKey]) {
+      html += '<div style="margin-top: 4px;">' + escapeHTML(c.audience_signals[audKey]) + '</div>';
+    } else {
+      html += '<div style="margin-top: 4px; color: var(--muted); font-style: italic;">No specific framing for this audience on this battlecard. Showing default counter-strategy.</div>';
+    }
+    html += '</div>';
+  }
+
+  // Sections (collapsed by default; key ones expanded)
+  const order = ['Threat Profile', 'Product Portfolio', 'Their Competitive Advantages', 'AVEVA Counter-Strategy',
+                 'When AVEVA Wins', 'When ' + c.name.split(' ')[0] + ' Wins', 'Top Objections + Responses',
+                 'Cybersecurity counter (Honeywell secure-by-design / Quantinuum positioning)',
+                 'Recommended Proof Points', 'Recent Changes (review monthly)', 'Internal Notes (do not share with customers)'];
+  const presentSections = order.filter(s => c.sections && c.sections[s]);
+  // Add any other sections not in the canonical order
+  Object.keys(c.sections || {}).forEach(s => { if (!presentSections.includes(s)) presentSections.push(s); });
+
+  presentSections.forEach((sec, idx) => {
+    const isInternal = sec.toLowerCase().includes('internal notes');
+    const expanded = idx < 4;   // Expand top 4 sections by default
+    const body = c.sections[sec];
+    if (!body) return;
+    html += '<details ' + (expanded ? 'open' : '') + ' class="section"><summary><strong>' + escapeHTML(sec) + '</strong>' +
+            (isInternal ? ' <span class="pill warn">INTERNAL</span>' : '') +
+            '</summary>';
+    html += '<pre>' + escapeHTML(body) + '</pre></details>';
+  });
+
+  // Sources / refresh
+  if (Array.isArray(c.sources) && c.sources.length) {
+    html += '<div class="section"><h3>Sources</h3><div class="source-list">';
+    c.sources.forEach(s => {
+      const url = (s && s.url) || '';
+      const date = (s && s.date) || '';
+      if (url) {
+        html += '<div>&bull; <a href="' + escapeAttr(url) + '" target="_blank" rel="noopener">' + escapeHTML(url) + '</a> ' +
+                (date ? '<span style="color:var(--muted);">(' + escapeHTML(date) + ')</span>' : '') + '</div>';
+      }
+    });
+    html += '</div></div>';
+  }
+
+  html += '</div>';
+  document.getElementById('cardArea').innerHTML = html;
+}
+
+function freshnessClass(d) {
+  try {
+    const days = (Date.now() - new Date(d).getTime()) / (1000*60*60*24);
+    if (days < 90) return 'freshness-fresh';
+    if (days < 365) return 'freshness-stale';
+    return 'freshness-very-stale';
+  } catch(e) { return 'freshness-stale'; }
+}
+
+function escapeHTML(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function escapeAttr(s) {
+  if (s == null) return '';
+  return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+</script>
+
+</body>
+</html>

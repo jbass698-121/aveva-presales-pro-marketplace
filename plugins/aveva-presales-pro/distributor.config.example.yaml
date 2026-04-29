@@ -1,0 +1,248 @@
+# Configuration template — copy to `distributor.config.yaml` and customize.
+
+# =========================================================================
+# Audience / org type — controls voice, content boundaries, terminology
+# =========================================================================
+audience:
+  org_type: "aveva_distributor"
+  org_name: "Q-Mation"
+  internal_assets: false
+  channel_relationship: "exclusive"
+
+# =========================================================================
+# Organization profile
+# =========================================================================
+distributor:
+  name: "Q-Mation"
+  type: "exclusive_aveva_distributor"
+  region: "gulf-coast"
+  regions_served:
+    - "gulf-coast"
+    - "mountain-west"
+    - "southwest"
+  pilot_scope:
+    seller_count: 15
+    primary_office: "Houston, TX"
+
+# =========================================================================
+# Verticals
+# =========================================================================
+verticals:
+  active:
+    - oil-gas-upstream
+    - oil-gas-midstream
+    - cpg
+    - water-wastewater
+    - mining-metals-minerals
+    - transportation
+  fast_follow:
+    - pharma-life-sciences
+    - power-utilities
+  parked:
+    - automotive
+    - semiconductor
+    - retail
+    - hospitality
+    - battery-ev
+    - lng
+
+# =========================================================================
+# Per-vertical primary competitors
+# =========================================================================
+competitors_by_vertical:
+  oil-gas-upstream:
+    primary: ["honeywell", "emerson", "yokogawa"]
+    secondary: ["abb", "rockwell"]
+  oil-gas-midstream:
+    primary: ["honeywell", "emerson", "yokogawa"]
+    secondary: ["abb"]
+  cpg:
+    primary: ["rockwell", "siemens", "ge-digital"]
+    secondary: ["inductive-automation-ignition"]
+  water-wastewater:
+    primary: ["rockwell", "siemens", "inductive-automation-ignition"]
+    secondary: ["trihedral-vtscada", "ge-digital"]
+  mining-metals-minerals:
+    primary: ["rockwell", "abb", "siemens"]
+    secondary: ["honeywell", "emerson", "ge-digital"]
+  transportation:
+    primary: ["siemens", "rockwell", "abb"]
+    secondary: ["honeywell"]
+  pharma-life-sciences:
+    primary: ["rockwell", "siemens", "emerson"]
+    secondary: ["honeywell", "ge-digital", "werum-pasx"]
+  power-utilities:
+    primary: ["abb", "siemens", "ge-digital"]
+    secondary: ["honeywell", "emerson"]
+
+# =========================================================================
+# Product portfolio focus
+# =========================================================================
+product_focus:
+  software_primary:
+    - system-platform
+    - operations-control
+    - pi-system
+    - aveva-connect
+    - intouch-hmi
+    - mes
+  software_secondary:
+    - unified-engineering
+    - process-simulation
+    - aim-asset-management
+    - unified-supply-chain
+  hardware_secondary:
+    - modicon-plc
+    - foxboro-dcs
+    - altivar-drives
+    - triconex-sis
+  schneider_companion:
+    - etap
+    - ecostruxure-automation-expert
+    - power-monitoring-expert
+    - ecostruxure-control-expert
+
+# =========================================================================
+# Solution tiers
+# =========================================================================
+tiers:
+  cost_conscious:
+    profile: "small site, low budget, low tag count"
+    primary_solution: "Modicon M221/M241 plus InTouch Edge Client"
+  mid_market:
+    profile: "regional, mid budget, mid tag count"
+    primary_solution: "Modicon M580 plus AVEVA System Platform"
+  enterprise:
+    profile: "large multi-site, high budget, high tag count"
+    primary_solution: "Foxboro DCS plus AVEVA Unified Operations Center"
+
+# =========================================================================
+# Stack
+# =========================================================================
+stack:
+  crm: "microsoft-dynamics-365"
+  email_calendar: "microsoft-365"
+  meeting_intelligence: "fireflies"
+  messaging: "microsoft-teams"
+  identity: "azure-ad-entra"
+
+optional_tools:
+  gamma_app:
+    enabled: false
+    org_account: false
+  wondercraft_ai:
+    enabled: false
+    org_account: false
+
+crm:
+  webhooks:
+    enabled: false
+    events:
+      - "opportunity.stage_changed"
+      - "opportunity.closed"
+      - "contact.created"
+    handler_url: ""
+
+# =========================================================================
+# Account memory
+# =========================================================================
+account_memory:
+  isolation: "per_ae"
+  ae_email_field: "owner_email"
+  team_sharing_default: false
+  retention:
+    active: "indefinite"
+    closed_won_active: "24_months"
+    closed_won_archive: "12_months"
+    closed_lost_active: "12_months"
+    closed_lost_archive: "6_months"
+    dormant_threshold_months: 6
+    dormant_archive_after_months: 18
+  privacy:
+    sensitive_data_scrub: true
+    customer_facing_filter: "synthesized_only"
+    annual_audit: true
+    subject_access_request_enabled: true
+    deletion_request_enabled: true
+
+# =========================================================================
+# Voice
+# =========================================================================
+voice:
+  persona: "AVEVA-native presales expert; consultative, executive-ready, evidence-based"
+  tone: "authoritative but not arrogant; cite sources; lead with business impact"
+  forbidden_phrases:
+    - "It depends"
+    - "I think"
+    - "Most customers prefer"
+  confidence_display: "natural_prose"
+
+# =========================================================================
+# Scheduled tasks
+# =========================================================================
+scheduled_tasks:
+  daily_docs_aveva_diff:
+    enabled: true
+    time: "06:00"
+    post_to: "teams://channel/aveva-intelligence"
+  daily_competitive_news:
+    enabled: true
+    time: "12:00"
+    post_to: "teams://channel/aveva-intelligence"
+  daily_analyst_scan:
+    enabled: true
+    time: "18:00"
+    post_to: "email://enablement-lead"
+  weekly_competitive_brief:
+    enabled: true
+    day: "Monday"
+    time: "07:30"
+    post_to: "teams://channel/sales-enablement"
+  biweekly_aveva_github_watch:
+    enabled: true
+    day: "Wednesday"
+    time: "08:00"
+    cadence_weeks: 2
+  weekly_pipeline_health:
+    enabled: true
+    day: "Friday"
+    time: "16:00"
+    post_to: "email://ae-and-se-owners"
+  monthly_source_validation:
+    enabled: true
+    day_of_month: 1
+    time: "09:00"
+  monthly_pricing_book_validation:
+    enabled: true
+    day_of_month: 1
+    time: "10:00"
+  monthly_competitive_github_scan:
+    enabled: true
+    day_of_month: 2
+    time: "09:00"
+  quarterly_roi_refresh:
+    enabled: true
+    months: [1, 4, 7, 10]
+    day_of_month: 1
+    time: "09:00"
+  quarterly_content_health_audit:
+    enabled: true
+    months: [1, 4, 7, 10]
+    day_of_month: 5
+    time: "09:00"
+  annual_memory_audit:
+    enabled: true
+    month: 1
+    day_of_month: 15
+    time: "09:00"
+
+# =========================================================================
+# Brand
+# =========================================================================
+brand:
+  primary_color: "#0F4C81"
+  accent_color: "#00B5B0"
+  logo_path: "content/brand/logo.png"
+  voice_guide_path: "content/brand/voice.md"
+  pdf_template: "content/brand/pdf-template.html"
+  pptx_template: "content/brand/pptx-template.pptx"

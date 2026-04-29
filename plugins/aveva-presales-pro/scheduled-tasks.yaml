@@ -1,0 +1,128 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+# Scheduled tasks installed at plugin install.
+# Distributor enables / disables in distributor.config.yaml.scheduled_tasks block.
+# Each task is registered via mcp__scheduled-tasks__create_scheduled_task.
+
+tasks:
+
+  daily_docs_aveva_diff:
+    cron: "0 6 * * *"                   # 06:00 daily
+    prompt: |
+      Diff key product pages on docs.aveva.com (System Platform, InTouch, PI System,
+      Operations Control, Connect, MES, AIM) against last snapshot. For each page:
+      1. WebFetch the current content.
+      2. Compare against the snapshot in cache/docs-aveva-snapshots/{bundle}-{page}.html.
+      3. If changed, summarize what changed in 2-3 bullets.
+      4. Update the snapshot file.
+      Post material changes (substantive content drift, new feature mentions, deprecations,
+      version bumps) to {scheduled_tasks.daily_docs_aveva_diff.post_to}.
+      Skip stylistic-only changes.
+
+  daily_competitive_news:
+    cron: "0 12 * * *"                  # 12:00 daily
+    prompt: |
+      Pull RSS / news for primary competitors per distributor.config.competitors_by_vertical:
+      Rockwell IR, Siemens IR, ABB IR, Honeywell IR, Emerson IR, Yokogawa IR,
+      Inductive Automation blog, ABB blog. Last 24 hours.
+      Filter by relevance — keep:
+      - product launches
+      - pricing changes
+      - acquisitions / partnerships
+      - executive moves
+      - notable customer wins
+      Skip routine PR. Post material items to
+      {scheduled_tasks.daily_competitive_news.post_to}.
+
+  daily_analyst_scan:
+    cron: "0 18 * * *"                  # 18:00 daily
+    prompt: |
+      Search for new Gartner, IDC, ARC Advisory, Frost & Sullivan reports / blog posts
+      in the past 24 hours covering industrial automation, MES, SCADA, OT cybersecurity,
+      process industries digital transformation. Flag relevant items for distributor
+      enablement lead at {scheduled_tasks.daily_analyst_scan.post_to}.
+
+  weekly_competitive_brief:
+    cron: "30 7 * * 1"                  # Monday 07:30
+    prompt: |
+      Synthesize the week's daily ingests (docs.aveva.com diffs + competitive news +
+      analyst scan) into a 1-page digest:
+      - Top 3 competitor moves
+      - Top 3 AVEVA-relevant changes
+      - Top 3 actions for the week
+      Post to {scheduled_tasks.weekly_competitive_brief.post_to}.
+
+  biweekly_aveva_github_watch:
+    cron: "0 8 * * 3"                 # Every Wednesday at 08:00; biweekly parity enforced inside the prompt
+    prompt: |
+      Diff github.com/AVEVA against last snapshot. Look for:
+      - new repositories
+      - new releases on flagship samples
+      - notable commits to AVEVA-Samples and AVEVA-Samples-PI-System
+      - security advisories
+      - breaking API changes
+      Summarize in a paragraph if material.
+
+  weekly_pipeline_health:
+    cron: "0 16 * * 5"                  # Friday 16:00
+    prompt: |
+      Read distributor's CRM (Microsoft Dynamics) per distributor.config.stack.crm.
+      Identify deals at risk:
+      - Stage stuck > 14 days
+      - Competitor field changed
+      - No activity > 21 days
+      - Past expected close date
+      For each at-risk deal, suggest specific content intervention.
+      Email per distributor.config.scheduled_tasks.weekly_pipeline_health.post_to.
+
+  monthly_source_validation:
+    cron: "0 9 1 * *"                   # 1st of month, 09:00
+    prompt: |
+      Spot-check top 50 URLs in content/public-sources.yaml + LIVE-SOURCES-REGISTRY.md.
+      Flag dead links, redirects, content drift.
+      Report to distributor enablement lead.
+
+  monthly_pricing_book_validation:
+    cron: "0 10 1 * *"                  # 1st of month, 10:00
+    prompt: |
+      Compare distributor pricing in content/pricing/aveva-current.yaml against
+      AVEVA's current published pricing references.
+      Flag drift > 5%. Report to enablement lead.
+
+  monthly_competitive_github_scan:
+    cron: "0 9 2 * *"                   # 2nd of month, 09:00 (~1st Tuesday-ish)
+    prompt: |
+      Scan competitor GitHub: rockwell-automation, siemens-industrial,
+      Inductive-Automation. Report new repos, major releases, notable activity.
+      Compare innovation velocity (commits, stars, forks) to AVEVA.
+      Generate monthly competitive innovation report.
+
+  quarterly_roi_refresh:
+    cron: "0 9 1 1,4,7,10 *"            # Jan/Apr/Jul/Oct 1, 09:00
+    prompt: |
+      Search for new AVEVA customer success stories and ROI case studies published
+      in the last 90 days. Compare against ROI numbers in content/pricing and case studies.
+      Flag stale or contradicted claims for distributor enablement lead review.
+
+  quarterly_content_health_audit:
+    cron: "0 9 5 1,4,7,10 *"            # Jan/Apr/Jul/Oct 5, 09:00
+    prompt: |
+      Run the aveva-content-health skill in audit mode.
+      Generate the Health Score report.
+      Email to distributor enablement lead with prioritized action list.
+
+  annual_memory_audit:
+    cron: "0 9 15 1 *"                  # Jan 15, 09:00
+    prompt: |
+      Run aveva-account-memory skill in audit mode.
+      Iterate every memory file under accounts/.
+      Apply retention rules from distributor.config.account_memory.retention.
+      Report files due for archival, dormant accounts, suspicious patterns.
+      Email to distributor enablement lead and privacy officer.
+
+# Each task respects distributor.config.scheduled_tasks.{task}.enabled flag.
+# Disabled tasks are skipped at install.
+# All tasks use distributor.config.stack and content references.

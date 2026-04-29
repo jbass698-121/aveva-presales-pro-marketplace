@@ -1,0 +1,58 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: enablement-podcast
+description: Sales enablement podcast script + audio render — Wondercraft-bound, 10-20 minute conversational MP3 for AE/SE listening
+trigger_intent:
+  - "enablement podcast"
+  - "audio briefing"
+  - "podcast for the team"
+  - "create a podcast on {topic}"
+audience: seller-internal
+output_format: mp3
+time_budget_seconds: 600
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - relevant_industry_playbook
+      - applicable_battlecards
+      - relevant_case_studies
+      - aveva_blog_recent_industry
+    parallel: true
+    timeout_seconds: 60
+
+  - name: analyst
+    agent: aveva-analyst
+    depends_on: [research]
+    structure: "two_host_qa_arc"          # Setup → 3-segment Q&A → Wrap-up
+    target_runtime_minutes: 12-15
+    timeout_seconds: 30
+
+  - name: writer
+    agent: aveva-writer
+    depends_on: [analyst]
+    output_format: wondercraft_script
+    hosts: ["Alex", "Jamie"]               # configurable via distributor.config.voice
+    voice_override: "conversational, 2-host Q&A, segment-marked"
+    target_word_count: 2250                 # ~150 wpm × 15 min
+    timeout_seconds: 90
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    rules:
+      - all_numeric_claims_tagged
+      - audience_filter_seller-internal
+    timeout_seconds: 20
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer, verifier]
+    output_format: mp3
+    fallback_chain: [wondercraft_chrome_mcp, wondercraft_manual_handoff, text_only_script]
+    output_path: "outputs/podcasts/{topic-slug}-{date}.mp3"
+    timeout_seconds: 360

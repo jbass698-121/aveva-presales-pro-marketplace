@@ -1,0 +1,52 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: quick-reference
+description: 1-page cheat sheet (CPG Quick Reference archetype) — scannable in 60 seconds, branded PDF
+trigger_intent:
+  - "cheat sheet"
+  - "quick reference"
+  - "1-pager"
+  - "1 pager"
+  - "in-meeting reference"
+  - "scannable summary"
+audience: seller-internal
+output_format: pdf
+time_budget_seconds: 90
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - relevant_industry_playbook
+      - applicable_battlecards
+      - top_objection_scripts
+      - top_case_studies_for_industry
+    parallel: true
+    timeout_seconds: 15
+
+  - name: writer                            # NOTE: skipping analyst stage; quick reference goes research → writer directly
+    agent: aveva-writer
+    depends_on: [research]
+    output_format: pdf_ready_markdown
+    structure: "5_section_template"          # TLDR table, sub-segments by urgency, 5-question discovery, top pains, ROI elevator pitch
+    target_page_count: 1
+    timeout_seconds: 15
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    rules:
+      - all_numeric_claims_tagged
+      - audience_filter_seller-internal
+      - pricing_claims_require_high_confidence_for_customer_facing
+    timeout_seconds: 8
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer, verifier]
+    output_format: pdf
+    output_path: "outputs/quick-references/{topic-slug}-{date}.pdf"
+    timeout_seconds: 5

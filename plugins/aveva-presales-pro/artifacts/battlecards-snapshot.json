@@ -1,0 +1,295 @@
+{
+  "plugin_version": "0.3.1",
+  "watermark": "appro-ca96e5c3-e535-40b4-a502-9e85523f608e",
+  "cards": {
+    "abb": {
+      "name": "Abb",
+      "threat_tier": "unknown",
+      "verticals": [],
+      "last_validated": "2026-04-29",
+      "audience_signals": {},
+      "their_AI_offering": null,
+      "recent_corporate_change": null,
+      "sources": [],
+      "sections": {},
+      "is_stub": true,
+      "path": "content/competitors/abb.md"
+    },
+    "aspentech": {
+      "name": "AspenTech (wholly-owned subsidiary of Emerson)",
+      "threat_tier": "primary in chemicals + refining process design",
+      "verticals": [
+        "chemicals",
+        "petrochemicals",
+        "oil-gas-downstream"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "multi_vendor_friendly": "Lead with portfolio breadth: AVEVA SimSci + System Platform vs. AspenTech process modeling alone",
+        "single_vendor_friendly": "Lead with one-vendor portfolio: AVEVA, part of Schneider Electric (process + simulation + electrical + energy)"
+      },
+      "their_AI_offering": "AspenTech bringing AI-driven process modeling and optimization (industrial-vertical AI) into Emerson's broader DeltaV + Plantweb stack since the March 2025 acquisition close.",
+      "recent_corporate_change": "Emerson completed take-private of AspenTech 2025-03-12 ($265/share, $17B). AspenTech is wholly owned subsidiary of Emerson; ceased trading on NASDAQ. Expect bundled DeltaV + Aspen quotes in chemicals/refining process design competitive situations.",
+      "sources": [
+        {
+          "url": "https://www.emerson.com/en-us/news/2025/emerson-completes-acquisition-of-remaining-outstanding-shares-of-aspentech",
+          "type": "emerson_press_release",
+          "date": "2026-04-29"
+        },
+        {
+          "url": "https://www.aspentech.com/en/acquisition/emerson",
+          "type": "aspentech_official",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** dominant process simulation and process design in refining and petrochemicals.\n- **Corporate structure:** wholly-owned subsidiary of Emerson since March 12, 2025. No longer independent.\n- **Revenue:** disclosed as part of Emerson; pre-acquisition AspenTech standalone ~$1.1B (FY2024).\n- **Core strength:** Aspen Plus, Aspen HYSYS, Aspen DMC3 (advanced process control), Aspen InfoPlus.21 (operations data), Aspen Mtell (predictive maintenance).\n- **Threat tier (this distributor):** primary in petrochemical and refining process design conversations; secondary in O&G operations where Emerson DeltaV is also in play.",
+        "Product Portfolio": "- **Aspen Plus / HYSYS** \u2014 process simulation (steady-state and dynamic)\n- **Aspen DMC3 / Aspen APC** \u2014 advanced process control / multivariable control\n- **Aspen InfoPlus.21** \u2014 process information management / historian (competitive with PI System in some accounts)\n- **Aspen Mtell** \u2014 asset performance management with predictive maintenance\n- **Aspen AIoT Hub** \u2014 IoT and AI-driven operations\n- Now bundled into Emerson commercial motions alongside DeltaV.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** AVEVA, part of Schneider Electric \u2014 unified portfolio (process automation + electrical + energy + software-defined) vs. process-focused AspenTech.\n- **Top differentiator #1:** AVEVA SimSci (now Process Simulator Suite) provides comparable process simulation and dynamic modeling with broader integration to System Platform + PI System operations data.\n- **Top differentiator #2:** AVEVA's PI System has 75% O&G market penetration vs. Aspen InfoPlus.21's narrower deployment base.\n- **Top differentiator #3:** AVEVA + ETAP + EAE + PME unified portfolio matches Emerson's DCS + AspenTech process modeling but adds electrical and software-defined automation Emerson doesn't have natively.",
+        "When AVEVA Wins": "- Customers wanting unified process + electrical + energy + automation (vs. process-only).\n- Multi-industry operators (chemicals + power, chemicals + water utility) where AVEVA's breadth shows.\n- Customers valuing AVEVA's PI System depth over Aspen InfoPlus.21.\n- Customer is software-first / cloud-first; CONNECT cloud architecture vs. AspenAIoT Hub.",
+        "When AspenTech (Emerson) Wins": "- Refining and petrochemical process design where AspenTech's heritage is uncontested.\n- Existing Aspen Plus / HYSYS process models drive integration choice.\n- Customer is committed to Emerson stack; bundled DeltaV + Aspen + Plantweb is the operational reality.",
+        "Top Objections + Responses": "### Objection: \"We use Aspen Plus / HYSYS for all our process design.\"\n**Response:** \"Process design and operations are different conversations. Aspen Plus is strong in design. AVEVA's strength is in operations \u2014 System Platform for SCADA, PI System for historian intelligence, AVEVA MES for batch operations. The two stacks coexist well; many customers run Aspen for design and AVEVA for operations. Operations is where the value compounds over decades.\"\n**Gap-closure:** Show a hybrid architecture diagram. AVEVA does not displace Aspen Plus.\n\n### Objection: \"Aspen InfoPlus.21 is our historian.\"\n**Response:** \"InfoPlus.21 works for what it does. PI System has the deeper Asset Framework model and 75% market share among major O&G producers. The migration math from InfoPlus.21 to PI System has well-trodden patterns; we can show reference architectures.\"\n**Gap-closure:** Migration assessment. Many AVEVA customers are former InfoPlus.21 users.\n\n### Objection: \"AspenTech is now part of Emerson \u2014 DeltaV + Aspen is one vendor.\"\n**Response:** \"True since March 2025. AVEVA's counter is the same logic on a broader scope: AVEVA, part of Schneider Electric, gives you process + electrical + software-defined + power monitoring under one MSA. Emerson + AspenTech is process design + DCS \u2014 narrower than the unified AVEVA portfolio. The right comparison is AVEVA's four pillars vs. Emerson's stack.\"\n**Gap-closure:** Side-by-side portfolio scope comparison.",
+        "Recommended Proof Points": "- AVEVA SimSci customer references in chemicals / refining.\n- 75% O&G PI System market penetration.\n- IDC MarketScape MES Leader designation.",
+        "Recent Changes (review monthly)": "- **Major:** Emerson completed take-private of AspenTech on 2025-03-12 ($265/share, $17B). AspenTech now wholly owned by Emerson; off NASDAQ.\n- Watch quarterly: Emerson AspenTech integration milestones; AspenTech AI feature additions; competitive bundling patterns from Emerson.",
+        "Internal Notes (do not share with customers)": "- AspenTech is the strongest process-design competitor; don't pretend to displace Aspen Plus / HYSYS in customers committed to those tools.\n- The hybrid framing (Aspen for design, AVEVA for operations) is the practical win.\n- Watch for Emerson commercial pressure to bundle Aspen + DeltaV in deals where AVEVA is the operations-layer alternative.",
+        "Notes for Verification Subagent": "- Verify Emerson IR for AspenTech-related disclosures quarterly.\n- Verify aspentech.com for product roadmap changes; many disclosures are now in Emerson's investor materials post-take-private."
+      },
+      "is_stub": false,
+      "path": "content/competitors/aspentech.md"
+    },
+    "emerson": {
+      "name": "Emerson",
+      "threat_tier": "primary",
+      "verticals": [
+        "oil-gas-upstream",
+        "oil-gas-downstream",
+        "chemicals",
+        "power"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "multi_vendor_friendly": "Lead with multi-industry breadth: AVEVA covers process + energy + discrete; Emerson is process-focused",
+        "single_vendor_friendly": "Lead with one-vendor unified portfolio: AVEVA, part of Schneider Electric (AVEVA + Foxboro + ETAP + EAE + PME); Emerson + AspenTech is the comparable single-stack"
+      },
+      "their_AI_offering": "Emerson AspenTech (wholly owned subsidiary since March 2025 take-private) brings AI-driven process modeling and optimization. DeltaV + Plantweb adding embedded AI features.",
+      "recent_corporate_change": "Emerson acquired all remaining outstanding AspenTech shares on 2025-03-12 for $265/share ($17B deal). AspenTech is now wholly owned subsidiary, ceased trading on NASDAQ. Aspen Plus, HYSYS, and the Aspen process simulation portfolio are part of Emerson's integrated stack \u2014 expect bundled DeltaV + Aspen quotes in chemicals/refining.",
+      "sources": [
+        {
+          "url": "https://www.emerson.com/en-us/automation",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** strong incumbent in process industries, especially upstream O&G and chemicals.\n- **Revenue:** Emerson Automation Solutions ~$4.2B (2023) \u2014 verify current.\n- **Core strength:** DeltaV DCS + comprehensive instrumentation portfolio + Plantweb digital ecosystem + Aspen integration.\n- **Threat tier (this distributor):** primary in upstream O&G; significant in midstream and chemicals.",
+        "Product Portfolio": "- DCS: DeltaV (modern generation)\n- Instrumentation and final control elements (Rosemount, Fisher, Micro Motion, etc.)\n- Plantweb digital ecosystem and analytics\n- AMS Device Manager (asset management)\n- AspenTech process simulation portfolio (Aspen Plus, HYSYS, etc.) \u2014 wholly-owned subsidiary since March 2025 take-private; integrated with DeltaV",
+        "Their Competitive Advantages": "1. Process optimization and reliability consulting heritage \u2014 Emerson sells solutions, not just products.\n2. Complete measurement and final control element portfolio (Rosemount, Fisher, Micro Motion, Bettis).\n3. DeltaV is widely regarded as easy to use and fast to commission for moderate-complexity DCS deployments.\n4. Plantweb digital twin integration and AMS asset management have decade-plus track record.\n5. AspenTech ownership (since March 2025) \u2014 Emerson now sells DeltaV + Aspen process modeling as one stack. AspenTech's $17B value reflects the strategic significance to Emerson's integrated digital play.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** complete industrial intelligence vs. process-only focus. AVEVA, part of Schneider Electric, covers process + energy + discrete in one architecture (AVEVA + Foxboro DCS + ETAP + EAE + PME). Emerson's AspenTech ownership gives it the process-modeling layer; AVEVA's unified portfolio still has the energy and discrete breadth Emerson doesn't match.\n- **Top differentiator #1:** AVEVA's PI System historian breadth and 75% O&G market penetration \u2014 Plantweb's analytics is built on a much narrower foundation.\n- **Top differentiator #2:** EcoStruxure energy management beyond DeltaV's process scope.\n- **Top differentiator #3:** Multi-industry strength \u2014 AVEVA covers discrete, process, infrastructure, and energy in one platform.\n- **Cloud / cloud-readiness story:** AVEVA Connect cloud architecture is broader and more mature than Plantweb cloud.",
+        "When AVEVA Wins": "- Multi-industry environments (e.g., integrated O&G + petrochem + power).\n- Energy and sustainability are strategic mandates.\n- Software-first or cloud-first requirements where Emerson's hardware-centric approach is a poor fit.\n- Customers wanting one unified platform across process, discrete, and energy.",
+        "When Emerson Wins": "- Upstream O&G incumbency \u2014 DeltaV has a strong installed base in production operations.\n- Customers prioritizing depth of instrumentation portfolio (Rosemount + Fisher + Micro Motion bundles).\n- Greenfield process plants where Emerson's bundled hardware-software-services is the operating model.",
+        "Top Objections + Responses": "### Objection: \"DeltaV and Plantweb provide all the process optimization we need.\"\n**Response:** \"Process optimization is important, and Foxboro DCS with AVEVA System Platform provides equivalent process control. The difference: Emerson focuses on process. AVEVA delivers process + energy + discrete in one platform. One stack for the complete facility.\"\n**Gap-closure:** Show a live demo of an integrated facility \u2014 process + energy + discrete \u2014 running on AVEVA. Most Emerson customers haven't seen this depth.\n\n### Objection: \"We standardize on Rosemount and Fisher instruments.\"\n**Response:** \"Keep them. AVEVA System Platform integrates with Rosemount, Fisher, and Micro Motion via standard protocols (HART, Foundation Fieldbus, Profibus, OPC-UA). The instrument layer doesn't have to change \u2014 the operations and historian layer is where AVEVA brings the multi-vendor and multi-industry advantage.\"\n**Gap-closure:** Reference architecture showing AVEVA on top of Rosemount-instrumented field.\n\n### Objection: \"DeltaV is easier to commission than other DCS platforms.\"\n**Response:** \"DeltaV is good for what it does. The harder question is what you do once it's running \u2014 when you need historian intelligence, multi-site rollup, energy optimization, recipe management, and cloud integration, the AVEVA stack on top is where the value compounds. Many DeltaV customers run AVEVA PI System and System Platform on top for exactly this reason.\"\n**Gap-closure:** Hybrid architecture proposal \u2014 DeltaV preserved, AVEVA added on top.",
+        "Recommended Proof Points": "- 75% of global O&G production companies on AVEVA PI System.\n- Foxboro DCS heritage references.\n- Customer case: integrated facility achieving 12% total efficiency improvement through unified AVEVA approach (industry estimate; verify against case study library).",
+        "Recent Changes (review monthly)": "- **Major:** Emerson completed take-private of AspenTech on March 12, 2025 ($265/share, $17B). AspenTech is now wholly owned. Expect Emerson to bundle DeltaV + Aspen Plus/HYSYS in process-design + DCS competitive situations.\n- Watch quarterly: DeltaV version updates; Plantweb cloud feature additions; AspenTech integration into Emerson commercial motions; AVEVA SimSci competitive positioning vs. integrated Aspen + DeltaV.",
+        "Monitoring Queries (used by scheduled tasks)": "- \"Emerson Plantweb vs AVEVA digital twin \u2014 last 90 days\"\n- \"DeltaV DCS roadmap 2026\"\n- \"Emerson upstream O&G strategy\"",
+        "Internal Notes (do not share with customers)": "- Upstream O&G is where Emerson is hardest to displace; the hybrid framing (DeltaV + AVEVA on top) is the practical win.\n- Emerson's instrumentation moat is real \u2014 don't pretend AVEVA replaces Rosemount/Fisher; integrate around them."
+      },
+      "is_stub": false,
+      "path": "content/competitors/emerson.md"
+    },
+    "ge-digital": {
+      "name": "Ge digital",
+      "threat_tier": "unknown",
+      "verticals": [],
+      "last_validated": "2026-04-29",
+      "audience_signals": {},
+      "their_AI_offering": null,
+      "recent_corporate_change": null,
+      "sources": [],
+      "sections": {},
+      "is_stub": true,
+      "path": "content/competitors/ge-digital.md"
+    },
+    "honeywell": {
+      "name": "Honeywell Process Solutions",
+      "threat_tier": "primary",
+      "verticals": [
+        "oil-gas-upstream",
+        "oil-gas-midstream",
+        "oil-gas-downstream",
+        "petrochemicals"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "multi_vendor_friendly": "Lead with multi-vendor SIS: AVEVA + Triconex/HIMA/Yokogawa SIS, vs Honeywell's integrated SIS lock-in",
+        "single_vendor_friendly": "Lead with one-vendor unified portfolio: AVEVA, part of Schneider Electric (AVEVA + Foxboro DCS + ETAP + EAE + PME) under one MSA"
+      },
+      "their_AI_offering": "Honeywell Forge AI features (cybersecurity-led positioning, including Quantinuum quantum-cryptography for OT). Vertically integrated within the Honeywell stack.",
+      "recent_corporate_change": null,
+      "sources": [
+        {
+          "url": "https://www.honeywell.com/us/en/products/automation",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        },
+        {
+          "url": "https://process.honeywell.com/us/en",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** strong incumbent in process industries, refining, petrochemicals, LNG, safety-critical applications.\n- **Revenue:** Honeywell Performance Materials & Technologies segment ~$6.8B \u2014 verify current.\n- **Core strength:** Experion DCS + safety instrumented systems (SIS) + UOP process technology licensing.\n- **Threat tier (this distributor):** primary in O&G upstream and midstream; very strong in downstream (where AVEVA is typically AVEVA-direct).",
+        "Product Portfolio": "- DCS: Experion PKS\n- Operations / Performance: Uniformance Suite\n- Safety: SIS portfolio (FSC, GuardLogix-class systems)\n- Process technology: UOP licensing (refining catalysts, process designs)\n- Cloud / digital: Honeywell Forge",
+        "Their Competitive Advantages": "1. Leading SIS expertise \u2014 refining and petrochem operators trust Honeywell on safety-critical applications.\n2. UOP process technology licensing creates an integration moat.\n3. Experion maturity in refining and petrochemicals (decades of incumbency).\n4. Industrial cybersecurity offerings tightly integrated with Experion.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** open safety + process intelligence vs. proprietary safety-and-process lock-in. AVEVA, part of Schneider Electric \u2014 one company across the unified portfolio (AVEVA + Foxboro DCS + ETAP + EAE + PME), one MSA, one renewal. Honeywell asks customers to commit to the Honeywell stack.\n- **Top differentiator #1:** AVEVA System Platform integrates with best-in-class third-party SIS (Triconex, HIMA, Yokogawa) \u2014 customer choice instead of mandatory Honeywell stack.\n- **Top differentiator #2:** Foxboro DCS provides equivalent process control heritage with EcoStruxure energy management Honeywell does not match.\n- **Top differentiator #3:** AVEVA Connect cloud is broadly multi-vendor; Honeywell Forge is more Honeywell-centric.\n- **Cloud / cloud-readiness story:** AVEVA was first SCADA on AWS; multi-year head start vs. Honeywell Forge.",
+        "When AVEVA Wins": "- Multi-vendor SIS requirements where the customer wants Triconex, HIMA, or other safety vendors alongside the DCS.\n- Energy optimization or sustainability commitments are strategic.\n- Cloud deployment is required.\n- Customer is challenger-friendly (newer operators, PE-backed acquisitions, growing operators not locked into Experion).",
+        "When Honeywell Wins": "- Refining incumbency \u2014 long-running Experion deployments are politically and operationally hard to displace.\n- UOP licensee customers where Honeywell process tech and DCS are bundled.\n- Customer believes their refining / petrochem safety case requires Experion + SIS in lockstep.",
+        "Cybersecurity counter (Honeywell secure-by-design / Quantinuum positioning)": "Honeywell increasingly leads with \"secure-by-design\" framing and the Quantinuum quantum-cryptography roadmap for OT cybersecurity. The right counter:\n\n**AVEVA holds:**\n- ISO 27001 (long-standing)\n- SOC 2 Type II (long-standing)\n- ISA/IEC 62443 / ISA 99 (since 2019)\n- ISASecure SDLA (long-standing)\n- Cloud (Azure + AWS): ISO 27001/27017/27018, AICPA SOC 2\n\nThese are independently verified, current, and the standards that customers' auditors are looking for. Quantum-cryptography roadmaps don't replace today's certification floor \u2014 they layer on top of it. AVEVA + ETAP + EAE + PME meet the floor today; quantum-readiness is a roadmap conversation for both vendors and shouldn't decide the deal.",
+        "Top Objections + Responses": "### Objection: \"Experion provides integrated safety and process control.\"\n**Response:** \"Safety integration is critical, and Foxboro DCS provides equivalent capabilities with best-in-class third-party SIS \u2014 Triconex, HIMA, Yokogawa. Key difference: Honeywell locks you into their process and safety ecosystem. We provide flexibility plus EcoStruxure energy optimization that Experion doesn't include.\"\n**Gap-closure:** Propose a hybrid: keep existing Honeywell SIS, add AVEVA System Platform + PI System for SCADA aggregation and historian intelligence.\n**Source:** Foxboro DCS docs.aveva.com / docs.se.com; AVEVA + third-party SIS reference architectures.\n\n### Objection: \"We've used Experion for 15 years; replacing the DCS is a multi-year project.\"\n**Response:** \"We're not asking you to replace Experion. Most of the value lands by adding AVEVA System Platform and PI System on top \u2014 SCADA aggregation, multi-site rollup, historian intelligence Honeywell doesn't deliver natively. The DCS conversation can come later, on your timeline.\"\n**Gap-closure:** 90-day proof-of-concept on a single asset class (e.g., compressor health monitoring) keeping Experion intact.\n\n### Objection: \"Honeywell Forge is the new digital platform.\"\n**Response:** \"Forge is newer and largely Honeywell-centric. AVEVA CONNECT has a multi-year head start with multi-vendor data services. If you're operating with mixed assets \u2014 and refining / midstream operators usually are \u2014 AVEVA's vendor-agnostic position is more valuable. AVEVA Industrial AI Assistant is GA in CONNECT (January 2026) \u2014 natural-language query across your operations data, role-based permissions, never trained on customer data. That's a production AI conversation today.\"\n**Gap-closure:** Side-by-side cloud architecture review.",
+        "Recommended Proof Points": "- AVEVA's published O&G case study library (75% of global O&G production companies use PI System).\n- Foxboro DCS heritage and reference customer list \u2014 pull from `content/case-studies/` if available.\n- Demo asset: `Demo Video- Cloud OTS.mp4` (cloud architecture); PI Vision dashboards for asset health.",
+        "Recent Changes (review monthly)": "- Watch quarterly: Honeywell Forge feature additions; Experion version updates; UOP technology bundles.",
+        "Monitoring Queries (used by scheduled tasks)": "- \"Honeywell Forge vs AVEVA Connect \u2014 capabilities last 90 days\"\n- \"Honeywell Process Solutions cloud strategy update\"\n- \"Experion DCS roadmap 2026\"",
+        "Internal Notes (do not share with customers)": "- Refining incumbency is the toughest battle. Distributor's typical wins are upstream and midstream where Honeywell is less locked in. Don't burn cycles on locked-in refining accounts unless the customer is signaling change.\n- The AVEVA + third-party SIS positioning is the strongest counter; emphasize this with multi-vendor-friendly buyers."
+      },
+      "is_stub": false,
+      "path": "content/competitors/honeywell.md"
+    },
+    "inductive-automation-ignition": {
+      "name": "Inductive Automation (Ignition)",
+      "threat_tier": "primary",
+      "verticals": [
+        "water-wastewater",
+        "cpg",
+        "oil-gas-upstream"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "cost_sensitive": "Surface modules math + AVEVA Operations Control \u2014 Edge subscription option below 3-year Ignition fully-loaded TCO",
+        "enterprise_inclined": "Lead with one-company portfolio + certified support: AVEVA, part of Schneider Electric, with ISO 27001 + SOC 2 Type II + ISA/IEC 62443 + Customer FIRST 24/7"
+      },
+      "their_AI_offering": "Ignition Vision AI module (machine vision focus). Cloud-edition AI features in development. Inductive Automation has been adding AI capabilities; the gap to AVEVA Industrial AI Assistant (GA Jan 2026) is real but narrowing.",
+      "recent_corporate_change": null,
+      "sources": [
+        {
+          "url": "https://inductiveautomation.com/",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        },
+        {
+          "url": "https://inductiveautomation.com/pricing",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** growing fast in light manufacturing, water/wastewater, mid-market CPG, system-integrator-led deployments.\n- **Revenue:** privately held; estimated >$50M and growing.\n- **Core strength:** transparent pricing, unlimited-tag licensing, SQL-based architecture, strong SI community.\n- **Threat tier (this distributor):** primary in cost-conscious water/wastewater and mid-market CPG; secondary in upstream pad operators.",
+        "Product Portfolio": "- Ignition (unified HMI/SCADA/MES platform)\n- Vision module (computer vision AI)\n- Reporting, Voice Notification, MQTT, SQL Bridge, Web Browser, OPC-UA, etc. (modular pricing)\n- Ignition Edge (smaller, edge-first deployments)\n- Enterprise licensing tiers",
+        "Their Competitive Advantages": "1. Transparent published pricing on the website \u2014 easy to comparison-shop. Resonates with budget-anxious municipal and small-mid customers.\n2. Unlimited-tag licensing message is simple to understand and pitch.\n3. SQL-based historian creates accessibility for IT teams familiar with traditional databases.\n4. Strong SI partner community; many SIs are deeply Ignition-fluent.\n5. Active development cadence and engaged user community.\n6. Free fully-functional trial / development version lowers buyer barrier.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** enterprise platform with bundled support and security certification vs. open-architecture platform with SI-dependent customization.\n- **Top differentiator #1:** AVEVA InTouch Unlimited and Operations Control include enterprise drivers, integrated reporting, integrated historian, and 24/7 Customer FIRST support \u2014 Ignition equivalents are modular and add up.\n- **Top differentiator #2:** AVEVA's enterprise certification posture \u2014 **ISO 27001, SOC 2 Type II, ISA/IEC 62443 (since 2019), ISASecure SDLA** \u2014 is the floor for water utilities under CISA/AWIA/CIRCIA scrutiny, CPG under FDA Part 11, and midstream under TSA Pipeline Cybersecurity Directive. Independent verification matters when a customer's auditor asks.\n- **Top differentiator #3:** AVEVA Industrial AI Assistant is GA in CONNECT (January 2026) \u2014 natural-language query across operations data, role-based permissions, never trained on customer data. AVEVA Operations Control \u2014 Edge / Supervisory / Enterprise are cloud-native subscription models. Ignition Vision and Cloud Edition are real but require more assembly to match this maturity.\n- **MES depth:** AVEVA MES is IDC MarketScape Leader-rated; Ignition MES is younger and lighter.",
+        "When AVEVA Wins": "- Enterprise deployments and regulated industries (CPG with FDA, water with CISA/EPA, O&G with PHMSA).\n- Multi-site standardization where one platform across many sites is the goal.\n- Customers prioritizing certified support over community-supported architecture.\n- PI System integration requirements \u2014 AVEVA's PI System breadth is hard to match.\n- Customers concerned about cybersecurity audit posture.",
+        "When Ignition Wins": "- Cost-sensitive small operators and special-purpose districts where headline price drives the decision.\n- SI-led implementations where the SI is Ignition-fluent and recommends what they know best.\n- Customers with strong internal IT/development capability who want to customize the platform.\n- Cloud-greenfield deployments by buyers who treat the SCADA layer as commodity.",
+        "Top Objections + Responses": "### Objection: \"Ignition is only $5,000 vs your $12,000.\"\n**Response:** *(See `content/objections/ignition-pricing.md` for the full sequence \u2014 this is the highest-leverage script in the distributor's playbook.)* The short version: surface the modules conversation, then pivot to the support-and-cybersecurity conversation, then offer the staged-deployment gap-closure.\n\n### Objection: \"Ignition has unlimited tags out of the box.\"\n**Response:** \"InTouch Unlimited is also unlimited-tag \u2014 that's why it's named Unlimited. The licensing model is different (perpetual vs. modular) but tag count isn't actually a differentiator.\"\n**Gap-closure:** Direct comparison sheet showing tag licensing on both sides.\n\n### Objection: \"Our SI prefers Ignition.\"\n**Response:** \"We'd love to partner with them. AVEVA has a strong SI program, certified training, and consistent integration revenue for the SI. They keep their billing and you get an enterprise platform. Win-win.\"\n**Gap-closure:** Co-sell motion with the SI; offer joint training credits.\n\n### Objection: \"Ignition feels more modern / cloud-native.\"\n**Response:** \"AVEVA was first SCADA on AWS. AVEVA CONNECT is the cloud layer. Operations Control \u2014 Edge, Supervisory, and Enterprise are cloud-native subscription models. AVEVA Industrial AI Assistant is GA in CONNECT today (January 2026), AVEVA + Databricks integration via Delta Sharing is in production (Manufacturing ISV Partner of the Year 2025) \u2014 modern architecture is exactly the AVEVA story.\"\n**Gap-closure:** Demo of AVEVA Connect Vision AI and cloud architecture.",
+        "Recommended Proof Points": "- Cybersecurity certification documentation for AVEVA (vs. Ignition's largely self-asserted posture).\n- IDC MarketScape MES Leader designation (where MES is in scope).\n- Customer reference: enterprise water utility on AVEVA Operations Control vs. comparable utility on Ignition \u2014 pull from `content/case-studies/` if available.",
+        "Recent Changes (review monthly)": "- Watch monthly: Ignition module pricing changes; new module releases; Ignition Cloud Edition feature additions.\n- Inductive Automation has been adding cloud and AI capabilities; the \"AVEVA is cloud, Ignition is on-prem\" framing is no longer fully accurate \u2014 the comparison is more nuanced now.",
+        "Monitoring Queries (used by scheduled tasks)": "- \"Inductive Automation Ignition pricing changes 2026\"\n- \"Ignition Cloud Edition vs AVEVA Connect\"\n- \"Ignition new modules last 90 days\"",
+        "Internal Notes (do not share with customers)": "- The Ignition battle is more about *positioning* than *capability* \u2014 Ignition is a real product. Win on enterprise discipline, support, and integration depth, not on dismissive talking points.\n- Distributor SEs should be Ignition-fluent enough to demo it credibly. Customers respect competitors who know the alternatives well."
+      },
+      "is_stub": false,
+      "path": "content/competitors/inductive-automation-ignition.md"
+    },
+    "rockwell": {
+      "name": "Rockwell Automation",
+      "threat_tier": "primary",
+      "verticals": [
+        "cpg",
+        "water-wastewater",
+        "oil-gas-discrete-adjacent"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "multi_vendor_friendly": "Lead with open-architecture: AVEVA System Platform on top of Allen-Bradley PLCs",
+        "single_vendor_friendly": "Lead with one company / one MSA: AVEVA, part of Schneider Electric \u2014 unified portfolio under one renewal"
+      },
+      "their_AI_offering": "Rockwell FactoryTalk Design Studio Copilot (Microsoft Azure OpenAI Service powered) + NVIDIA Nemotron Nano edge SLM integration. Demonstrated at Hannover Messe 2026.",
+      "recent_corporate_change": null,
+      "sources": [
+        {
+          "url": "https://www.rockwellautomation.com/en-us/products.html",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        },
+        {
+          "url": "https://ir.rockwellautomation.com/",
+          "type": "competitor_investor_relations",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** #3 globally in industrial automation; #1 in North American discrete manufacturing.\n- **Revenue:** approximately $8.1B (FY2023) \u2014 verify current.\n- **Core strength:** Allen-Bradley PLC dominance with FactoryTalk software ecosystem; deep automotive and CPG penetration.\n- **Threat tier (this distributor):** primary in CPG, water/wastewater (large municipal), discrete-adjacent O&G.",
+        "Product Portfolio": "- Modern HMI/SCADA: FactoryTalk Optix (GA March 2023)\n- Site-wide SCADA: FactoryTalk View SE\n- Machine HMI: FactoryTalk View ME\n- Controller programming: Studio 5000 Design Suite\n- Process control / DCS: PlantPAx\n- Historian: FactoryTalk Historian\n- Batch: FactoryTalk Batch\n- Cloud: FactoryTalk Hub (newer; less mature than AVEVA Connect)",
+        "Their Competitive Advantages": "1. PLC market leadership \u2014 over 60% North American discrete share. [Source: Rockwell IR + analyst reports.]\n2. Tight integrated engineering across Allen-Bradley + FactoryTalk + Studio 5000.\n3. Deep automotive and CPG domain expertise; large named-account history.\n4. Strong system integrator and channel partner relationships in North America.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** open architecture vs. vendor lock-in. AVEVA, part of Schneider Electric, runs on top of any PLC, including Allen-Bradley.\n- **One-vendor differentiator:** AVEVA + ETAP + EAE + PME unified portfolio under one MSA, one renewal motion. Rockwell partners with Microsoft and NVIDIA to assemble its AI story; AVEVA is part of Schneider Electric \u2014 same company top to bottom.\n- **Top differentiator #1:** EcoStruxure energy management capabilities Rockwell does not match natively.\n- **Top differentiator #2:** PI System historian depth and breadth \u2014 process-industry track record.\n- **Top differentiator #3:** AVEVA Connect cloud-agnostic; Rockwell's FactoryTalk Hub is newer and Rockwell-centric.\n- **Cloud / cloud-readiness story:** AVEVA was first SCADA on AWS; AVEVA CONNECT data services have a multi-year head start over FactoryTalk Hub. CONNECT Visualization for browser-based composable dashboards. **Strategic data partnership:** AVEVA was named **2025 Databricks Manufacturing ISV Partner of the Year**; CONNECT and Databricks share data via Delta Sharing \u2014 open standard, no ETL.\n- **MES leadership:** AVEVA recognized in IDC MarketScape MES leadership category; FactoryTalk MES is more discrete-focused.",
+        "When AVEVA Wins": "- Multi-vendor environments where the customer wants to keep existing PLCs (including Allen-Bradley) but add a unified operations layer.\n- Energy optimization is a strategic mandate (Scope 1/2 emissions, sustainability commitments).\n- Process-industry environments (CPG, water, O&G) where Rockwell's discrete heritage shows.\n- Multi-site standardization where System Platform's object-oriented approach shines.\n- Cloud-first or cloud-hybrid deployments.",
+        "When Rockwell Wins": "- Pure discrete manufacturing with deep Allen-Bradley installed base. Gap-closure: the AVEVA + Allen-Bradley hybrid story.\n- Customer mandate for single-vendor stack from PLC through MES. Gap-closure: emphasize Schneider Electric's Modicon + AVEVA as a comparable single-vendor path.",
+        "Top Objections + Responses": "### Objection: \"Allen-Bradley PLCs are the standard \u2014 we don't want to introduce another vendor.\"\n**Response:** \"You don't have to. AVEVA System Platform sits on top of your Allen-Bradley PLCs through OPC-UA and gives you the operations, alarming, and historian layer that FactoryTalk View doesn't deliver natively. Keep the PLC investment, add the intelligence.\"\n**Gap-closure:** Propose a 90-day pilot on a single line keeping existing AB PLCs; demonstrate AVEVA dashboards next to FactoryTalk View in parallel.\n**Source:** AVEVA + Allen-Bradley joint customer references; verify against `content/case-studies/`.\n\n### Objection: \"FactoryTalk Hub is going to close the cloud gap.\"\n**Response:** \"AVEVA CONNECT has a multi-year head start with proven multi-vendor data services. FactoryTalk Hub is largely Rockwell-centric. If you're operating mixed-vendor \u2014 and most customers are \u2014 CONNECT's vendor-agnostic position is more valuable as your stack evolves. And AVEVA Industrial AI Assistant is GA in CONNECT (January 2026) with natural-language query, role-based permissions, never trained on customer data \u2014 that's the production-ready AI conversation, not a future roadmap.\"\n**Gap-closure:** Side-by-side cloud architecture review with the customer's IT and OT directors.\n**Source:** docs.aveva.com Connect documentation; Rockwell FactoryTalk Hub product pages.\n\n### Objection: \"Rockwell's MES is good enough for our discrete operations.\"\n**Response:** \"FactoryTalk MES is competitive in pure-discrete. AVEVA's strength is hybrid and process \u2014 batch, recipe, multi-site standardization. IDC MarketScape rates AVEVA an MES leader. If your operations have batch or recipe complexity, the comparison opens up.\"\n**Gap-closure:** IDC MarketScape MES report walkthrough; demo of recipe management.\n**Source:** IDC MarketScape MES report (in distributor asset library); docs.aveva.com MES bundle.",
+        "Recommended Proof Points": "- IDC MarketScape MES Leader designation [in distributor asset library \u2014 verify quote permissions].\n- Customer reference: AVEVA + Allen-Bradley hybrid customers \u2014 pull from `content/case-studies/` if available; otherwise cite AVEVA's published case studies.\n- Demo asset: `Best Practices for System Platform 2023 R2.pptx` for engineering audiences.",
+        "Recent Changes (review monthly)": "- 2023-03: FactoryTalk Optix GA \u2014 Rockwell's modern HMI play; less mature than AVEVA System Platform.\n- Watch quarterly: PlantPAx version updates; FactoryTalk Hub feature additions.",
+        "Monitoring Queries (used by scheduled tasks)": "- \"Rockwell FactoryTalk Hub vs AVEVA Connect \u2014 current capabilities\"\n- \"Rockwell PlantPAx version updates last 90 days\"\n- \"Rockwell discrete vs process market share trend\"",
+        "Internal Notes (do not share with customers)": "- Rockwell's channel-incumbency position is strong in some Q-Mation regions; partner with the SI ecosystem rather than fighting it.\n- Customers buying based on existing Allen-Bradley footprint usually appreciate the hybrid framing (AVEVA on top of AB) \u2014 leads with this in CPG."
+      },
+      "is_stub": false,
+      "path": "content/competitors/rockwell.md"
+    },
+    "siemens": {
+      "name": "Siemens Digital Industries",
+      "threat_tier": "primary",
+      "verticals": [
+        "cpg",
+        "water-wastewater-large",
+        "oil-gas-petrochem"
+      ],
+      "last_validated": "2026-04-29",
+      "audience_signals": {
+        "multi_vendor_friendly": "Lead with multi-vendor flexibility: AVEVA System Platform on top of SIMATIC + Modicon + 3rd-party",
+        "single_vendor_friendly": "Lead with one-company breadth: AVEVA, part of Schneider Electric \u2014 unified portfolio (AVEVA + ETAP + EAE + PME) under one MSA, vs. Siemens stack"
+      },
+      "their_AI_offering": "Siemens Industrial Copilot \u2014 joint with Microsoft Azure OpenAI. Code generation/debug for TIA Portal automation; simulation acceleration.",
+      "recent_corporate_change": null,
+      "sources": [
+        {
+          "url": "https://www.siemens.com/global/en/products/automation.html",
+          "type": "competitor_official",
+          "date": "2026-04-29"
+        }
+      ],
+      "sections": {
+        "Threat Profile": "- **Market position:** #1 globally in industrial automation.\n- **Revenue:** Siemens Digital Industries ~$20.8B (2023) \u2014 verify current.\n- **Core strength:** TIA Portal integrated engineering + SIMATIC hardware ecosystem; tightest engineering-to-operations workflow on the market.\n- **Threat tier (this distributor):** primary in CPG (especially European-HQ multinationals) and large industrial water; secondary in petrochemicals.",
+        "Product Portfolio": "- TIA Portal (integrated engineering platform)\n- WinCC (HMI/SCADA \u2014 Open Architecture, Professional, Comfort)\n- SIMATIC PCS7 / PCS neo (DCS)\n- Opcenter MES suite\n- MindSphere \u2192 Insights Hub (cloud)\n- Complete hardware stack from sensors to enterprise.",
+        "Their Competitive Advantages": "1. Integrated engineering across the automation lifecycle \u2014 TIA Portal is genuinely strong.\n2. Complete hardware breadth \u2014 Siemens makes everything from sensor to enterprise software.\n3. Industry 4.0 leadership and IoT investments (MindSphere/Insights Hub).\n4. Strongest presence in European and Asian markets; many global CPG operators standardize on Siemens for global plants.",
+        "AVEVA Counter-Strategy": "- **Primary positioning:** engineering freedom vs. engineering lock-in. AVEVA, part of Schneider Electric, delivers similar integrated benefits across *any* hardware platform.\n- **One-vendor differentiator:** AVEVA + ETAP + EAE + PME unified portfolio under one MSA, one renewal. Siemens has the breadth but it's all Siemens \u2014 AVEVA gives you Schneider's portfolio with multi-vendor PLC freedom.\n- **Top differentiator #1:** Multi-vendor integration \u2014 seamless mix of SIMATIC + Modicon + third-party PLCs via AVEVA System Platform.\n- **Top differentiator #2:** AVEVA + EcoStruxure energy intelligence beyond Siemens Digital Factory.\n- **Top differentiator #3:** US-regional support footprint and ecosystem of AVEVA-certified system integrators.\n- **Cloud / cloud-readiness story:** AVEVA Connect has been cloud-first longer; Insights Hub is younger.",
+        "When AVEVA Wins": "- Multi-vendor environments where the customer wants flexibility, not commitment to single-vendor stack.\n- US-headquartered customers where regional support and SI ecosystem matter.\n- Energy optimization or sustainability commitments are strategic.\n- Process-industry environments where AVEVA's PI System depth shines.",
+        "When Siemens Wins": "- European-HQ multinationals with global Siemens standards.\n- Existing TIA Portal investments where the engineering-to-operations workflow is already delivering value.\n- Discrete and automotive manufacturing environments.\n- Large industrial water deployments where Siemens' hardware breadth meets the customer's needs.",
+        "Top Objections + Responses": "### Objection: \"TIA Portal provides integrated engineering across our entire lifecycle.\"\n**Response:** \"Integration matters, but freedom matters more. AVEVA gives the same lifecycle benefits across any hardware \u2014 SIMATIC, Modicon, or third-party \u2014 plus the energy intelligence TIA Portal doesn't deliver.\"\n**Gap-closure:** Demonstrate AVEVA System Platform multi-vendor integration with SIMATIC PLCs in a side-by-side; highlight EcoStruxure energy capabilities.\n\n### Objection: \"Insights Hub is our cloud strategy.\"\n**Response:** \"Insights Hub is real, but AVEVA CONNECT has more multi-vendor data services and a longer track record. If you're operating mixed assets, AVEVA's vendor-agnostic position is more valuable than a Siemens-centric cloud. AVEVA Industrial AI Assistant is GA in CONNECT (January 2026) \u2014 natural-language query across CONNECT data, never trained on customer data. That's the AI conversation that's available today, vs. Siemens Industrial Copilot which targets TIA Portal automation code rather than operations data.\"\n**Gap-closure:** Side-by-side cloud architecture review.\n\n### Objection: \"We're a Siemens shop globally.\"\n**Response:** \"Many global operators are. AVEVA System Platform sits on top of SIMATIC PLCs without disturbing them, adding multi-site SCADA aggregation, recipe management, and PI System historian intelligence. You don't choose AVEVA *instead of* Siemens \u2014 you add AVEVA *on top of* Siemens.\"\n**Gap-closure:** 90-day pilot on a single plant keeping all SIMATIC hardware.",
+        "Recommended Proof Points": "- AVEVA System Platform multi-vendor reference architectures.\n- EcoStruxure case studies showing energy and sustainability outcomes.\n- IDC MarketScape MES designation vs. Siemens Opcenter.",
+        "Recent Changes (review monthly)": "- Siemens has rebranded MindSphere \u2192 Insights Hub; expect continued cloud platform evolution.\n- PCS7 \u2192 PCS neo migration is ongoing; gives AVEVA an opening to position multi-vendor flexibility during the transition.",
+        "Monitoring Queries (used by scheduled tasks)": "- \"Siemens Insights Hub vs AVEVA Connect \u2014 capabilities last 90 days\"\n- \"Siemens PCS neo adoption update\"\n- \"Siemens Opcenter MES roadmap\"",
+        "Internal Notes (do not share with customers)": "- US Q-Mation territory is less Siemens-heavy than Europe. Most Siemens engagements are with US plants of European-HQ multinationals.\n- Co-existence is the right frame \u2014 fighting Siemens head-to-head on engineering integration is uphill; lead with multi-vendor flexibility and energy intelligence."
+      },
+      "is_stub": false,
+      "path": "content/competitors/siemens.md"
+    },
+    "trihedral-vtscada": {
+      "name": "Trihedral vtscada",
+      "threat_tier": "unknown",
+      "verticals": [],
+      "last_validated": "2026-04-29",
+      "audience_signals": {},
+      "their_AI_offering": null,
+      "recent_corporate_change": null,
+      "sources": [],
+      "sections": {},
+      "is_stub": true,
+      "path": "content/competitors/trihedral-vtscada.md"
+    }
+  }
+}

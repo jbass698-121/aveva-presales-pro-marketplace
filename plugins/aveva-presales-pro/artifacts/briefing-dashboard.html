@@ -1,0 +1,325 @@
+<!--
+Copyright (c) 2026 Jason Bass. All rights reserved.
+Licensed under the Business Source License 1.1. See LICENSE.md.
+Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AVEVA Opportunity Briefing</title>
+<style>
+  :root {
+    --bg: var(--background, #fafafa);
+    --fg: var(--foreground, #1a1a1a);
+    --muted: var(--muted-foreground, #6b6b6b);
+    --primary: var(--primary, #0F4C81);
+    --accent: var(--accent, #00B5B0);
+    --border: var(--border, #e0e0e0);
+    --card-bg: var(--card, #ffffff);
+    --good: #157f3a;
+    --warn: #c97f0a;
+    --bad: #b33020;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 18px; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.5; font-size: 10pt; }
+  h1 { color: var(--primary); margin: 0 0 6px 0; font-size: 18pt; }
+  h2 { color: var(--primary); font-size: 12pt; margin: 16px 0 8px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  h3 { font-size: 10.5pt; margin: 10px 0 4px; color: var(--primary); }
+  .subtitle { color: var(--muted); font-size: 10pt; margin-bottom: 14px; }
+  .panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+  .connector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .connector { padding: 12px; border-radius: 6px; border-left: 4px solid var(--border); background: rgba(0,0,0,0.02); }
+  .connector.connected { border-left-color: var(--good); background: rgba(21, 127, 58, 0.05); }
+  .connector.disconnected { border-left-color: var(--bad); background: rgba(180, 50, 30, 0.05); }
+  .connector .name { font-weight: 700; font-size: 10pt; }
+  .connector .status { font-size: 8.5pt; color: var(--muted); margin-top: 4px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 8.5pt; font-weight: 600; }
+  .pill.connected { background: #e8f4eb; color: var(--good); }
+  .pill.disconnected { background: #f7e1dd; color: var(--bad); }
+  .pill.warn { background: #fbf3df; color: var(--warn); }
+  .alert { padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 10pt; }
+  .alert.info { background: #e3eef9; color: var(--primary); border-left: 4px solid var(--primary); }
+  .alert.warn { background: #fbf3df; color: var(--warn); border-left: 4px solid var(--warn); }
+  input[type="text"], textarea { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 10pt; background: var(--card-bg); color: var(--fg); }
+  textarea { min-height: 60px; resize: vertical; font-family: inherit; }
+  label { display: block; margin: 8px 0 4px; font-size: 9.5pt; font-weight: 600; }
+  button { padding: 7px 14px; font-size: 10pt; border-radius: 4px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer; }
+  button.secondary { background: var(--card-bg); color: var(--primary); }
+  button:hover { opacity: 0.92; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .brief-output { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-top: 14px; min-height: 120px; }
+  .brief-output h2 { margin-top: 0; }
+  .brief-output table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; }
+  .brief-output th, .brief-output td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  .brief-output th { background: rgba(0,0,0,0.03); font-weight: 600; }
+  .footer-note { margin-top: 18px; padding: 10px; border-top: 1px solid var(--border); font-size: 8.5pt; color: var(--muted); }
+  details summary { cursor: pointer; font-size: 10pt; color: var(--primary); padding: 6px 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>Opportunity Briefing Dashboard <span style="font-size: 10pt; color: var(--muted);">v0.3.1</span></h1>
+<div class="subtitle">The killer artifact for daily AE / SE use. Pulls live from CRM + Fireflies + M365 when connectors are wired; works in degraded mode otherwise.</div>
+
+<div class="panel">
+  <h2 style="margin-top: 0;">Connector status</h2>
+  <div class="subtitle" style="margin-bottom: 10px;">This dashboard's value scales with connector availability. The more wired, the less manual context you provide.</div>
+  <div class="connector-grid" id="connectorGrid"></div>
+</div>
+
+<div id="modeAlert"></div>
+
+<div class="panel">
+  <h2 style="margin-top: 0;">Briefing inputs</h2>
+  <div class="grid-2">
+    <div>
+      <label>Account name</label>
+      <input type="text" id="account" placeholder="e.g. Houston Water Utility" oninput="saveInputs()">
+      <label>Industry / vertical</label>
+      <select id="vertical" onchange="saveInputs()">
+        <option value="cpg">CPG / Food &amp; Beverage</option>
+        <option value="oil_gas">Oil &amp; Gas</option>
+        <option value="water_ww" selected>Water &amp; Wastewater</option>
+        <option value="mining">Mining, Metals &amp; Minerals</option>
+        <option value="transportation">Transportation</option>
+        <option value="pharma">Pharma / Life Sciences</option>
+        <option value="power">Power &amp; Utilities</option>
+      </select>
+      <label>Competitor of record (if known)</label>
+      <select id="competitor" onchange="saveInputs()">
+        <option value="">— none / unknown —</option>
+        <option value="rockwell">Rockwell</option>
+        <option value="siemens">Siemens</option>
+        <option value="honeywell">Honeywell</option>
+        <option value="emerson">Emerson</option>
+        <option value="inductive-automation-ignition">Ignition (Inductive Automation)</option>
+        <option value="aspentech">AspenTech (Emerson-owned)</option>
+        <option value="abb">ABB</option>
+        <option value="ge-digital">GE Digital</option>
+      </select>
+    </div>
+    <div>
+      <label>Meeting date (next upcoming)</label>
+      <input type="text" id="mtgDate" placeholder="e.g. 2026-05-12 14:00" oninput="saveInputs()">
+      <label>Tier</label>
+      <select id="tier" onchange="saveInputs()">
+        <option value="cost_conscious">Cost-Conscious</option>
+        <option value="mid_market" selected>Mid-Market</option>
+        <option value="enterprise">Enterprise</option>
+      </select>
+      <label>Manual context (since CRM/Fireflies/M365 not connected)</label>
+      <textarea id="manualContext" placeholder="Recent meetings, key stakeholders, pain points raised, what they care about. Use this when connectors are not available." oninput="saveInputs()"></textarea>
+    </div>
+  </div>
+  <div style="margin-top: 12px;">
+    <button onclick="generateBrief()">Generate briefing</button>
+    <button class="secondary" onclick="resetForm()">Reset</button>
+  </div>
+</div>
+
+<div id="briefOutput" class="brief-output">
+  <em style="color: var(--muted);">Briefing will appear here. Fill in account name and click Generate.</em>
+</div>
+
+<div class="footer-note">
+  AVEVA, part of Schneider Electric &middot; Watermark: <code>appro-ca96e5c3-e535-40b4-a502-9e85523f608e</code> &middot; aveva-presales-pro v0.3.1<br>
+  This dashboard demonstrates the briefing artifact's structure. Full live mode requires CRM (Microsoft Dynamics 365), Fireflies, and Microsoft 365 connectors to be wired in your Cowork tenant. The orchestrator's <code>aveva-briefing</code> skill is the production code path; this artifact is the visualization layer.
+</div>
+
+<script>
+// =========================================================================
+// Connector detection — checks for Cowork's MCP tool API
+// =========================================================================
+const CONNECTORS = [
+  { key: 'crm_dynamics', name: 'Microsoft Dynamics 365', purpose: 'Opportunity record, contacts, stage, amount, custom fields' },
+  { key: 'm365', name: 'Microsoft 365', purpose: 'Email threads (last 30 days), calendar, Teams threads, SharePoint' },
+  { key: 'fireflies', name: 'Fireflies', purpose: 'Recent meeting transcripts (last 60 days), attendee history, pain points raised' },
+  { key: 'slack_teams', name: 'Slack / Teams', purpose: 'Internal team thread context (optional)' },
+];
+
+function detectConnectors() {
+  // In Cowork artifact context, window.cowork.callMcpTool would be available.
+  const hasCowork = !!(window.cowork && typeof window.cowork.callMcpTool === 'function');
+  return CONNECTORS.map(c => ({ ...c, available: hasCowork }));
+}
+
+function renderConnectorGrid() {
+  const conns = detectConnectors();
+  const html = conns.map(c => {
+    const state = c.available ? 'connected' : 'disconnected';
+    return '<div class="connector ' + state + '">' +
+           '<div class="name">' + c.name + ' <span class="pill ' + state + '">' + (c.available ? 'available' : 'not connected') + '</span></div>' +
+           '<div class="status">' + c.purpose + '</div>' +
+           '</div>';
+  }).join('');
+  document.getElementById('connectorGrid').innerHTML = html;
+}
+
+function showModeAlert() {
+  const conns = detectConnectors();
+  const liveConns = conns.filter(c => c.available).length;
+  const target = document.getElementById('modeAlert');
+  if (liveConns === 0) {
+    target.innerHTML =
+      '<div class="alert warn"><strong>Degraded mode.</strong> No CRM / Fireflies / M365 connectors detected. ' +
+      'Briefing will be generated from manual context you provide below. ' +
+      'Connect those MCPs in your Cowork tenant for full-fidelity briefings.</div>';
+  } else if (liveConns < CONNECTORS.length) {
+    target.innerHTML =
+      '<div class="alert info"><strong>Partial mode.</strong> ' + liveConns + ' of ' + CONNECTORS.length + ' connectors available. ' +
+      'Briefing will use what\'s connected; fill in manual context for the rest.</div>';
+  } else {
+    target.innerHTML =
+      '<div class="alert info"><strong>Full mode.</strong> All connectors detected. Briefing will be live-pulled from CRM + Fireflies + M365.</div>';
+  }
+}
+
+// =========================================================================
+// Persistence
+// =========================================================================
+function loadInputs() {
+  try {
+    const s = localStorage.getItem('aveva-briefing-inputs');
+    if (!s) return;
+    const o = JSON.parse(s);
+    ['account', 'mtgDate', 'manualContext'].forEach(k => {
+      if (o[k]) document.getElementById(k).value = o[k];
+    });
+    ['vertical', 'competitor', 'tier'].forEach(k => {
+      if (o[k]) document.getElementById(k).value = o[k];
+    });
+  } catch(e) {}
+}
+
+function saveInputs() {
+  const o = {};
+  ['account', 'mtgDate', 'manualContext', 'vertical', 'competitor', 'tier'].forEach(k => {
+    o[k] = document.getElementById(k).value;
+  });
+  try { localStorage.setItem('aveva-briefing-inputs', JSON.stringify(o)); } catch(e) {}
+}
+
+function resetForm() {
+  try { localStorage.removeItem('aveva-briefing-inputs'); } catch(e) {}
+  ['account', 'mtgDate', 'manualContext'].forEach(k => document.getElementById(k).value = '');
+  document.getElementById('vertical').value = 'water_ww';
+  document.getElementById('competitor').value = '';
+  document.getElementById('tier').value = 'mid_market';
+  document.getElementById('briefOutput').innerHTML = '<em style="color: var(--muted);">Briefing will appear here. Fill in account name and click Generate.</em>';
+}
+
+// =========================================================================
+// Briefing generation
+// =========================================================================
+function generateBrief() {
+  const account = document.getElementById('account').value.trim();
+  if (!account) {
+    alert('Account name is required.');
+    return;
+  }
+  const vertical = document.getElementById('vertical').value;
+  const competitor = document.getElementById('competitor').value;
+  const tier = document.getElementById('tier').value;
+  const mtgDate = document.getElementById('mtgDate').value;
+  const manual = document.getElementById('manualContext').value.trim();
+
+  const verticalDisplay = {
+    cpg: 'CPG / Food &amp; Beverage',
+    oil_gas: 'Oil &amp; Gas',
+    water_ww: 'Water &amp; Wastewater',
+    mining: 'Mining, Metals &amp; Minerals',
+    transportation: 'Transportation',
+    pharma: 'Pharma / Life Sciences',
+    power: 'Power &amp; Utilities',
+  }[vertical] || vertical;
+
+  const tierDisplay = {
+    cost_conscious: 'Cost-Conscious',
+    mid_market: 'Mid-Market',
+    enterprise: 'Enterprise',
+  }[tier];
+
+  const competitorPrompt = competitor ?
+    'Loaded from <code>content/competitors/' + competitor + '.md</code>. Top 3 differentiators per the battlecard.' :
+    'Run the orchestrator with the account context — it will infer the most likely competitor of record from the vertical + region.';
+
+  const regulatoryHook = {
+    cpg: 'FSMA 204 traceability program (compliance extended to 2028-07-20). FDA Part 11 e-records.',
+    oil_gas: 'PHMSA Mega Rule Part 2 (May 2023) integrity management; OOOOb monitoring (first annual report due no earlier than 2026-11-30).',
+    water_ww: 'LCRI (formerly LCRR) — 10-year service line replacement timeline. CISA / EPA / AWIA cybersecurity expectations.',
+    mining: 'ICMM 10 Principles, GISTM tailings management, MSHA. ESG / Scope 2 reporting.',
+    transportation: 'IIJA capital wave + decarbonization mandate. PTC enforcement (FRA), TSA Pipeline Cybersecurity Directive.',
+    pharma: 'FDA 21 CFR Part 11, Part 210/211 cGMP, DSCSA serialization, ICH Q9.',
+    power: 'NERC CIP, FERC market participation, IEEE 1547 DER interconnection.',
+  }[vertical];
+
+  const recommendedSolution = {
+    cost_conscious: 'AVEVA InTouch Unlimited (perpetual) or AVEVA Operations Control — Edge (subscription)',
+    mid_market: 'AVEVA Operations Control — Supervisory (Plant SCADA + System Platform) + AVEVA PI System',
+    enterprise: 'AVEVA Operations Control — Enterprise (UOC + System Platform full) + AVEVA PI System Enterprise + ETAP/EAE/PME unified',
+  }[tier];
+
+  const liveDataSection = manual ?
+    '<h3>Manual context (provided by AE)</h3><div style="white-space: pre-wrap; font-size: 9.5pt; padding: 8px; background: rgba(0,0,0,0.02); border-radius: 4px;">' + escapeHTML(manual) + '</div>' :
+    '<h3>Recent activity</h3><div style="color: var(--muted); font-style: italic;">Connect Fireflies + M365 to pull last 60 days of meetings + last 30 days of email threads. No manual context provided.</div>';
+
+  const html =
+    '<h2>Briefing: ' + escapeHTML(account) + '</h2>' +
+    '<table>' +
+      '<tr><th>Account</th><td>' + escapeHTML(account) + '</td><th>Vertical</th><td>' + verticalDisplay + '</td></tr>' +
+      '<tr><th>Tier</th><td><span class="pill connected">' + tierDisplay + '</span></td><th>Competitor of record</th><td>' + (competitor ? escapeHTML(competitor) : '<em>unknown</em>') + '</td></tr>' +
+      '<tr><th>Meeting</th><td>' + (mtgDate ? escapeHTML(mtgDate) : '<em>not specified</em>') + '</td><th>Confidence</th><td><span class="pill warn">MEDIUM (no live CRM)</span></td></tr>' +
+    '</table>' +
+
+    '<h3>What the customer cares about</h3>' +
+    '<ul>' +
+      '<li><strong>Regulatory pressure:</strong> ' + regulatoryHook + '</li>' +
+      '<li><strong>Operational driver:</strong> tier-aligned with ' + tierDisplay + ' profile</li>' +
+      '<li><strong>Budget posture:</strong> verify with manual context above; ROI calculator artifact recommended for sizing</li>' +
+    '</ul>' +
+
+    liveDataSection +
+
+    '<h3>Competitive context</h3>' +
+    '<div>' + competitorPrompt + '</div>' +
+
+    '<h3>Recommended solution</h3>' +
+    '<div><strong>' + recommendedSolution + '</strong></div>' +
+    '<div style="font-size: 9.5pt; color: var(--muted); margin-top: 4px;">For cloud-evaluating customers: layer in CONNECT Visualization + AVEVA Industrial AI Assistant (GA January 2026).</div>' +
+
+    '<h3>Recommended approach for this meeting</h3>' +
+    '<ol>' +
+      '<li><strong>Open with the regulatory or operational pressure</strong> tied to the customer\'s observable reality.</li>' +
+      '<li><strong>Ask one discovery question</strong> from <code>content/discovery/questions.md</code> tagged for ' + verticalDisplay + '.</li>' +
+      '<li><strong>Demo one capability</strong> — pick from PI Vision OEE dashboard / CONNECT Visualization / Industrial AI Assistant based on customer tier.</li>' +
+      '<li><strong>Pre-load the likely objection</strong> — for ' + (competitor || 'incumbent') + ', see <code>content/objections/</code>.</li>' +
+      '<li><strong>Close with a concrete next-step CTA</strong> (90-day pilot, technical workshop, ROI workshop).</li>' +
+    '</ol>' +
+
+    '<h3>Sources / next actions</h3>' +
+    '<ul>' +
+      '<li>Industry playbook: <code>content/industries/' + vertical.replace('_', '-') + '.md</code></li>' +
+      (competitor ? '<li>Battlecard: <code>content/competitors/' + competitor + '.md</code></li>' : '<li>Battlecard: <em>determine competitor of record from manual context, then load battlecard</em></li>') +
+      '<li>For ROI: open the <strong>ROI calculator artifact</strong> with this account\'s tier + vertical pre-set.</li>' +
+      '<li>Confidence summary: tagged MEDIUM throughout because connectors are not live. Re-run after wiring CRM + Fireflies + M365.</li>' +
+    '</ul>';
+
+  document.getElementById('briefOutput').innerHTML = html;
+}
+
+function escapeHTML(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Init
+loadInputs();
+renderConnectorGrid();
+showModeAlert();
+</script>
+
+</body>
+</html>

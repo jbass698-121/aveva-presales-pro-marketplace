@@ -1,0 +1,60 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# This file is a Category 3 protected component per MODIFICATION-POLICY.md.
+
+name: executive-deck
+description: Customer-facing executive deck (MMM Inflection archetype) — Gamma-bound, 20-30 slides, narrative arc
+trigger_intent:
+  - "executive deck"
+  - "customer presentation"
+  - "board-level deck"
+  - "industry inflection point"
+  - "customer-facing slides for {industry}"
+audience: customer-facing-executive
+output_format: pptx
+time_budget_seconds: 360
+
+stages:
+  - name: research
+    agent: aveva-researcher
+    inputs:
+      - aveva_corporate_industry_case_studies
+      - aveva_blog_industry_posts
+      - aveva_youtube_recent_industry
+      - relevant_industry_playbook
+      - applicable_battlecards
+    parallel: true
+    timeout_seconds: 60
+
+  - name: analyst
+    agent: aveva-analyst
+    depends_on: [research]
+    structure: "executive_narrative_arc"   # Crisis → Implications → Solution → Outcome → Call-to-action
+    target_slide_count: 20-30
+    timeout_seconds: 30
+
+  - name: writer
+    agent: aveva-writer
+    depends_on: [analyst]
+    output_format: gamma_markdown
+    voice_override: "executive, narrative, customer-facing"
+    timeout_seconds: 60
+
+  - name: verifier
+    agent: aveva-claim-verifier
+    depends_on: [writer]
+    rules:
+      - audience_filter_customer-facing-executive    # strict; no PROPOSED, no INFERRED
+      - all_numeric_claims_tagged
+      - no_internal_terminology
+      - pricing_claims_require_high_confidence_for_customer_facing
+    timeout_seconds: 30
+
+  - name: formatter
+    agent: aveva-formatter
+    depends_on: [writer, verifier]
+    output_format: pptx
+    fallback_chain: [gamma_chrome_mcp, gamma_manual_handoff, python_pptx_native]
+    output_path: "outputs/executive-decks/{industry-or-topic}-{date}.pptx"
+    timeout_seconds: 180

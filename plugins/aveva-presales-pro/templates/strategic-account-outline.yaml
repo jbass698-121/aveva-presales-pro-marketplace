@@ -1,0 +1,75 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# Outline contract for the analyst stage of pipelines/strategic-account-brief.yaml.
+#
+# Implements the four-part Baker Hughes archetype. The analyst fills in this
+# structure from researcher findings; the writer produces 30-50 pages of
+# pdf_ready_markdown with citation footnoting.
+
+name: strategic-account-outline
+archetype: baker-hughes-four-part
+target_page_count: [30, 50]
+target_format: pdf_ready_markdown_with_footnotes
+
+sections:
+
+  - id: cover
+    required: true
+    fields:
+      - account_name
+      - subtitle                    # e.g. "Tier-1 Strategic Account Brief"
+      - prepared_for                # AE / SE / executive
+      - prepared_date
+
+  - id: executive_summary
+    required: true
+    target_words: 400
+    rules:
+      - lead_with_strategic_thesis: true
+      - cite_every_numeric_claim: true
+
+  - id: part_1_market_industry
+    required: true
+    title: "Part 1 — Market & Industry Analysis"
+    subsections:
+      - ceo_profile
+      - strategic_priorities         # 3-5 themes from earnings calls / press
+      - financial_performance        # revenue, margin, capex trend
+      - industry_dynamics
+      - regulatory_landscape
+      - competitive_position
+
+  - id: part_2_solution_alignment
+    required: true
+    title: "Part 2 — Schneider/AVEVA Solution Alignment"
+    subsections:
+      - priority_to_solution_map     # one row per strategic priority
+      - aveva_software_value
+      - schneider_hardware_value
+      - unified_portfolio_story      # AVEVA + ETAP + EAE + PME
+      - reference_customers          # from content/case-studies/
+
+  - id: part_3_engagement_strategy
+    required: true
+    title: "Part 3 — Executive Engagement Strategy"
+    subsections:
+      - stakeholder_map
+      - engagement_arc               # phase 1, 2, 3 with deliverables
+      - meeting_choreography         # who-does-what at the upcoming exec meeting
+      - objection_pre_handling
+
+  - id: part_4_financial_roi
+    required: true
+    title: "Part 4 — Financial Analysis & ROI Framework"
+    subsections:
+      - opportunity_sizing           # USD multi-year
+      - tco_comparison_vs_competitor
+      - payback_model                # tier-aware
+      - business_case_summary
+
+  - id: appendix_citations
+    required: true
+    rules:
+      - every_claim_traceable_to_footnote: true
+      - sources_categorized: ["primary", "secondary", "distributor-pack"]

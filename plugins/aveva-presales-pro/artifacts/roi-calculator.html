@@ -1,0 +1,312 @@
+<!--
+Copyright (c) 2026 Jason Bass. All rights reserved.
+Licensed under the Business Source License 1.1. See LICENSE.md.
+Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AVEVA ROI Calculator</title>
+<style>
+  :root {
+    --bg: var(--background, #fafafa);
+    --fg: var(--foreground, #1a1a1a);
+    --muted: var(--muted-foreground, #6b6b6b);
+    --primary: var(--primary, #0F4C81);
+    --accent: var(--accent, #00B5B0);
+    --border: var(--border, #e0e0e0);
+    --card-bg: var(--card, #ffffff);
+    --warn: #c97f0a;
+    --good: #157f3a;
+    --bad: #b33020;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 20px; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.45; }
+  h1 { color: var(--primary); margin: 0 0 4px 0; font-size: 20pt; }
+  h2 { color: var(--primary); font-size: 13pt; margin: 18px 0 8px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  .subtitle { color: var(--muted); font-size: 10pt; margin-bottom: 18px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card h3 { margin: 0 0 10px 0; font-size: 11pt; color: var(--primary); }
+  label { display: block; margin: 8px 0 4px; font-size: 10pt; font-weight: 600; }
+  input[type="range"] { width: 100%; }
+  input[type="number"], select { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 10pt; background: var(--card-bg); color: var(--fg); }
+  .slider-row { display: grid; grid-template-columns: 1fr 70px; gap: 8px; align-items: center; }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 8pt; font-weight: 700; margin-left: 4px; }
+  .badge.HIGH { background: #cfe9d6; color: var(--good); }
+  .badge.MEDIUM { background: #faedd1; color: var(--warn); }
+  .badge.LOW { background: #f6d4ce; color: var(--bad); }
+  .totals { margin: 10px 0; }
+  .totals .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  .totals .row.total { font-weight: 700; border-bottom: 2px solid var(--primary); margin-top: 4px; padding-top: 8px; }
+  .totals .row .lbl { font-size: 10pt; }
+  .totals .row .val { font-size: 11pt; font-family: ui-monospace, monospace; }
+  .pos { color: var(--good); }
+  .neg { color: var(--bad); }
+  .confidence-summary { font-size: 9pt; color: var(--muted); padding: 8px; background: rgba(0,0,0,0.03); border-radius: 4px; margin-top: 10px; }
+  .footer-note { margin-top: 22px; padding: 10px; border-top: 1px solid var(--border); font-size: 8.5pt; color: var(--muted); }
+  .tier-badge { display: inline-block; padding: 2px 8px; font-size: 9pt; border-radius: 3px; background: var(--accent); color: white; }
+  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  button { padding: 6px 12px; font-size: 10pt; border-radius: 4px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer; }
+  button.secondary { background: var(--card-bg); color: var(--primary); }
+  button:hover { opacity: 0.92; }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; font-size: 10pt; color: var(--primary); }
+</style>
+</head>
+<body>
+
+<h1>AVEVA ROI Calculator <span style="font-size: 10pt; color: var(--muted);">v0.3.1</span></h1>
+<div class="subtitle">Interactive ROI / TCO modeling for AVEVA, part of Schneider Electric. Adjust assumptions; numbers update in real time. Confidence tags follow the plugin's three-axis system.</div>
+
+<div class="grid">
+
+  <div class="card">
+    <h3>1. Customer profile</h3>
+
+    <label>Tier <span class="tier-badge" id="tierBadge">Mid-Market</span></label>
+    <select id="tier" onchange="recalc()">
+      <option value="cost_conscious">Cost-Conscious (small site)</option>
+      <option value="mid_market" selected>Mid-Market (regional)</option>
+      <option value="enterprise">Enterprise (multi-site)</option>
+    </select>
+
+    <label>Vertical (sets benchmarks)</label>
+    <select id="vertical" onchange="recalc()">
+      <option value="cpg" selected>CPG / Food &amp; Beverage</option>
+      <option value="oil_gas">Oil &amp; Gas</option>
+      <option value="water_ww">Water &amp; Wastewater</option>
+      <option value="mining">Mining, Metals &amp; Minerals</option>
+      <option value="transportation">Transportation</option>
+    </select>
+
+    <label>Number of sites <span id="siteCount">5</span></label>
+    <div class="slider-row">
+      <input type="range" id="sites" min="1" max="50" value="5" oninput="recalc()">
+      <input type="number" id="sitesNum" min="1" max="50" value="5" oninput="syncSites();recalc()">
+    </div>
+
+    <label>Tag count per site (thousands) <span id="tagCount">5</span>K</label>
+    <div class="slider-row">
+      <input type="range" id="tags" min="1" max="100" value="5" oninput="recalc()">
+      <input type="number" id="tagsNum" min="1" max="100" value="5" oninput="syncTags();recalc()">
+    </div>
+
+    <label>Operator labor rate ($/hr fully loaded) <span id="rateVal">$80</span></label>
+    <div class="slider-row">
+      <input type="range" id="rate" min="40" max="200" value="80" oninput="recalc()">
+      <input type="number" id="rateNum" min="40" max="200" value="80" oninput="syncRate();recalc()">
+    </div>
+
+    <h3 style="margin-top: 16px;">2. Operational baseline</h3>
+
+    <label>Current OEE % <span id="oeeVal">68</span></label>
+    <input type="range" id="oee" min="50" max="85" value="68" oninput="recalc()">
+
+    <label>Target OEE % (after AVEVA deployment) <span id="oeeTargetVal">80</span></label>
+    <input type="range" id="oeeTarget" min="60" max="95" value="80" oninput="recalc()">
+
+    <label>Current unplanned downtime hrs/month per site <span id="downtimeVal">12</span></label>
+    <input type="range" id="downtime" min="0" max="60" value="12" oninput="recalc()">
+
+    <div class="actions">
+      <button onclick="resetDefaults()" class="secondary">Reset to defaults</button>
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3. Investment <span class="badge MEDIUM" title="Pricing book is illustrative; verify before quoting">MEDIUM</span></h3>
+    <div class="totals" id="invTable"></div>
+
+    <h3 style="margin-top: 16px;">4. Quantified annual benefits <span class="badge MEDIUM" title="Industry-benchmark estimates from AVEVA case study library">MEDIUM</span></h3>
+    <div class="totals" id="benefitsTable"></div>
+
+    <h3 style="margin-top: 16px;">5. Multi-year ROI</h3>
+    <div class="totals" id="roiTable"></div>
+
+    <div class="confidence-summary">
+      <strong>Confidence summary.</strong> Pricing values: <span class="badge MEDIUM">MEDIUM</span> (illustrative; replace with distributor pricing book for HIGH). Operational benchmarks: <span class="badge MEDIUM">MEDIUM</span> (industry estimates from AVEVA case study library). All numeric claims tagged. Verify against your pricing desk before quoting.
+    </div>
+
+    <details>
+      <summary>Show assumption details</summary>
+      <div id="assumptionDetail" style="margin-top:8px; font-size: 9pt;"></div>
+    </details>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  Generated by <strong>aveva-presales-pro</strong> v0.3.1. AVEVA, part of Schneider Electric.<br>
+  Watermark: <code>appro-ca96e5c3-e535-40b4-a502-9e85523f608e</code><br>
+  Pricing source hierarchy: distributor pricing book (HIGH) &rarr; AVEVA published references (MEDIUM) &rarr; estimated ranges (MEDIUM-LOW). Replace embedded defaults with verified pricing before customer-facing use. See <code>tools/load-your-pricing.md</code>.<br>
+  This calculator is a sales-tool aid, not a contract. Final TCO depends on actual deployment scope, support tier, and regional adjustments.
+</div>
+
+<script>
+const PRICING = {
+  cost_conscious: { name: "AVEVA Operations Control - Edge", annual_subscription: 22500, impl_min: 8000, impl_max: 15000, training_min: 3000, training_max: 5000, annual_support_pct: 0.20 },
+  mid_market: { name: "AVEVA Operations Control - Supervisory + PI System", annual_subscription: 75000, impl_min: 40000, impl_max: 90000, training_min: 8000, training_max: 18000, annual_support_pct: 0.20 },
+  enterprise: { name: "AVEVA Operations Control - Enterprise + PI System Enterprise + UOC", annual_subscription: 250000, impl_min: 200000, impl_max: 500000, training_min: 25000, training_max: 60000, annual_support_pct: 0.20 },
+};
+
+const BENCHMARKS = {
+  cpg: { oee_revenue_per_point: 75000, downtime_cost_per_hr: 4200, compliance_hrs_saved_per_site_year: 380, energy_pct_savings: 0.06, energy_baseline_per_site: 350000 },
+  oil_gas: { oee_revenue_per_point: 220000, downtime_cost_per_hr: 12000, compliance_hrs_saved_per_site_year: 520, energy_pct_savings: 0.05, energy_baseline_per_site: 1200000 },
+  water_ww: { oee_revenue_per_point: 28000, downtime_cost_per_hr: 1500, compliance_hrs_saved_per_site_year: 320, energy_pct_savings: 0.07, energy_baseline_per_site: 180000 },
+  mining: { oee_revenue_per_point: 380000, downtime_cost_per_hr: 22000, compliance_hrs_saved_per_site_year: 280, energy_pct_savings: 0.05, energy_baseline_per_site: 2200000 },
+  transportation: { oee_revenue_per_point: 95000, downtime_cost_per_hr: 3800, compliance_hrs_saved_per_site_year: 240, energy_pct_savings: 0.06, energy_baseline_per_site: 480000 },
+};
+
+function loadInputs() {
+  try {
+    const s = localStorage.getItem('aveva-roi-inputs');
+    if (!s) return;
+    const o = JSON.parse(s);
+    if (o.tier) document.getElementById('tier').value = o.tier;
+    if (o.vertical) document.getElementById('vertical').value = o.vertical;
+    if (o.sites != null) { document.getElementById('sites').value = o.sites; document.getElementById('sitesNum').value = o.sites; }
+    if (o.tags != null) { document.getElementById('tags').value = o.tags; document.getElementById('tagsNum').value = o.tags; }
+    if (o.rate != null) { document.getElementById('rate').value = o.rate; document.getElementById('rateNum').value = o.rate; }
+    if (o.oee != null) document.getElementById('oee').value = o.oee;
+    if (o.oeeTarget != null) document.getElementById('oeeTarget').value = o.oeeTarget;
+    if (o.downtime != null) document.getElementById('downtime').value = o.downtime;
+  } catch(e) {}
+}
+
+function saveInputs() {
+  const o = {
+    tier: document.getElementById('tier').value,
+    vertical: document.getElementById('vertical').value,
+    sites: +document.getElementById('sites').value,
+    tags: +document.getElementById('tags').value,
+    rate: +document.getElementById('rate').value,
+    oee: +document.getElementById('oee').value,
+    oeeTarget: +document.getElementById('oeeTarget').value,
+    downtime: +document.getElementById('downtime').value,
+  };
+  try { localStorage.setItem('aveva-roi-inputs', JSON.stringify(o)); } catch(e) {}
+}
+
+function resetDefaults() {
+  try { localStorage.removeItem('aveva-roi-inputs'); } catch(e) {}
+  document.getElementById('tier').value = 'mid_market';
+  document.getElementById('vertical').value = 'cpg';
+  document.getElementById('sites').value = 5; document.getElementById('sitesNum').value = 5;
+  document.getElementById('tags').value = 5; document.getElementById('tagsNum').value = 5;
+  document.getElementById('rate').value = 80; document.getElementById('rateNum').value = 80;
+  document.getElementById('oee').value = 68;
+  document.getElementById('oeeTarget').value = 80;
+  document.getElementById('downtime').value = 12;
+  recalc();
+}
+
+function syncSites() { document.getElementById('sites').value = document.getElementById('sitesNum').value; }
+function syncTags() { document.getElementById('tags').value = document.getElementById('tagsNum').value; }
+function syncRate() { document.getElementById('rate').value = document.getElementById('rateNum').value; }
+
+function fmt(n, opts) {
+  if (n == null || isNaN(n)) return '—';
+  const sign = n < 0 ? '-' : '';
+  const a = Math.abs(n);
+  if (opts && opts.pct) return sign + a.toFixed(1) + '%';
+  if (a >= 1e6) return sign + '$' + (a/1e6).toFixed(2) + 'M';
+  if (a >= 1e3) return sign + '$' + Math.round(a/1e3).toLocaleString() + 'K';
+  return sign + '$' + Math.round(a).toLocaleString();
+}
+
+function recalc() {
+  saveInputs();
+
+  const tier = document.getElementById('tier').value;
+  const vertical = document.getElementById('vertical').value;
+  const sites = +document.getElementById('sites').value;
+  const tags = +document.getElementById('tags').value;
+  const rate = +document.getElementById('rate').value;
+  const oeeNow = +document.getElementById('oee').value;
+  const oeeTarget = +document.getElementById('oeeTarget').value;
+  const downtimeHrs = +document.getElementById('downtime').value;
+
+  document.getElementById('siteCount').textContent = sites;
+  document.getElementById('tagCount').textContent = tags;
+  document.getElementById('sitesNum').value = sites;
+  document.getElementById('tagsNum').value = tags;
+  document.getElementById('rateNum').value = rate;
+  document.getElementById('rateVal').textContent = '$' + rate;
+  document.getElementById('oeeVal').textContent = oeeNow;
+  document.getElementById('oeeTargetVal').textContent = oeeTarget;
+  document.getElementById('downtimeVal').textContent = downtimeHrs;
+  document.getElementById('tierBadge').textContent =
+    tier === 'cost_conscious' ? 'Cost-Conscious' :
+    tier === 'mid_market' ? 'Mid-Market' : 'Enterprise';
+
+  const p = PRICING[tier];
+  const b = BENCHMARKS[vertical];
+
+  const annualSub = p.annual_subscription * sites;
+  const implOnce = ((p.impl_min + p.impl_max) / 2) * sites;
+  const trainOnce = ((p.training_min + p.training_max) / 2) * sites;
+  const yr1Investment = annualSub + implOnce + trainOnce;
+
+  document.getElementById('invTable').innerHTML =
+    '<div class="row"><span class="lbl">' + p.name + '</span><span class="val"></span></div>' +
+    '<div class="row"><span class="lbl">Annual subscription &times; ' + sites + ' site(s)</span><span class="val">' + fmt(annualSub) + '</span></div>' +
+    '<div class="row"><span class="lbl">Year-1 implementation (one-time)</span><span class="val">' + fmt(implOnce) + '</span></div>' +
+    '<div class="row"><span class="lbl">Year-1 training (one-time)</span><span class="val">' + fmt(trainOnce) + '</span></div>' +
+    '<div class="row total"><span class="lbl">Year-1 total investment</span><span class="val">' + fmt(yr1Investment) + '</span></div>';
+
+  const oeeGain = Math.max(0, oeeTarget - oeeNow);
+  const oeeBenefit = oeeGain * b.oee_revenue_per_point * sites;
+  const downtimeReduction = 0.25;
+  const downtimeBenefit = downtimeHrs * 12 * b.downtime_cost_per_hr * downtimeReduction * sites;
+  const complianceBenefit = b.compliance_hrs_saved_per_site_year * rate * sites;
+  const energyBenefit = b.energy_pct_savings * b.energy_baseline_per_site * sites;
+  const operatorLaborBenefit = 5 * 52 * rate * sites;
+  const totalBenefits = oeeBenefit + downtimeBenefit + complianceBenefit + energyBenefit + operatorLaborBenefit;
+
+  document.getElementById('benefitsTable').innerHTML =
+    '<div class="row"><span class="lbl">OEE improvement (' + oeeGain.toFixed(1) + ' pts &times; ' + sites + ' site(s))</span><span class="val pos">' + fmt(oeeBenefit) + '</span></div>' +
+    '<div class="row"><span class="lbl">Downtime reduction (25% of ' + downtimeHrs + ' hrs/mo)</span><span class="val pos">' + fmt(downtimeBenefit) + '</span></div>' +
+    '<div class="row"><span class="lbl">Compliance reporting automation</span><span class="val pos">' + fmt(complianceBenefit) + '</span></div>' +
+    '<div class="row"><span class="lbl">Energy / sustainability optimization</span><span class="val pos">' + fmt(energyBenefit) + '</span></div>' +
+    '<div class="row"><span class="lbl">Operator data-collection labor avoided</span><span class="val pos">' + fmt(operatorLaborBenefit) + '</span></div>' +
+    '<div class="row total"><span class="lbl">Total annual benefits</span><span class="val pos">' + fmt(totalBenefits) + '</span></div>';
+
+  const yr1Net = totalBenefits - yr1Investment;
+  const yr3Net = (totalBenefits * 3) - yr1Investment - (annualSub * 2);
+  const yr5Net = (totalBenefits * 5) - yr1Investment - (annualSub * 4);
+  const monthsToPayback = yr1Investment > 0 ? Math.max(1, Math.ceil((yr1Investment / Math.max(totalBenefits, 1)) * 12)) : 0;
+  const yr5Investment = yr1Investment + (annualSub * 4);
+  const roi5yr = yr5Investment > 0 ? ((totalBenefits * 5 - yr5Investment) / yr5Investment) * 100 : 0;
+
+  document.getElementById('roiTable').innerHTML =
+    '<div class="row"><span class="lbl">Year 1 net</span><span class="val ' + (yr1Net>=0?'pos':'neg') + '">' + fmt(yr1Net) + '</span></div>' +
+    '<div class="row"><span class="lbl">3-year net (cumulative)</span><span class="val ' + (yr3Net>=0?'pos':'neg') + '">' + fmt(yr3Net) + '</span></div>' +
+    '<div class="row"><span class="lbl">5-year net (cumulative)</span><span class="val ' + (yr5Net>=0?'pos':'neg') + '">' + fmt(yr5Net) + '</span></div>' +
+    '<div class="row"><span class="lbl">Payback period</span><span class="val">' + (monthsToPayback < 12 ? monthsToPayback + ' mo' : (monthsToPayback/12).toFixed(1) + ' yrs') + '</span></div>' +
+    '<div class="row total"><span class="lbl">5-year ROI %</span><span class="val ' + (roi5yr>=0?'pos':'neg') + '">' + fmt(roi5yr, {pct:true}) + '</span></div>';
+
+  document.getElementById('assumptionDetail').innerHTML =
+    '<strong>Pricing assumptions (per site):</strong><br>' +
+    '&bull; Annual subscription: ' + fmt(p.annual_subscription) + ' (' + p.name + ')<br>' +
+    '&bull; Implementation: ' + fmt(p.impl_min) + ' &ndash; ' + fmt(p.impl_max) + ' (midpoint used)<br>' +
+    '&bull; Training: ' + fmt(p.training_min) + ' &ndash; ' + fmt(p.training_max) + ' (midpoint used)<br>' +
+    '<br>' +
+    '<strong>' + vertical.toUpperCase() + ' benchmarks:</strong><br>' +
+    '&bull; OEE-point revenue lift: ' + fmt(b.oee_revenue_per_point) + '/site<br>' +
+    '&bull; Downtime cost: ' + fmt(b.downtime_cost_per_hr) + '/hr<br>' +
+    '&bull; Compliance hours saved: ' + b.compliance_hrs_saved_per_site_year + ' hrs/site/year &times; $' + rate + '/hr<br>' +
+    '&bull; Energy savings: ' + (b.energy_pct_savings*100).toFixed(0) + '% of ' + fmt(b.energy_baseline_per_site) + '/site<br>' +
+    '&bull; Operator labor: 5 hrs/week &times; 52 weeks &times; $' + rate + '/hr &times; ' + sites + ' site(s)<br>' +
+    '&bull; Downtime reduction assumed: 25% (industry estimate; verify per customer)';
+}
+
+loadInputs();
+recalc();
+</script>
+
+</body>
+</html>

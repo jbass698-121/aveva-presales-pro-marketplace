@@ -1,0 +1,258 @@
+{
+  "generated_at": "2026-04-29T19:49:17.823323",
+  "plugin_version": "0.3.1",
+  "watermark": "appro-ca96e5c3-e535-40b4-a502-9e85523f608e",
+  "slots": {
+    "industry_playbooks": [
+      {
+        "path": "content/industries/cpg.md",
+        "size_bytes": 17972,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/mining-metals-minerals.md",
+        "size_bytes": 11059,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/oil-gas.md",
+        "size_bytes": 11260,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/pharma-life-sciences.md",
+        "size_bytes": 604,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/power-utilities.md",
+        "size_bytes": 589,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/transportation.md",
+        "size_bytes": 7827,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/industries/water-wastewater.md",
+        "size_bytes": 11747,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      }
+    ],
+    "competitor_battlecards": [
+      {
+        "path": "content/competitors/abb.md",
+        "size_bytes": 766,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/aspentech.md",
+        "size_bytes": 6714,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/emerson.md",
+        "size_bytes": 7146,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/ge-digital.md",
+        "size_bytes": 780,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/honeywell.md",
+        "size_bytes": 7507,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/inductive-automation-ignition.md",
+        "size_bytes": 7362,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/rockwell.md",
+        "size_bytes": 7414,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/siemens.md",
+        "size_bytes": 6266,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/competitors/trihedral-vtscada.md",
+        "size_bytes": 794,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      }
+    ],
+    "case_studies": [
+      {
+        "path": "content/case-studies/bhp-escondida-mining.md",
+        "size_bytes": 934,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/case-studies/kelloggs-cpg.md",
+        "size_bytes": 1174,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/case-studies/maple-leaf-foods-cpg.md",
+        "size_bytes": 772,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/case-studies/mmg-limited-mining.md",
+        "size_bytes": 2100,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/case-studies/scg-chemicals-oil-gas.md",
+        "size_bytes": 1932,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/case-studies/votorantim-mining.md",
+        "size_bytes": 1073,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      }
+    ],
+    "objection_scripts": [
+      {
+        "path": "content/objections/ignition-pricing.md",
+        "size_bytes": 7947,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/objections/rockwell-incumbency.md",
+        "size_bytes": 4607,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      }
+    ],
+    "product_positioning": [
+      {
+        "path": "content/products/aveva-pi-system.md",
+        "size_bytes": 569,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/aveva-system-platform.md",
+        "size_bytes": 581,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/connect-visualization.md",
+        "size_bytes": 1932,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/ecostruxure-automation-expert.md",
+        "size_bytes": 597,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/etap.md",
+        "size_bytes": 547,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/flex-subscription.md",
+        "size_bytes": 3657,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/industrial-ai-assistant.md",
+        "size_bytes": 3702,
+        "status": "full",
+        "last_validated": "2026-04-29"
+      },
+      {
+        "path": "content/products/power-monitoring-expert.md",
+        "size_bytes": 585,
+        "status": "stub",
+        "last_validated": "2026-04-29"
+      }
+    ],
+    "pricing_book": [
+      {
+        "path": "content/pricing/aveva-current.yaml",
+        "size_bytes": 6601,
+        "status": "full",
+        "last_validated": null
+      },
+      {
+        "path": "content/pricing/competitors.yaml",
+        "size_bytes": 468,
+        "status": "stub",
+        "last_validated": null
+      }
+    ],
+    "discovery": [
+      {
+        "path": "content/discovery/questions.md",
+        "size_bytes": 6822,
+        "status": "full",
+        "last_validated": null
+      }
+    ],
+    "canonical_references": [
+      {
+        "path": "content/aveva-canonical.yaml",
+        "size_bytes": 17956,
+        "status": "full",
+        "last_validated": null
+      },
+      {
+        "path": "content/aveva-industry-positioning.yaml",
+        "size_bytes": 8802,
+        "status": "full",
+        "last_validated": null
+      },
+      {
+        "path": "content/aveva-regulatory-mapping.yaml",
+        "size_bytes": 16775,
+        "status": "full",
+        "last_validated": null
+      }
+    ]
+  },
+  "baseline_status": {
+    "baseline_version": "0.3.1",
+    "files_in_baseline": 26,
+    "matches": 26,
+    "mismatches": []
+  },
+  "watermark_count": 44
+}

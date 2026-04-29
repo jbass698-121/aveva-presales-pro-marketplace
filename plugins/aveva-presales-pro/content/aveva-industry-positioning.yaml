@@ -1,0 +1,156 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+#
+# AVEVA Industry Positioning — what AVEVA itself officially asserts about
+# its position in each vertical. Pulled from aveva.com/en/industries/* and
+# AVEVA corporate communications.
+#
+# This file represents AVEVA's voice. The distributor's playbook may
+# legitimately diverge (more conservative, more regional, more buyer-
+# specific). Use this as the credibility floor: the plugin must not
+# undersell AVEVA's own claims, nor contradict them.
+#
+# Phase 0 deliverable. Last refreshed: 2026-04-29.
+
+schema_version: 1
+captured_at: "2026-04-29"
+captured_by: "Phase 0 discovery + WebSearch"
+watermark: "appro-ca96e5c3-e535-40b4-a502-9e85523f608e"
+
+# =========================================================================
+# Industry positions (AVEVA's own framing)
+# =========================================================================
+industries:
+
+  oil_and_gas:
+    aveva_position: "Industry leader. AVEVA PI System is deployed at the majority of global O&G majors and many independents."
+    headline_claim: "75% of the world's largest O&G producers use AVEVA PI System"
+    plugin_match: "Plugin's existing oil-gas.md uses this 75% claim — keep it; verify against AVEVA's current case-study library quarterly"
+    industry_pillars:
+      - "Real-time production monitoring (PI System)"
+      - "Pipeline integrity and SCADA (System Platform + PI Asset Framework)"
+      - "Asset Performance Management (AVEVA APM)"
+      - "Predictive analytics (AVEVA Predictive Analytics)"
+      - "Engineering integration (Unified Engineering)"
+    sub_segments_addressed: ["upstream", "midstream", "downstream / refining", "petrochemicals"]
+    refining_note: "AVEVA tends to sell directly to large refiners. Distributor channel typically pulls hardware (Modicon, Foxboro) with selective AVEVA software pull-through."
+    sources:
+      - url: "https://www.aveva.com/en/industries/oil-and-gas/"
+        last_verified: "2026-04-29"
+
+  food_and_beverage:
+    aveva_position: "Strong presence in CPG, food and beverage, and personal care manufacturing."
+    industry_pillars:
+      - "Manufacturing execution and batch management (AVEVA MES)"
+      - "Multi-site standardization (System Platform + UOC)"
+      - "OEE and downtime intelligence (PI System)"
+      - "FDA Part 11 electronic batch records"
+      - "FSMA 204 traceability via Critical Tracking Events"
+    headline_customers_publicly_referenced: ["Kellogg's", "Maple Leaf Foods", "Cargill", "AMCOR"]
+    plugin_match: "CPG playbook is well-aligned. Refresh FSMA 204 framing per regulatory mapping (compliance date now 2028-07-20)."
+    sources:
+      - url: "https://www.aveva.com/en/industries/food-and-beverage/"
+        last_verified: "2026-04-29"
+
+  water_and_wastewater:
+    aveva_position: "Tier-aware portfolio for utilities of every size — from small districts on InTouch Edge to large utilities on Unified Operations Center."
+    industry_pillars:
+      - "Tier-aware deployment (Operations Control Edge / Supervisory / Enterprise)"
+      - "LCRI compliance support — service line inventory, public-facing replacement plan portals, audit-ready records"
+      - "AWIA risk and resilience assessment data architecture"
+      - "Regulatory reporting automation (NPDES DMR)"
+      - "Cybersecurity certification posture (ISA/IEC 62443, ISO 27001, SOC 2 Type II) for CISA / EPA expectations"
+    plugin_match: "Plugin's water-wastewater playbook is the strongest in the bundle. Critical update: LCRR → LCRI throughout."
+    sources:
+      - url: "https://www.aveva.com/en/industries/water-and-wastewater/"
+        last_verified: "2026-04-29"
+
+  mining_metals_minerals:
+    aveva_position: "Leader in mining, metals, and minerals digital transformation. Long-running case study library (MMG, Votorantim, BHP Escondida, Rio Tinto)."
+    industry_pillars:
+      - "Production management (AVEVA Production Management)"
+      - "Predictive maintenance (AVEVA Predictive Analytics)"
+      - "Mine-to-mill optimization (System Platform + PI System)"
+      - "Energy intensity tracking (PME + PI System)"
+      - "Tailings and ESG reporting (System Platform + PI Asset Framework)"
+    headline_customers_publicly_referenced: ["MMG", "Votorantim", "BHP Escondida", "Rio Tinto Gudai-Darri"]
+    case_study_freshness_note: "Case studies are 2014-2016 vintage; AVEVA has more recent published references. Refresh case study library."
+    sources:
+      - url: "https://www.aveva.com/en/industries/mining-metals-and-minerals/"
+        last_verified: "2026-04-29"
+
+  life_sciences:
+    aveva_position: "Pharma and biotech manufacturing, with focus on batch records, validation, and serialization."
+    industry_pillars:
+      - "AVEVA MES batch records (Part 11 ready)"
+      - "DSCSA serialization support"
+      - "Recipe and master-recipe management"
+      - "Process control with validation discipline"
+    plugin_status: "Industry skill ships in v0.2.6 with stub playbook. Phase 4 fills it in."
+    sources:
+      - url: "https://www.aveva.com/en/industries/life-sciences/"
+        last_verified: "2026-04-29"
+
+  power_and_utilities:
+    aveva_position: "Generation, transmission and distribution, and demand-side management. AVEVA Enterprise SCADA / OASyS heritage in T&D."
+    industry_pillars:
+      - "AVEVA Enterprise SCADA (formerly OASyS) — large-scale T&D"
+      - "Generation operations (System Platform + PI System)"
+      - "Renewable assets — wind, solar, BESS — via PI Asset Framework templates"
+      - "Microgrid + DER integration (ETAP + AVEVA)"
+    plugin_status: "Industry skill ships in v0.2.6 with stub playbook. Phase 4 fills it in."
+    sources:
+      - url: "https://www.aveva.com/en/industries/power-and-utilities/"
+        last_verified: "2026-04-29"
+
+  transportation:
+    aveva_position: "Rail, transit, ports, airports, and highways. Smart-mobility / Traffic Operations Center applications."
+    industry_pillars:
+      - "Multi-system integration (System Platform)"
+      - "Asset health (PI Asset Framework templates per vehicle/asset class)"
+      - "Electrification + decarbonization (PME + ETAP integrated)"
+      - "Traffic Operations Center aggregation"
+    plugin_match: "Plugin's transportation playbook is good; aligns with Schneider IIJA capital wave framing."
+    sources:
+      - url: "https://www.aveva.com/en/industries/transportation/"
+        last_verified: "2026-04-29"
+
+# =========================================================================
+# Cross-cutting AVEVA themes (2026 GTM messaging)
+# =========================================================================
+cross_cutting_themes:
+
+  industrial_intelligence:
+    canonical_name: "AVEVA Industrial Intelligence Platform"
+    description: "AVEVA's umbrella positioning since 2024 — the platform that brings IT and OT data together with AI, analytics, and visualization."
+    plugin_implication: "Adopt this phrasing in the orchestrator and portfolio narrative. Replaces older 'industrial automation' framing where appropriate."
+
+  industrial_ai:
+    canonical_name: "AVEVA Industrial AI"
+    description: "AVEVA's AI portfolio: Industrial AI Assistant (CONNECT), Generative Design AI, Predictive Design AI, Intelligent Point Cloud Framework."
+    launch_window: "January 2026 wave (Industrial AI Assistant + 3 Unified Engineering AI tools)"
+    plugin_implication: "New plugin section: AI capabilities by skill / by industry. Competitive battlecards need their AI counterpart noted."
+
+  connected_industrial_economy:
+    canonical_name: "Connected Industrial Economy"
+    description: "Schneider Electric's umbrella vision for cross-industry data sharing — built on CONNECT + Databricks + ecosystem partners."
+    plugin_implication: "Cross-cutting framing for executive decks and strategic-account briefs. Currently not in the plugin."
+
+  it_ot_convergence:
+    canonical_name: "IT-OT Convergence with CONNECT and Databricks"
+    description: "Marketing-level positioning of the AVEVA + Databricks integration. Open data sharing via Delta Sharing protocol."
+    sources:
+      - url: "https://www.databricks.com/blog/aveva-world-conference-redefining-industrial-ai-aveva-databricks"
+        last_verified: "2026-04-29"
+
+# =========================================================================
+# Refresh policy
+# =========================================================================
+refresh:
+  quarterly_check: "Industry pages refresh slowly; quarterly audit is sufficient"
+  triggers_audit_pass:
+    - "AVEVA repositions an industry pillar"
+    - "Headline customer reference rotation"
+    - "AVEVA World annual messaging changes"
+  next_review: "2026-07-29"

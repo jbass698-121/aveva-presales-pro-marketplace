@@ -1,0 +1,170 @@
+# =========================================================================
+# AVEVA pricing book — DEMO CONTENT
+# =========================================================================
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+#
+# IMPORTANT FOR DISTRIBUTORS:
+# This file ships with publicly-derivable AVEVA list pricing as a starting
+# point. It is INTENTIONALLY APPROXIMATE. To use this in production sales:
+#   1. Read tools/load-your-pricing.md for the override workflow.
+#   2. Replace these values with your verified pricing from your AVEVA
+#      partner price list and your regional/discount adjustments.
+#   3. Update last_validated to the date you reviewed against your sources.
+#
+# Numbers below are framework defaults sourced from public references
+# (AVEVA published collateral, partner-portal extracts dated mid-2025,
+# distributor-shared list pricing). They are illustrative; the licensor
+# makes no representation as to current accuracy. Verify against AVEVA's
+# current Global Price List before quoting.
+
+metadata:
+  effective_date: "2026-04-29"
+  region: "north-america-default"
+  next_review: "2026-07-29"
+  pricing_source: "Public AVEVA references; framework defaults; distributor must override"
+  confidence: "MEDIUM (illustrative; verify before quoting)"
+  override_runbook: "tools/load-your-pricing.md"
+
+# =========================================================================
+# AVEVA Operations Control + Edge — subscription model
+# =========================================================================
+products:
+  intouch_unlimited:
+    perpetual_license: 12000
+    annual_support: 2400
+    implementation_range: [8000, 15000]
+    training_range: [3000, 5000]
+    notes: "InTouch Unlimited perpetual; standard SCADA license; partner discount applies per program tier"
+    confidence: "MEDIUM"
+
+  ops_control_edge_starter:
+    annual_subscription: 22500
+    implementation_range: [12000, 18000]
+    support: "Included"
+    notes: "AVEVA Operations Control — Edge (subscription, formerly marketed as Edge Starter); cloud-enabled; 3-year minimum term"
+    confidence: "MEDIUM"
+
+  ops_control_edge_site:
+    annual_subscription_range: [15000, 30000]
+    user_count_range: [25, 99]
+    notes: "Edge Site Edition; user-based pricing"
+    confidence: "MEDIUM"
+
+  ops_control_supervisory_site:
+    annual_subscription_range: [20000, 40000]
+    user_count_range: [25, 99]
+    notes: "Supervisory Site Edition"
+    confidence: "MEDIUM"
+
+  unified_operations_center:
+    annual_subscription_base: 90000
+    notes: "Enterprise multi-site; pricing scales with site/asset count"
+    confidence: "MEDIUM"
+
+# =========================================================================
+# AVEVA System Platform (perpetual + concurrent users)
+# =========================================================================
+  system_platform:
+    perpetual_license_base: 30000
+    perpetual_license_concurrent_users:
+      "10": 45000
+      "25": 70000
+      "50": 105000
+      "99": 145000
+    annual_support_pct: 20
+    redundancy_uplift_pct: 50
+    notes: "System Platform; concurrent-user model; redundancy adds 50%"
+    confidence: "MEDIUM"
+
+# =========================================================================
+# AVEVA PI System
+# =========================================================================
+  pi_data_archive:
+    base_license: 25000
+    annual_support_pct: 20
+    notes: "Verify against AVEVA Connect / partner price list"
+    confidence: "LOW (varies widely by deployment scale)"
+
+  pi_af:
+    bundled_with_data_archive: true
+    notes: "Asset Framework typically bundled with PI Data Archive"
+
+  pi_vision:
+    base_license: 15000
+    annual_support_pct: 20
+    notes: "PI Vision web client"
+    confidence: "LOW"
+
+# =========================================================================
+# AVEVA MES
+# =========================================================================
+  mes_starter:
+    annual_subscription_range: [40000, 75000]
+    notes: "MES Starter Editions for batch/recipe entry-point"
+    confidence: "LOW (highly customer-specific)"
+
+  mes_full:
+    annual_subscription_range: [100000, 300000]
+    notes: "Full MES with Plant Applications, batch, recipe, OEE"
+    confidence: "LOW"
+
+# =========================================================================
+# AVEVA Connect cloud data services
+# =========================================================================
+  aveva_connect_data_services:
+    annual_base: 15000
+    streams_included: 200
+    additional_stream_pack: 1500
+    notes: "AVEVA Connect; streams = real-time data feeds; tiered pricing above base"
+    confidence: "MEDIUM"
+
+# =========================================================================
+# Schneider hardware list prices (used by ROI for tier-based stack pricing)
+# =========================================================================
+modicon:
+  m221_starter_kit: 350
+  m241_with_io_basic: 1200
+  m251_compact: 1800
+  m580_base: 4500
+  m580_with_redundancy: 7500
+  notes: "Modicon list prices; partner discount applies"
+  confidence: "MEDIUM"
+
+altivar_drives:
+  altivar_machine_atv320_5kw: 850
+  altivar_process_atv630_75kw: 6500
+  notes: "Representative VFD list prices"
+  confidence: "MEDIUM"
+
+# =========================================================================
+# Regional adjustments
+# =========================================================================
+regional_adjustments:
+  texas: 1.00
+  louisiana: 1.00
+  oklahoma: 1.00
+  mountain_west: 1.02
+  southwest: 1.02
+  southeast: 1.00
+  northeast: 1.05
+  west_coast: 1.07
+  notes: "Multipliers vs. partner-program list. Review quarterly."
+
+# =========================================================================
+# Partner discount tiers — DISTRIBUTOR INTERNAL ONLY
+# =========================================================================
+# These values control margin in distributor ROI; never appear in customer-facing artifacts.
+partner_discount_tiers:
+  authorized: 0.20
+  silver: 0.25
+  gold: 0.30
+  platinum: 0.35
+  notes: "Discount off list. Confirm with AVEVA channel rep for your program tier."
+
+# =========================================================================
+# Notes for the verifier
+# =========================================================================
+verification_notes:
+  - "All numeric values tagged confidence MEDIUM by default; LOW where customer-specific."
+  - "Framework refresh cadence: quarterly_pricing_book_validation scheduled task."
+  - "Distributor MUST override before customer-facing quotes. See tools/load-your-pricing.md."

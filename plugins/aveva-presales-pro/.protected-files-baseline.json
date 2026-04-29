@@ -1,0 +1,32 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": "fbd31bad1da99d3b2117dc9eb6cf91f626b077112e80646d910f6d44a52fa35f",
+    "LICENSE.md": "ed2cf38355618d89ef3291294f92f23bb1adce9f489a9cdbe9fc234f9cb1b995",
+    "MODIFICATION-POLICY.md": "bab8a0430608889096be0fb3100aa6daceb6c60ca0ed55ae0c3d20ad2bde1cb5",
+    "agents/analyst.md": "28b1588439e317596afe48358b0dd64c8f30da9c5be2821024ced0d24eb6a93c",
+    "agents/formatter.md": "0cb03283903b564d5f6803c6c99c8fb6455b845f90c460242378976b3d598ea0",
+    "agents/researcher.md": "2baaf1361cd1e76ff423f53ee2b95b7ae0286626dd08b075309781b2cfa7e027",
+    "agents/verifier.md": "69ecceee0f4181e8ee5bbe11b966de92af585529d479db46714726e0cdb848ec",
+    "agents/writer.md": "a57d67c510351918f3a58dbbccdc31d3372b00f166101a0a02a33318e278c499",
+    "content/public-sources.yaml": "a14146694b7584fdf7a2371e3ab101a7a5acdafbdb7455cb1a77ae923ddbf172",
+    "pipelines/enablement-podcast.yaml": "d0f4e9fc96f4a9ffe6fd6383e18383902f2bb620dfaf1e279169d54fedf50bc1",
+    "pipelines/executive-deck.yaml": "78d8cfe6a5b6a83bc97091c613a27071822d8cbe5ba9ad12a9764e546090d52d",
+    "pipelines/industry-playbook.yaml": "b3762567f192b7f9c0621fa13c9d4ec40ac160d52bab101dc15564a46669e610",
+    "pipelines/opportunity-briefing.yaml": "1fd7934e67d4caa7050633c6f6fe74cfb6f461362380a23238ba9d0956af40f3",
+    "pipelines/quick-reference.yaml": "58634f7104912a9c6c73fb5b98f291b6fcb81a5fb7e7ac1d6f7561a1d451d483",
+    "pipelines/strategic-account-brief.yaml": "cac72c21e64346981d70e6361c5a49f647c681660e4ccbe4c7a22abc752880aa",
+    "skills/account-memory/SKILL.md": "deb764d2443762661411e1e6de2c51aa26767493b73df3b7d64ce9b4711e61f2",
+    "skills/content-health/SKILL.md": "9f56a321f7d70453da9f8ed77ef705770ba03e49979a6f5daad12ecac67cc7a2",
+    "skills/deck-generator/SKILL.md": "bf9136431e61c4c802ae8f9a1d4647441228909b6c15d9167859cae04a3fae5e",
+    "skills/enablement-podcast/SKILL.md": "5414b683a452f155b8040f9b897ab200ac47b4a3c735de2cde0d0532efb8afd2",
+    "skills/onboarding/SKILL.md": "49b6a5390cd6a12935b376ce66f59f84dbfc76893b3241d787c99dc25818f30e",
+    "skills/orchestrator/SKILL.md": "3731fc198ebdfebf2f183adf66535f5b8b88de00363caded65c39d146d38e8a4",
+    "skills/pipeline-health/SKILL.md": "a3edecc806dff20aa0661d165d1c5f39d86f59d00e306ada4515e5accd6f1e1f",
+    "skills/portfolio-narrative/SKILL.md": "b550adf15864a2174c0885615c044fdcb79f6d30103571a53c534ca3ee2b6426",
+    "skills/quick-reference/SKILL.md": "2aa4f83a814973a2e8188dbfbfa229d6d2baa9ee49f6e27c347ef13901f9c07c",
+    "skills/strategic-account/SKILL.md": "e3fce2b628e5e5e9378d314bbe767c6c03d7ef90762793500e3770c9d3e2c2fb",
+    "skills/win-loss-loop/SKILL.md": "564962cfee18db864752d6e78e523533bba2886d23b208c5d6623794bf9a7324"
+  },
+  "version": "0.3.1",
+  "watermark": "appro-ca96e5c3-e535-40b4-a502-9e85523f608e"
+}

@@ -1,0 +1,84 @@
+# Copyright (c) 2026 Jason Bass. All rights reserved.
+# Licensed under the Business Source License 1.1. See LICENSE.md.
+# Watermark: appro-ca96e5c3-e535-40b4-a502-9e85523f608e
+# Outline contract for the analyst stage of pipelines/opportunity-briefing.yaml.
+#
+# The analyst takes the researcher's findings and fills in this outline.
+# The writer then renders Markdown from the populated outline. Every section
+# below is required unless marked optional.
+
+name: opportunity-briefing-outline
+target_word_count: 1000
+target_format: markdown_one_pager
+
+sections:
+
+  - id: header
+    required: true
+    fields:
+      - account_name                # str — from CRM
+      - meeting_date                # ISO date — when the briefed meeting occurs
+      - meeting_attendees           # list[str]
+      - opportunity_amount_usd      # int | null
+      - stage                       # str — CRM stage
+      - competitor_of_record        # str | null
+
+  - id: executive_summary
+    required: true
+    target_words: 80
+    rules:
+      - lead_with_business_impact
+      - one_paragraph_max
+      - no_jargon
+
+  - id: stakeholder_map
+    required: true
+    fields:
+      - rows                        # list[{name, role, posture, last_contacted, source}]
+    rules:
+      - posture_in: [champion, supporter, neutral, detractor, unknown]
+
+  - id: recent_signals
+    required: true
+    fields:
+      - meetings                    # list[{date, source, headline, key_points[]}]  (last 60 days)
+      - emails                      # list[{date, subject, headline}]               (last 30 days)
+      - account_memory_excerpt      # str — relevant pulls from accounts/{ae}/{slug}.md
+
+  - id: competitive_context
+    required: true
+    rules:
+      - load_from: "content/competitors/{competitor_of_record}.md"
+      - if_missing_flag_content_gap: true
+    fields:
+      - threat_summary              # str — 2-3 sentences
+      - top_objections              # list[str] — max 3
+      - gap_closure_offer           # str
+
+  - id: industry_lens
+    required: true
+    rules:
+      - load_from: "content/industries/{industry}.md"
+    fields:
+      - relevant_pains              # list[str]
+      - regulatory_pressure         # str | null
+
+  - id: recommended_approach
+    required: true
+    target_words: 150
+    rules:
+      - tie_to_executive_summary: true
+      - include_specific_questions_to_ask: true
+
+  - id: pre_loaded_objection_rebuttals
+    required: true
+    rules:
+      - load_from: "content/objections/*.md"
+    fields:
+      - rebuttals                   # list[{objection, response, source_citation}]
+
+  - id: source_citations
+    required: true
+    rules:
+      - confidence_tag_required_on_every_numeric_claim: true
+      - format: "[source → page/section, last verified YYYY-MM-DD]"
