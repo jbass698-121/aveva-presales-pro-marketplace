@@ -1,10 +1,14 @@
 {
-  "name": "local-marketplace",
+  "name": "aveva-presales-pro-marketplace",
+  "owner": {
+    "name": "Jason Bass"
+  },
   "plugins": [
     {
       "name": "aveva-presales-pro",
-      "source": "./plugins/aveva-presales-pro",
-      "version": "0.3.1"
+      "description": "AI presales content factory for Schneider Electric direct sellers and AVEVA distributors. v0.3.1 adds HTML live artifacts: ROI calculator, content health dashboard, battlecard viewer, briefing dashboard.",
+      "version": "0.3.1",
+      "source": "./plugins/aveva-presales-pro"
     }
   ]
 }
