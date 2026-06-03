@@ -1,7 +1,8 @@
 # aveva-presales-pro — Product Specification
 
-**Version of this document:** v1.4 (2026-04-29; aligned to plugin v0.3.1)
-**Plugin version this spec describes:** v0.3.1 (current — HTML live artifacts release on top of v0.3.0 pilot)
+**Version of this document:** v1.6 (2026-06-03; aligned to plugin v0.3.2 — bug-fix + 2026-H1 content-refresh release)
+**Plugin version this spec describes:** v0.3.2 (current — fixes regulatory skill-body currency + self-contained HTML artifacts; folds in 2026 H1 reference updates. Built on v0.3.1 HTML live artifacts + v0.3.0 pilot)
+**Distribution:** Personal GitHub marketplace at https://github.com/jbass698-121/aveva-presales-pro-marketplace
 **Author:** Jason Bass
 **Status:** Specification (design intent)
 **Companion doc:** AS-BUILT.md (what actually shipped + gaps)
@@ -21,10 +22,43 @@ A Cowork plugin that turns Claude into a vendor-aware, distributor-personalized 
 
 ## 3. Distribution and Licensing Model
 
-- **Format:** Cowork plugin (`.plugin` file), installed per distributor org.
+- **Format (current — pivoted 2026-04-29):** Personal GitHub Marketplace. Public repo at `github.com/jbass698-121/aveva-presales-pro-marketplace` containing `.claude-plugin/marketplace.json` at the root and the plugin tree under `plugins/aveva-presales-pro/`. Users add the marketplace in Cowork via Browse plugins → Personal tab → + Add marketplace from GitHub → enter `jbass698-121/aveva-presales-pro-marketplace` → Sync → Install.
+- **Format (deprecated):** `.plugin` file via Cowork's local upload UI. The `.plugin` and `.zip` builds remain in the workspace as fallbacks but Cowork's local upload pathway is broken on Windows for user-built plugins (Anthropic GitHub issues #24328, #40414, #28337, #42651). Do not direct users to the local upload path.
+- **Per-tenant model:** each distributor org adds the marketplace once, then each user installs the plugin from it. Updates flow as `git push` → Cowork shows Update button → user clicks. Same iteration loop as the Wash-Reports automation pipeline.
 - **Pricing model (deferred — Phase 7 of modernization plan):** open between per-seat subscription, per-org annual, or hybrid.
 - **Content model:** BYOC (Bring Your Own Content). Plugin ships with framework + slot definitions + public-source layer + minimal vendor-neutral starter content. Each distributor brings their own pricing book, battlecards, case studies, and objection scripts under their AVEVA partnership rights.
 - **IP boundary:** framework, orchestrator, slot definitions, scheduled-task patterns, and verification subagent are author IP. Distributor-supplied content is distributor IP. Public AVEVA sources are referenced under fair-use citation, not redistributed.
+
+### 3.1 marketplace.json schema (Cowork-validated)
+
+The `.claude-plugin/marketplace.json` at the repo root must conform to Cowork's strict schema:
+
+```json
+{
+  "name": "aveva-presales-pro-marketplace",
+  "owner": { "name": "Jason Bass" },
+  "plugins": [
+    {
+      "name": "aveva-presales-pro",
+      "description": "...",
+      "version": "0.3.1",
+      "source": "./plugins/aveva-presales-pro"
+    }
+  ]
+}
+```
+
+Common gotchas observed during the pivot: `owner` must be an **object** (string-form is rejected — Cowork errors `owner: Invalid input: expected object, received string`); `name` should match the repo name; the file must be UTF-8 **without BOM** (PowerShell 5.1's `Out-File -Encoding utf8` adds a BOM — use `[System.IO.File]::WriteAllText` with `New-Object System.Text.UTF8Encoding $false` if rewriting); the `source` path is relative to the marketplace.json's location.
+
+### 3.2 Iteration workflow
+
+1. Edit files in `local-marketplace/plugins/aveva-presales-pro/...`
+2. Bump `version` in **both** `plugins/aveva-presales-pro/.claude-plugin/plugin.json` AND `.claude-plugin/marketplace.json`'s plugin entry
+3. `git push origin main` (pause OneDrive sync first or work in a non-OneDrive folder — OneDrive locks `.git/objects/`)
+4. Cowork polls GitHub on focus and surfaces an Update button to users when version differs
+5. Users click Update; new version pulls down
+
+Known persistence issue (#40600): user-installed plugins from a personal marketplace sometimes don't survive a Cowork restart. Marketplace registration persists; just re-click Install on the plugin entry. Document this in the user-facing install guide.
 
 ## 4. Architecture
 
@@ -34,9 +68,12 @@ A Cowork plugin that turns Claude into a vendor-aware, distributor-personalized 
 Layer 1: Framework (always present)
   - Plugin manifest
   - Orchestrator skill (master persona, routing, confidence)
-  - 7 sub-skills (competitive, roi, 3 industry, discovery, briefing)
+  - 21 sub-skills (22 total incl. orchestrator) — see AS-BUILT inventory
+  - 5 pipeline-stage agents + 6 content pipelines
+  - 4 self-contained HTML live artifacts (data inlined at build time)
   - Verification subagent
   - Public-sources layer (docs.aveva.com + github.com/AVEVA)
+  - Canonical reference YAMLs (canonical, regulatory-mapping, industry-positioning, whats-new-2026H1)
   - Slot templates
 
 Layer 2: Distributor configuration (per-distributor, file-based)
@@ -197,4 +234,34 @@ Customer-facing outputs additionally strip internal-only fields (margins, intern
 | 2b: QA-fix release | Done — v0.2.6 shipped | Critical agent-frontmatter fix, hash-comparator restored, outline templates shipped, content stubs cover orphan refs, 12 referenced content slots stubbed, packaging cleaned (`__pycache__` and build script no longer ship inside plugin), in-plugin `docs/` directory so onboarding's path refs resolve |
 | 2c: Content discovery (Phase 0 of improvement plan) | Done | Three canonical reference YAMLs shipped — aveva-canonical, aveva-regulatory-mapping, aveva-industry-positioning. PHASE-0-DIFF.md catalogs plugin-content drift |
 | 2d: Pilot release (Phase 1 + Phase 2 of improvement plan) | Done — v0.3.0 shipped | Regulatory currency refresh (LCRR→LCRI, FSMA 204 extension to 2028-07-20, PHMSA Mega Rule three phases, OOOOb/c with deadline-extension context). AVEVA product naming standardized (Operations Control Edge / Supervisory / Enterprise; PI Vision + CONNECT Visualization dual-tracked). Industrial AI Assistant integrated. AspenTech ownership update + new aspentech.md battlecard. AVEVA-as-Schneider parent reframe across all 5 full battlecards. Honeywell secure-by-design counter. AVEVA + Databricks partnership. Verifier rule for regulatory-claim freshness. |
-| 2e: HTML live artifacts | **Done — v0.3.1 shipped** | Four interactive HTML artifacts: `artifacts/roi-calculator.html` (sliders + tier/vertical selectors + 
+| 2e: HTML live artifacts | **Done — v0.3.1 shipped** | Four interactive HTML artifacts: `artifacts/roi-calculator.html` (sliders + tier/vertical selectors + real-time Y1/Y3/Y5 totals), `artifacts/content-health-dashboard.html` (KPIs + hash-baseline integrity + per-category slot status), `artifacts/battlecard-viewer.html` (audience-signals selector across 9 cards), `artifacts/briefing-dashboard.html` (connector-aware skeleton — full mode activates with Dynamics + Fireflies + M365). Five skills wired (roi, content-health, competitive, briefing, orchestrator). Snapshot JSONs regenerated at build time. |
+| 2f: Distribution pivot to GitHub Marketplace | **Done — 2026-04-29** | Cowork's local upload UI confirmed broken for user-built plugins (issue #24328 + extension-rejection bugs #40414/28337/42651). Pivoted to personal-GitHub-marketplace install path. Repo `jbass698-121/aveva-presales-pro-marketplace` created public; `marketplace.json` schema-corrected (owner-as-object, name matching repo, no BOM); plugin tree mirrors local working copy at `plugins/aveva-presales-pro/`. Iteration loop now: edit → `git push` → users click Update in Cowork. Same pattern as the Wash-Reports automation pipeline. |
+| 2g: Bug-fix + 2026-H1 content refresh | **Done — v0.3.2 (2026-06-03)** | Fixed regulatory currency in skill bodies (LCRI / Nov-2027 and FSMA 204 → 2028-07-20; the skill bodies had lagged the content playbooks). Made battlecard-viewer + content-health dashboards self-contained (snapshot data inlined at build, removing the sibling-file `fetch()` that failed in the Cowork `create_artifact` path). Folded in 2026 H1 reference updates: AVEVA World 2026 (CONNECT + Snowflake/ServiceNow, Flows/Crosser, MCP roadmap, Operations Control unified viz), AVEVA Unified Engineering AI; Emerson AspenTech AVA; **EPA methane WEC repealed + OOOOb/c weakened**; **PHMSA 2025 LDAR rule withdrawn**; Ignition 8.3 LTS; Honeywell reorg. Added `content/whats-new-2026H1.md` + `recent_developments_2026` in canonical. Corrected battlecard count to 6 full + 3 stub. Added one-command `build.py` (version bump + snapshot regen + inline + hash baseline). Synced in-plugin `docs/`. |
+| 3: MCP integration layer | Pending | Dynamics 365, M365, Fireflies wiring; opportunity briefing functional |
+| 4: BYOC content manifest & onboarding | Done — v0.2.1 onboarding skill | Interactive 9-step wizard ships; content slots stubbed in v0.2.6 |
+| 5: Q-Mation pilot prep | Ready | Onboarding doc, demo script, success metrics — go-no-go gated on first-tester (sales friend) feedback against v0.2.6 |
+| 6: Pilot & iterate | Pending | 30-day pilot with Q-Mation Gulf Coast |
+| 7: Productize for scale | Pending | Marketplace listing, pricing, multi-tenant |
+
+## 12. Design Boundaries — what this is NOT
+
+- **Not a replacement for AVEVA's direct sales team.** Distributors complement, not replace, AVEVA-direct selling.
+- **Not a CRM.** It pulls from Dynamics; it doesn't replace it.
+- **Not an MES or SCADA itself.** It's a presales accelerator that sells AVEVA's products.
+- **Not free-form Claude.** The orchestrator constrains the persona; sub-skills enforce structure; the verifier enforces accuracy.
+- **Not vendor-neutral.** Despite the framework's vendor-agnostic abstractions, the v0.1 instance is AVEVA-exclusive in voice and positioning, matching Q-Mation's reality.
+
+## 13. Acceptance Criteria for Pilot
+
+- All 22 skills activate on appropriate triggers (8-skill core per §4.2 plus producer, operational, and 7 industry skills).
+- The briefing artifact pulls from at least 2 of {Dynamics, M365, Fireflies} and produces a usable one-page brief.
+- The Ignition pricing objection script is loaded and accessible.
+- The CPG playbook loads with real content (not stub).
+- Confidence tags appear on every numeric claim in test responses.
+- The verifier runs on at least one numeric claim per response and reports CONFIRMED/CORRECTED/FLAGGED.
+- The distributor's enablement lead can fill in 3 BYOC slots without engineering help.
+- Content health artifact reports complete/partial/missing for every slot.
+
+---
+
+*End of SPEC.md.*

@@ -334,6 +334,83 @@ phrasing:
       reason: "Not a current SKU. Use 'AVEVA Operations Control — Supervisory'."
 
 # =========================================================================
+# Recent developments (2026 H1) — dated, citable entries folded in at v0.3.2.
+# Companion narrative: content/whats-new-2026H1.md
+# =========================================================================
+recent_developments_2026:
+  - title: "AVEVA World 2026 — CONNECT platform announcements"
+    date: "2026-05-20"
+    location: "Milan"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-announces-new-capabilities-to-embed-ai-across-industrial-organizations-and-data-infrastructure-at-aveva-world-2026/"
+    highlights:
+      - "New CONNECT integrations to Snowflake and ServiceNow"
+      - "Industrial knowledge graph plus agentic-AI 'twin builder'; major CONNECT release targeted Q1 2027"
+      - "'Flows' (from the Crosser acquisition) GA Q2 2026 with 800+ connectors for real-time data pipelines"
+
+  - title: "AVEVA World 2026 — Operations Control"
+    date: "2026-05-20"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-announces-new-capabilities-to-embed-ai-across-industrial-organizations-and-data-infrastructure-at-aveva-world-2026/"
+    highlights:
+      - "From June 2026: unified HMI/SCADA/enterprise visualization via CONNECT"
+      - "Native C# and Python at the edge"
+      - "Generative-AI templates and graphics"
+
+  - title: "AVEVA World 2026 — AI platform roadmap (MCP, AI Server/Client)"
+    date: "2026-05-20"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-announces-new-capabilities-to-embed-ai-across-industrial-organizations-and-data-infrastructure-at-aveva-world-2026/"
+    highlights:
+      - "Model Context Protocol (MCP) integrations on the roadmap"
+      - "AI Server / AI Client management on the roadmap (on-prem and cloud)"
+
+  - title: "AVEVA World 2026 — PI System"
+    date: "2026-05-20"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-announces-new-capabilities-to-embed-ai-across-industrial-organizations-and-data-infrastructure-at-aveva-world-2026/"
+    highlights:
+      - "Performance/scale improvements for AI workloads"
+      - "Bulk PI to CONNECT data movement"
+      - "Web-based Adapter management"
+      - "PI Vision UX upgrades"
+      - "New AVEVA PI Audit Reporter (built with Cognizant)"
+
+  - title: "AVEVA World 2026 — partnerships and deployment"
+    date: "2026-05-20"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-announces-new-capabilities-to-embed-ai-across-industrial-organizations-and-data-infrastructure-at-aveva-world-2026/"
+    highlights:
+      - "Microsoft partnership deepened"
+      - "Customer-Hosted SaaS option for data sovereignty"
+
+  - title: "AVEVA Unified Engineering AI offering"
+    date: "2026-01-14"
+    confidence: "HIGH"
+    source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-unveils-new-artificial-intelligence-offering-across-its-unified-engineering-solution/"
+    highlights:
+      - "Industrial AI assistant for Unified Engineering"
+      - "Generative design AI assistant"
+      - "Predictive design AI assistant"
+      - "Intelligent point-cloud framework"
+      - "Browser access to Unified Engineering"
+      - "Unified Engineering for marine design coming Q4 2026"
+
+  - title: "Industrial AI Assistant — status confirmation"
+    date: "2026-05-20"
+    confidence: "MEDIUM"
+    source: "https://www.aveva.com/en/connect-experience/about-connect/industrial-ai-assistant/"
+    highlights:
+      - "Confirmed GA and live in CONNECT; no discrete changelog found beyond the AVEVA World 2026 portfolio context"
+
+# Items deliberately NOT asserted as fact — verify before use in any content.
+unverified_do_not_assert:
+  - claim: "Specific 2026 System Platform / Plant SCADA point-release version number (bundled under Operations Control)"
+    status: "UNVERIFIED — verify against docs.aveva.com before citing any number"
+  - claim: "NVIDIA Nemotron attributed to AVEVA"
+    status: "INCORRECT — Nemotron is a Rockwell tie-up; do NOT attribute to AVEVA"
+
+# =========================================================================
 # Refresh policy
 # =========================================================================
 refresh:
@@ -343,4 +420,5 @@ refresh:
     - "any package set change"
     - "Industrial AI Assistant capability change > 1 line"
     - "new security certification added or expired"
-  next_review: "2026-05-29"
+    - "any new dated entry in recent_developments_2026"
+  next_review: "2026-06-30"

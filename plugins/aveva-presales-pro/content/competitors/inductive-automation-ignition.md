@@ -5,10 +5,10 @@ verticals_active_in: ["water-wastewater", "cpg", "oil-gas-upstream"]
 audience_signals:
   cost_sensitive: "Surface modules math + AVEVA Operations Control — Edge subscription option below 3-year Ignition fully-loaded TCO"
   enterprise_inclined: "Lead with one-company portfolio + certified support: AVEVA, part of Schneider Electric, with ISO 27001 + SOC 2 Type II + ISA/IEC 62443 + Customer FIRST 24/7"
-their_AI_offering: "Ignition Vision AI module (machine vision focus). Cloud-edition AI features in development. Inductive Automation has been adding AI capabilities; the gap to AVEVA Industrial AI Assistant (GA Jan 2026) is real but narrowing."
-last_validated: "2026-04-29"
+their_AI_offering: "Ignition's 'AI' is integration-via-REST-API plus third-party tooling, not a native copilot. Ignition 8.3 ships a built-in REST API that makes it straightforward to connect external AI/ML services; machine-vision use cases rely on third-party integration. No native conversational/agentic AI assistant comparable to the AVEVA Industrial AI Assistant (GA Jan 2026). [Confidence: HIGH]"
+last_validated: "2026-06-03"
 confidence_default: "MEDIUM"
-provenance: "Pricing changes regularly; verify against inductiveautomation.com/pricing each month."
+provenance: "Pricing changes regularly; verify against inductiveautomation.com/pricing each month. Version currency: Ignition 8.3 LTS line (8.3.0 released 2025-09-16), minor releases through 8.3.6 (Apr 2026)."
 sources:
   - url: "https://inductiveautomation.com/"
     type: "competitor_official"
@@ -16,6 +16,9 @@ sources:
   - url: "https://inductiveautomation.com/pricing"
     type: "competitor_official"
     date: "2026-04-29"
+  - url: "https://inductiveautomation.com/ignition/whatsnew"
+    type: "competitor_official"
+    date: "2026-06-03"
 ---
 
 # Battlecard: Inductive Automation (Ignition)
@@ -29,8 +32,8 @@ sources:
 
 ## Product Portfolio
 
-- Ignition (unified HMI/SCADA/MES platform)
-- Vision module (computer vision AI)
+- Ignition (unified HMI/SCADA/MES platform) — current major line is **8.3**, the first LTS release (8.3.0 released 2025-09-16; minor releases through 8.3.6, Apr 2026). 8.3 adds a built-in REST API, Historian Module Suite, Event Streams Module, a new Siemens driver, the Perspective Drawing Editor, and a redesigned gateway. There is no 8.5 line.
+- Vision module (computer vision)
 - Reporting, Voice Notification, MQTT, SQL Bridge, Web Browser, OPC-UA, etc. (modular pricing)
 - Ignition Edge (smaller, edge-first deployments)
 - Enterprise licensing tiers
@@ -92,8 +95,10 @@ sources:
 
 ## Recent Changes (review monthly)
 
-- Watch monthly: Ignition module pricing changes; new module releases; Ignition Cloud Edition feature additions.
-- Inductive Automation has been adding cloud and AI capabilities; the "AVEVA is cloud, Ignition is on-prem" framing is no longer fully accurate — the comparison is more nuanced now.
+- **Version currency (2026-06-03):** current major line is **Ignition 8.3** — the first LTS release (8.3.0 GA 2025-09-16), with minor releases through **8.3.6 (Apr 2026)**. Key 8.3 additions: built-in REST API, Historian Module Suite, Event Streams Module, new Siemens driver, Perspective Drawing Editor, redesigned gateway. There is **no 8.5** — if any asset cites 8.1 as current or references an 8.5, correct it to the 8.3 LTS line. [Confidence: HIGH]
+- **AI framing:** Ignition's AI story is integration-via-REST-API + third-party tooling, not a native copilot. There is no conversational/agentic assistant comparable to the AVEVA Industrial AI Assistant (GA Jan 2026). [Confidence: HIGH]
+- Watch monthly: Ignition module pricing changes; new module releases; 8.3.x maintenance releases.
+- Inductive Automation has been adding cloud and integration capabilities; the "AVEVA is cloud, Ignition is on-prem" framing is no longer fully accurate — the comparison is more nuanced now.
 
 ## Monitoring Queries (used by scheduled tasks)
 

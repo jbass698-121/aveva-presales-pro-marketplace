@@ -40,7 +40,7 @@ ROI patterns the distributor sees most often:
 
 CPG and food-and-beverage operators in the United States deal with:
 
-- **FSMA (Food Safety Modernization Act)** — Section 204 traceability rule effective January 2026, requiring records of critical tracking events for foods on the FTL (Food Traceability List). AVEVA MES batch records meet this directly.
+- **FSMA 204 (Food Safety Modernization Act, Section 204)** — traceability rule requiring records of Critical Tracking Events (CTEs) and Key Data Elements (KDEs) for foods on the FTL (Food Traceability List). Original compliance date was January 20, 2026; **extended to July 20, 2028** by Congressional directive (Continuing Appropriations Act 2026); FDA enforcement-discretion until the new date. **Two-track positioning:** customers compliant with the original timeline → AVEVA accelerates audit prep and KDE capture automation. Customers using the extension → AVEVA delivers a phased path: KDE capture readiness year 1, integrated CTE traceability year 2. AVEVA MES batch records meet the requirement directly.
 - **FDA 21 CFR Part 117** — current Good Manufacturing Practices for human food. Records and process control requirements.
 - **FDA 21 CFR Part 11** — electronic records and electronic signatures. Critical for batch records produced by AVEVA MES.
 - **HACCP** — Hazard Analysis and Critical Control Points. Process monitoring at CCPs is exactly the use case AVEVA System Platform addresses.

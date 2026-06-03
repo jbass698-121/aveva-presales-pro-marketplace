@@ -5,8 +5,8 @@ verticals_active_in: ["cpg", "water-wastewater", "oil-gas-discrete-adjacent"]
 audience_signals:
   multi_vendor_friendly: "Lead with open-architecture: AVEVA System Platform on top of Allen-Bradley PLCs"
   single_vendor_friendly: "Lead with one company / one MSA: AVEVA, part of Schneider Electric — unified portfolio under one renewal"
-their_AI_offering: "Rockwell FactoryTalk Design Studio Copilot (Microsoft Azure OpenAI Service powered) + NVIDIA Nemotron Nano edge SLM integration. Demonstrated at Hannover Messe 2026."
-last_validated: "2026-04-29"
+their_AI_offering: "FactoryTalk Design Studio AI Copilot (Microsoft Azure OpenAI Service powered) for natural-language code / ladder-logic generation; edge generative AI via NVIDIA Nemotron Nano small language model (SLM) for FactoryTalk; FactoryTalk ResilientEdge available Q1 2026. Announced around Automation Fair (Nov 2025). [Confidence: MEDIUM — official + trade]"
+last_validated: "2026-06-03"
 confidence_default: "MEDIUM"
 provenance: "Starter content adapted from prior consolidated competitive intelligence (2025-Q4). Verify revenue and product roadmap against current Rockwell investor relations before customer-facing use."
 sources:
@@ -16,6 +16,9 @@ sources:
   - url: "https://ir.rockwellautomation.com/"
     type: "competitor_investor_relations"
     date: "2026-04-29"
+  - url: "https://www.rockwellautomation.com/en-us/company/news/press-releases/rockwell-automation-to-advance-industrial-intelligence-through-e.html"
+    type: "competitor_official"
+    date: "2026-06-03"
 ---
 
 # Battlecard: Rockwell Automation
@@ -93,8 +96,9 @@ sources:
 
 ## Recent Changes (review monthly)
 
+- **AI (announced around Automation Fair, Nov 2025):** FactoryTalk Design Studio AI Copilot (Azure OpenAI) for natural-language code / ladder-logic generation; edge generative AI via NVIDIA Nemotron Nano SLM for FactoryTalk; FactoryTalk ResilientEdge available Q1 2026. NVIDIA Nemotron is a Rockwell tie-up — not AVEVA. [Confidence: MEDIUM — official + trade]
 - 2023-03: FactoryTalk Optix GA — Rockwell's modern HMI play; less mature than AVEVA System Platform.
-- Watch quarterly: PlantPAx version updates; FactoryTalk Hub feature additions.
+- Watch quarterly: PlantPAx version updates; FactoryTalk Hub feature additions; FactoryTalk Design Studio AI Copilot and Nemotron Nano edge SLM rollout.
 
 ## Monitoring Queries (used by scheduled tasks)
 

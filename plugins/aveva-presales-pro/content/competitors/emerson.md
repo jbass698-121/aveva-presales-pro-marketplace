@@ -5,15 +5,18 @@ verticals_active_in: ["oil-gas-upstream", "oil-gas-downstream", "chemicals", "po
 audience_signals:
   multi_vendor_friendly: "Lead with multi-industry breadth: AVEVA covers process + energy + discrete; Emerson is process-focused"
   single_vendor_friendly: "Lead with one-vendor unified portfolio: AVEVA, part of Schneider Electric (AVEVA + Foxboro + ETAP + EAE + PME); Emerson + AspenTech is the comparable single-stack"
-their_AI_offering: "Emerson AspenTech (wholly owned subsidiary since March 2025 take-private) brings AI-driven process modeling and optimization. DeltaV + Plantweb adding embedded AI features."
-recent_corporate_change: "Emerson acquired all remaining outstanding AspenTech shares on 2025-03-12 for $265/share ($17B deal). AspenTech is now wholly owned subsidiary, ceased trading on NASDAQ. Aspen Plus, HYSYS, and the Aspen process simulation portfolio are part of Emerson's integrated stack — expect bundled DeltaV + Aspen quotes in chemicals/refining."
-last_validated: "2026-04-29"
+their_AI_offering: "Emerson launched AspenTech AVA (2026-05-11) — an enterprise-scale, agentic, domain-aware industrial AI platform combining agentic AI with Emerson/AspenTech first-principles models across cloud/edge/on-prem. A direct head-to-head answer to AVEVA's agentic-AI / industrial-knowledge-graph story. AspenTech (wholly owned subsidiary since March 2025 take-private) also brings AI-driven process modeling and optimization; DeltaV + Plantweb adding embedded AI features. [Confidence: HIGH]"
+recent_corporate_change: "Emerson launched AspenTech AVA on 2026-05-11 — an enterprise-scale, agentic, domain-aware industrial AI platform (agentic AI + Emerson/AspenTech first-principles models across cloud/edge/on-prem). Earlier, Emerson acquired all remaining outstanding AspenTech shares on 2025-03-12 for $265/share ($17B deal); AspenTech is now a wholly owned subsidiary, delisted/ceased trading on NASDAQ. Aspen Plus, HYSYS, and the Aspen process simulation portfolio are part of Emerson's integrated stack — expect bundled DeltaV + Aspen + AVA quotes in chemicals/refining/process-design deals. [Confidence: HIGH]"
+last_validated: "2026-06-03"
 confidence_default: "MEDIUM"
 provenance: "Starter content from prior consolidated competitive intelligence (2025-Q4). Verify revenue and product naming against current Emerson IR."
 sources:
   - url: "https://www.emerson.com/en-us/automation"
     type: "competitor_official"
     date: "2026-04-29"
+  - url: "https://www.emerson.com/en/corporate/news/2026/new-emerson-industrial-ai-platform-delivers-enterprise-scale-ai"
+    type: "competitor_official"
+    date: "2026-06-03"
 ---
 
 # Battlecard: Emerson
@@ -44,6 +47,7 @@ sources:
 ## AVEVA Counter-Strategy
 
 - **Primary positioning:** complete industrial intelligence vs. process-only focus. AVEVA, part of Schneider Electric, covers process + energy + discrete in one architecture (AVEVA + Foxboro DCS + ETAP + EAE + PME). Emerson's AspenTech ownership gives it the process-modeling layer; AVEVA's unified portfolio still has the energy and discrete breadth Emerson doesn't match.
+- **AspenTech AVA counter (launched 2026-05-11):** Emerson now leads with AspenTech AVA — an enterprise-scale, agentic, domain-aware industrial AI platform — as a direct answer to AVEVA's agentic-AI / industrial-knowledge-graph story. Position the AVEVA (part of Schneider Electric) unified stack against it: CONNECT + Industrial AI Assistant + System Platform + electrical/energy breadth (ETAP + EAE + PME) deliver agentic, knowledge-graph-grounded operations intelligence across process **and** energy **and** discrete, where AVA is process-centric. The differentiator isn't whether Emerson has agentic AI — it now does — it's the breadth of the operational footprint that AI reasons over. [Confidence: HIGH]
 - **Top differentiator #1:** AVEVA's PI System historian breadth and 75% O&G market penetration — Plantweb's analytics is built on a much narrower foundation.
 - **Top differentiator #2:** EcoStruxure energy management beyond DeltaV's process scope.
 - **Top differentiator #3:** Multi-industry strength — AVEVA covers discrete, process, infrastructure, and energy in one platform.
@@ -84,8 +88,9 @@ sources:
 
 ## Recent Changes (review monthly)
 
+- **Major (2026-05-11):** Emerson launched **AspenTech AVA**, an enterprise-scale agentic, domain-aware industrial AI platform (agentic AI + Emerson/AspenTech first-principles models across cloud/edge/on-prem) — a direct head-to-head answer to AVEVA's agentic-AI / industrial-knowledge-graph story. Expect bundled DeltaV + Aspen + AVA quotes in chemicals/refining/process-design deals. [Confidence: HIGH]
 - **Major:** Emerson completed take-private of AspenTech on March 12, 2025 ($265/share, $17B). AspenTech is now wholly owned. Expect Emerson to bundle DeltaV + Aspen Plus/HYSYS in process-design + DCS competitive situations.
-- Watch quarterly: DeltaV version updates; Plantweb cloud feature additions; AspenTech integration into Emerson commercial motions; AVEVA SimSci competitive positioning vs. integrated Aspen + DeltaV.
+- Watch quarterly: DeltaV version updates; Plantweb cloud feature additions; AspenTech AVA capability and pricing; AspenTech integration into Emerson commercial motions; AVEVA SimSci competitive positioning vs. integrated Aspen + DeltaV.
 
 ## Monitoring Queries (used by scheduled tasks)
 

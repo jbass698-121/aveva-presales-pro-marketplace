@@ -6,7 +6,7 @@ This file is a Category 3 protected component per MODIFICATION-POLICY.md.
 -->
 ---
 name: aveva-industry-water-wastewater
-description: AVEVA presales positioning for water and wastewater utilities — drinking water treatment, wastewater treatment, distribution and collection systems, lift stations, SCADA modernization, and EPA SDWA / NPDES compliance. Activates on industry keywords (water, wastewater, sewer, sewage, treatment plant, WWTP, DWTP, lift station, pump station, SCADA muni, municipal, utility, drinking water, distribution, reservoir, storage tank, chlorination, UV disinfection, dosing, filtration, sludge, biosolids, MBR, RAS WAS, blowers, aeration) and regulatory framing (EPA, SDWA, Safe Drinking Water Act, NPDES, CWA, Clean Water Act, LCRR, lead and copper rule, GASB 34, asset management plan).
+description: AVEVA presales positioning for water and wastewater utilities — drinking water treatment, wastewater treatment, distribution and collection systems, lift stations, SCADA modernization, and EPA SDWA / NPDES compliance. Activates on industry keywords (water, wastewater, sewer, sewage, treatment plant, WWTP, DWTP, lift station, pump station, SCADA muni, municipal, utility, drinking water, distribution, reservoir, storage tank, chlorination, UV disinfection, dosing, filtration, sludge, biosolids, MBR, RAS WAS, blowers, aeration) and regulatory framing (EPA, SDWA, Safe Drinking Water Act, NPDES, CWA, Clean Water Act, LCRI, LCRR, lead and copper rule improvements, lead and copper rule, GASB 34, asset management plan).
 ---
 
 # AVEVA Water and Wastewater Industry Skill
@@ -58,7 +58,8 @@ For full battlecards: `content/competitors/{name}.md`. The `aveva-competitive` s
 
 Water and wastewater operators in the United States face:
 
-- **Safe Drinking Water Act (SDWA)** — federal drinking water standards; revised Lead and Copper Rule (LCRR) effective 2024–2027 driving utility modernization.
+- **Safe Drinking Water Act (SDWA)** — federal drinking water standards.
+- **Lead and Copper Rule Improvements (LCRI, formerly LCRR)** — finalized October 8, 2024; effective December 30, 2024; **compliance date November 1, 2027**. Headline requirements: 10-year mandatory replacement of all lead service lines (limited exceptions), revised lead action level (10 µg/L), mandatory baseline service-line inventory by November 2027, publicly-accessible replacement plan for systems serving >50,000. Interim LCRR-era requirements (initial inventory October 16, 2024; public notification of known/potential lead service lines; Tier 1 notification for action level exceedance) are maintained until the LCRI compliance date. Driving utility SCADA-modernization conversations across the country.
 - **Clean Water Act (CWA) / NPDES permits** — discharge monitoring and reporting. Daily, monthly, and quarterly DMR reporting that AVEVA System Platform automates.
 - **EPA America's Water Infrastructure Act (AWIA)** — risk and resilience assessments, emergency response plans. Cybersecurity audit posture matters.
 - **State-level regulations** — TCEQ in Texas, LDEQ in Louisiana, FDEP in Florida, RRC in Texas for produced water.
@@ -67,7 +68,7 @@ Water and wastewater operators in the United States face:
 
 ## Talk tracks by deal stage
 
-**Prospecting / cold call:** Lead with a regulatory pressure (LCRR, AWIA, NPDES audit prep) or an operational pain (operator labor in remote lift stations, SCADA upgrade pressure). Avoid product names until the second meeting.
+**Prospecting / cold call:** Lead with a regulatory pressure (LCRI, AWIA, NPDES audit prep) or an operational pain (operator labor in remote lift stations, SCADA upgrade pressure). Avoid product names until the second meeting.
 
 **Discovery:** Ask about (a) current SCADA platform and modernization timeline, (b) regulatory reporting burden and audit prep effort, (c) cybersecurity posture and CISA / EPA assessment status, (d) remote site count and operator drive time, (e) cloud and analytics interest level.
 
@@ -85,7 +86,7 @@ The Gulf Coast water and wastewater market includes:
 - **Special-purpose water districts** — abundant in Texas and the Gulf Coast region; Tier 1 deployment patterns.
 - **Industrial water and wastewater** — often co-located with petrochemical plants; cross-sells with O&G accounts.
 
-Many Gulf Coast utilities have SCADA refresh cycles tied to LCRR compliance deadlines. The 2024–2027 LCRR window is a sustained pipeline driver.
+Many Gulf Coast utilities have SCADA refresh cycles tied to **LCRI (formerly LCRR)** compliance. With LCRI's November 1, 2027 compliance date and 10-year service-line replacement timeline, the modernization window through 2027 is a sustained pipeline driver. Service-line inventory and public-facing replacement-plan portals are direct AVEVA opportunities.
 
 ## Reference files
 

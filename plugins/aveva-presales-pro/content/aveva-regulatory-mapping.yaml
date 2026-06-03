@@ -6,13 +6,13 @@
 # plugin's industry playbooks, with effective dates, compliance dates, and
 # authoritative source URLs. Phase 0 deliverable.
 #
-# Last refreshed: 2026-04-29.
+# Last refreshed: 2026-06-03 (v0.3.2 — methane/PHMSA contradiction fixes + 2026 H1 updates).
 # Refresh policy: monthly via source-validation scheduled task. Regulatory
 # changes are the highest-value freshness driver in the plugin.
 
 schema_version: 1
-captured_at: "2026-04-29"
-captured_by: "Phase 0 discovery + WebSearch primary-source verification"
+captured_at: "2026-06-03"
+captured_by: "Phase 0 discovery + WebSearch primary-source verification; 2026-06-03 currency pass"
 watermark: "appro-ca96e5c3-e535-40b4-a502-9e85523f608e"
 
 # =========================================================================
@@ -43,6 +43,12 @@ water_wastewater:
       seller_question: "Where are you on LCRI's 10-year service-line replacement timeline, and what's your service-line communication strategy?"
       avoid_question: "Have you completed your LCRR inventory?"   # LCRR is superseded
       sales_hook: "LCRI compliance by 2027-11-01 is the primary modernization driver in US municipal water through 2027. AVEVA Operations Control + asset management directly addresses inventory tracking, public-facing portals, and audit-ready documentation."
+    litigation_watch:
+      status: "Compliance date 2027-11-01 still stands as of 2026-06-03; EPA is actively defending the rule."
+      case: "American Water Works Association et al. v. EPA — AWWA challenging the 10-year lead-service-line replacement feasibility; NRDC/Sierra Club intervening to defend. Briefing complete; oral argument expected Fall 2026."
+      seller_note: "Treat 2027-11-01 as firm, but flag Fall 2026 oral argument as a potential future change point."
+      confidence: "HIGH"
+      last_verified: "2026-06-03"
     sources:
       - url: "https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements"
         type: "regulatory_primary"
@@ -55,8 +61,12 @@ water_wastewater:
     canonical_name: "America's Water Infrastructure Act"
     short_form: "AWIA"
     section_in_play: "Section 2013 — Risk and Resilience Assessments + Emergency Response Plans"
+    recertification_2026:
+      detail: "RRA/ERP recertification for community water systems serving 3,301–49,999 population is due 2026-06-30 (the mid-size-system cohort in the 5-year cycle)."
+      confidence: "MEDIUM-HIGH"
+      last_verified: "2026-06-03"
     presales_implication:
-      sales_hook: "AWIA risk and resilience assessments + Emergency Response Plans are recurring (every 5 years for community water systems > 3,300 population). AVEVA Operations Control + cybersecurity certification posture supports these."
+      sales_hook: "AWIA risk and resilience assessments + Emergency Response Plans are recurring (every 5 years for community water systems > 3,300 population). The 2026-06-30 recertification for mid-size systems is a near-term hook. AVEVA Operations Control + cybersecurity certification posture supports these."
     sources:
       - url: "https://www.epa.gov/waterresilience/awia-section-2013"
         last_verified: "2026-04-29"
@@ -80,9 +90,13 @@ cpg:
     formal_title: "Requirements for Additional Traceability Records for Certain Foods"
     original_compliance_date: "2026-01-20"
     extended_compliance_date: "2028-07-20"
-    extension_basis: "Continuing Appropriations Act (2026) Congressional directive — FDA shall not enforce prior to 2028-07-20"
-    extension_source: "FDA proposal (Aug 2025); Congressional directive in subsequent appropriations act"
-    fda_enforcement_stance: "FDA intends to comply with Congressional directive; effectively non-enforcement until 2028-07-20"
+    extension_basis: "Statutory enforcement bar — Continuing Appropriations Act (2026, enacted Nov 2025) directs FDA not to enforce prior to 2028-07-20. This is a statutory bar, not merely FDA's earlier proposed 30-month extension."
+    extension_source: "FDA proposed extension (Aug 2025); superseded/backed by Congressional statutory directive (Nov 2025 appropriations act)"
+    fda_enforcement_stance: "Enforcement statutorily barred until 2028-07-20; underlying rule requirements unchanged."
+    rule_reexamination_2026:
+      detail: "FDA opened a 2026 stakeholder-engagement initiative (quarterly listening sessions; public sessions Q2 2026) explicitly questioning lot-level traceability — signals possible future requirement changes. Monitor; do not assume the current rule text is final-forever."
+      confidence: "MEDIUM"
+      last_verified: "2026-06-03"
     plugin_legacy_term: "FSMA 204 effective Jan 2026"   # the plugin currently treats as in-force; needs two-track update
     headline_requirements:
       - "Critical Tracking Events (CTEs) for foods on the Food Traceability List (FTL)"
@@ -147,8 +161,14 @@ oil_gas:
         canonical_name: "Mega Rule Part 3 (RIN3) — Onshore Gathering Lines"
         scope: "Expanded PHMSA jurisdiction over onshore gathering lines"
         effective_date: "2023-05-16"
+    ldar_rule_2025_status:
+      canonical_name: "PHMSA Gas Pipeline Leak Detection and Repair (LDAR) final rule"
+      status: "WITHDRAWN — do NOT cite as an active compliance deadline."
+      detail: "The Jan 2025 LDAR final rule (advanced leak detection, gathering-line corrosion control) was sent to but not published in the Federal Register, then pulled under the Jan 2025 regulatory-freeze EO. It is not in effect. The PIPES Act of 2020 Section 113 mandate still stands, so a future LDAR rulemaking is possible — but as of 2026-06-03 there is NO current LDAR compliance deadline. Any 2026-finalized LDAR/RIN-refile claim is UNVERIFIED; do not assert."
+      confidence: "MEDIUM-HIGH"
+      last_verified: "2026-06-03"
     presales_implication:
-      sales_hook: "Mega Rule Part 2 (effective May 2023) and Part 3 (effective May 2023) are driving SCADA-modernization conversations across midstream right now. Compliance reporting automation, integrity management workflows, and pipeline asset records are the AVEVA opportunity."
+      sales_hook: "Mega Rule Parts 2 (effective May 2023) and 3 (effective May 2023) remain in effect and continue to drive SCADA-modernization and integrity-management conversations across midstream. Compliance reporting automation, integrity management workflows, and pipeline asset records are the AVEVA opportunity. NOTE: the separate 2025 LDAR final rule was withdrawn — frame leak-detection as operator-elected / integrity-driven, not a current federal deadline."
       seller_question: "How does your team handle Mega Rule Part 2 integrity management reporting? What's the data architecture between SCADA, integrity management, and the records system?"
     sources:
       - url: "https://www.federalregister.gov/documents/2022/08/24/2022-17031/pipeline-safety-safety-of-gas-transmission-pipelines-repair-criteria-integrity-management"
@@ -173,23 +193,28 @@ oil_gas:
     overview:
       ooo_b: "New Source Performance Standards (NSPS) for new, reconstructed, and modified oil and gas sources"
       ooo_c: "Emission Guidelines (EG) — states develop plans for existing sources"
+    status_2026: "MATERIALLY WEAKENED — posture shifted from federal mandate to operator-elected / state-driven. Update any framing that treats 2024 methane rules as firm in-force mandates."
     deadline_status_2026:
-      - "2025-07-28: EPA extended several compliance deadlines (interim final rule)"
-      - "2025-11-26: Final rule adopted IFR-extended deadlines"
-      - "First annual report under Subpart OOOOb due no earlier than 2026-11-30"
-      - "State plan submission deadline: 2027-01-22"
-      - "2026-04-04: EPA finalized reconsideration on two specific aspects"
+      - "Waste Emissions Charge (WEC, the methane fee under CAA 136) REPEALED via Congressional Review Act; EPA revoked 40 CFR Part 99 (FR notice 2025-05-19). The methane FEE no longer exists."
+      - "EPA reconsideration final rule weakening OOOOb/OOOOc published 2026-04-09, EFFECTIVE 2026-06-08 — loosens flare/vent-gas (NHV) monitoring requirements and extends several compliance dates."
+      - "Core OOOOb/OOOOc framework still exists but is materially softened; enforcement posture relaxed under the current administration."
+      - "State plan timing under OOOOc remains in flux pending the reconsideration; treat prior state-plan deadlines as uncertain."
     presales_implication:
-      sales_hook: "OOOOb/c monitoring requirements are driving fugitive-emissions data architecture conversations in upstream and midstream. AVEVA PI System + System Platform aggregate continuous monitoring data into auditable records."
-      seller_question: "How are you tracking methane emissions for OOOOb reporting? Annual report under OOOOb is due no earlier than November 2026 — what's your data plan?"
-      avoid_framing: "OOOOb is in force as originally scheduled"   # extensions matter
+      sales_hook: "Methane/emissions monitoring is now better framed as OPERATOR-ELECTED and state-driven (e.g., investor/ESG pressure, voluntary OGMP 2.0, state programs) rather than a hard federal mandate — the 2024 rules were weakened in 2026 and the Waste Emissions Charge was repealed. AVEVA PI System + System Platform still aggregate continuous monitoring data into auditable records for operators who choose to (or are state-required to) monitor."
+      seller_question: "Given the 2026 rollback of the federal methane rules and repeal of the Waste Emissions Charge, what's driving your emissions-monitoring strategy now — state requirements, investor/ESG commitments, or LDAR for product-loss recovery?"
+      avoid_framing: "OOOOb/OOOOc and the Waste Emissions Charge are firm federal mandates"   # both were rolled back / repealed in 2025-2026
     sources:
+      - url: "https://www.federalregister.gov/documents/2026/04/09/2026-06808/reconsideration-of-standards-of-performance-for-new-reconstructed-and-modified-sources-and-emissions"
+        type: "federal_register"
+        note: "2026 reconsideration final rule (eff. 2026-06-08)"
+        last_verified: "2026-06-03"
+      - url: "https://www.epa.gov/controlling-air-pollution-oil-and-natural-gas-operations/2026-final-rule-reduce-burden-oil-and"
+        type: "regulatory_primary"
+        last_verified: "2026-06-03"
       - url: "https://www.epa.gov/controlling-air-pollution-oil-and-natural-gas-operations/epas-final-rule-reduce-methane-and-other"
         type: "regulatory_primary"
-        last_verified: "2026-04-29"
-      - url: "https://www.epa.gov/controlling-air-pollution-oil-and-natural-gas-operations/2025-interim-final-rule-extend-compliance"
-        type: "regulatory_primary"
-        last_verified: "2026-04-29"
+        note: "Original 2024 methane rule (now reconsidered/weakened)"
+        last_verified: "2026-06-03"
 
   api_recommended_practices:
     canonical_names:
@@ -265,7 +290,11 @@ cybersecurity:
   circia:
     canonical_name: "Cyber Incident Reporting for Critical Infrastructure Act"
     short_form: "CIRCIA"
-    presales_implication: "Critical infrastructure (including water and pipelines) report cyber incidents to CISA within 72 hours of discovery. Drives the case for proper logging + alarm management in OT systems."
+    presales_implication: "Critical infrastructure (including water and pipelines) report cyber incidents to CISA within 72 hours of discovery (and ransom payments within 24 hours). Drives the case for proper logging + alarm management in OT systems."
+    final_rule_status_2026:
+      detail: "CIRCIA final rule was anticipated ~mid-2026 (CISA held refinement town-halls; FR notice 2026-02-13). As of 2026-06-03 confirm whether the final rule has actually published before citing firm 72-hr/24-hr obligations as in-force — UNVERIFIED until the final rule appears."
+      confidence: "MEDIUM (forecast, not confirmed published)"
+      last_verified: "2026-06-03"
 
 # =========================================================================
 # Refresh policy

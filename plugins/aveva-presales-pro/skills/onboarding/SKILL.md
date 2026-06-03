@@ -183,7 +183,7 @@ If yes, write `distributor.config.yaml` to the plugin root (overwriting the exam
 Run the `aveva-content-health` skill in audit mode. Produces the Health Score, lists what's complete vs. missing.
 
 For most fresh installs, the audit will surface:
-- **GREEN:** all 5 starter battlecards (Rockwell, Honeywell, Siemens, Emerson, Ignition), 5 industry playbooks (CPG, O&G, Water-WW, Mining, Transportation) refreshed for v0.3.0 regulatory currency (LCRI, FSMA 204 extension, PHMSA Mega Rule, OOOOb/c), Ignition pricing + Rockwell incumbency objections, 6 starter case studies, public-sources.yaml, AVEVA canonical reference YAMLs.
+- **GREEN:** all 6 full battlecards (Rockwell, Honeywell, Siemens, Emerson, Ignition, AspenTech), plus 3 stubs (ABB, GE Digital, Trihedral VTScada), 5 industry playbooks (CPG, O&G, Water-WW, Mining, Transportation) refreshed for v0.3.0 regulatory currency (LCRI, FSMA 204 extension, PHMSA Mega Rule, OOOOb/c), Ignition pricing + Rockwell incumbency objections, 6 starter case studies, public-sources.yaml, AVEVA canonical reference YAMLs.
 - **YELLOW:** stub industry skills (Pharma, Power-Utilities); slot templates without real content yet.
 - **RED:** distributor pricing book (`content/pricing/aveva-current.yaml`) — most-leverage missing slot.
 

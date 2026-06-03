@@ -1,7 +1,7 @@
 {
   "name": "aveva-presales-pro",
-  "version": "0.3.1",
-  "description": "AI presales content factory for Schneider Electric direct sellers and AVEVA distributors. v0.3.1 adds HTML live artifacts: interactive ROI calculator, content health dashboard, battlecard viewer, and briefing dashboard skeleton (activates with CRM + Fireflies + M365 connectors). Built on v0.3.0's regulatory + AI content refresh.",
+  "version": "0.3.2",
+  "description": "AI presales content factory for Schneider Electric direct sellers and AVEVA distributors. v0.3.2 (2026-06-03): bug-fix + content-refresh release \u2014 regulatory currency fixed in skill bodies (LCRI, FSMA 204 to 2028-07-20), HTML artifact data inlined so the battlecard viewer and content-health dashboard work as self-contained Cowork artifacts, plus 2026 H1 updates (AVEVA World 2026, Emerson AspenTech AVA, EPA methane/PHMSA rollbacks, Ignition 8.3 LTS). Built on v0.3.1 HTML live artifacts and v0.3.0 regulatory/AI content.",
   "author": {
     "name": "Jason Bass"
   },

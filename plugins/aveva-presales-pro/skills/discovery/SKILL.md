@@ -42,7 +42,7 @@ Tie the operational pain to a business objective.
 Industry-specific. Use the industry playbook's regulatory section.
 - O&G: PHMSA reporting burden, API IMP audit cadence, OOOOa/OOOOb readiness.
 - CPG: FSMA 204 traceability readiness, FDA Part 11 batch records posture, GFSI certification calendar.
-- Water/WW: LCRR compliance posture, CISA cybersecurity assessment status, NPDES DMR reporting effort.
+- Water/WW: LCRI (formerly LCRR) compliance posture — where they are on the 10-year service-line replacement timeline toward the November 1, 2027 compliance date — CISA cybersecurity assessment status, NPDES DMR reporting effort.
 
 ### Decision criteria and process
 Surface the buying process without being intrusive.

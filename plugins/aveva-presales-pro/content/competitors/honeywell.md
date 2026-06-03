@@ -6,7 +6,8 @@ audience_signals:
   multi_vendor_friendly: "Lead with multi-vendor SIS: AVEVA + Triconex/HIMA/Yokogawa SIS, vs Honeywell's integrated SIS lock-in"
   single_vendor_friendly: "Lead with one-vendor unified portfolio: AVEVA, part of Schneider Electric (AVEVA + Foxboro DCS + ETAP + EAE + PME) under one MSA"
 their_AI_offering: "Honeywell Forge AI features (cybersecurity-led positioning, including Quantinuum quantum-cryptography for OT). Vertically integrated within the Honeywell stack."
-last_validated: "2026-04-29"
+recent_corporate_change: "Q1 2026 reorganization created a new 'Process Automation and Technology' reportable segment (recomposed from the former Industrial Automation segment); the Aerospace spin-off is targeted for ~2026-06-29. Positioning should reflect the restructured process-automation business. [Confidence: MEDIUM-HIGH — SEC 10-Q primary]"
+last_validated: "2026-06-03"
 confidence_default: "MEDIUM"
 provenance: "Starter content adapted from prior consolidated competitive intelligence (2025-Q4). Verify revenue and product roadmap against current Honeywell investor relations before customer-facing use."
 sources:
@@ -99,7 +100,8 @@ These are independently verified, current, and the standards that customers' aud
 
 ## Recent Changes (review monthly)
 
-- Watch quarterly: Honeywell Forge feature additions; Experion version updates; UOP technology bundles.
+- **Corporate structure (Q1 2026):** Honeywell reorganized into a new **"Process Automation and Technology"** reportable segment (recomposed from the former Industrial Automation segment); the Aerospace spin-off is targeted for ~2026-06-29. Frame positioning against the restructured, more process-focused business. [Confidence: MEDIUM-HIGH — SEC 10-Q primary]
+- Watch quarterly: Honeywell Forge feature additions; Experion version updates; UOP technology bundles; Process Automation and Technology segment reporting post-reorg.
 
 ## Monitoring Queries (used by scheduled tasks)
 

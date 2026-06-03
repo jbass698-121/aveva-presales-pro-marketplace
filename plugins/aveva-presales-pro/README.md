@@ -3,6 +3,18 @@
 **An AI presales content factory for Schneider Electric direct sellers and AVEVA distributors.**
 v0.3.1 — HTML live artifacts release. Adds 4 interactive artifacts (ROI calculator with sliders, content health dashboard, battlecard viewer, briefing dashboard) on top of v0.3.0's regulatory + AI content refresh.
 
+## ⚠️ Just installed? Start here
+
+Cowork doesn't auto-run anything when a plugin installs — the skills are registered but silent until you trigger one. To configure this plugin for your team, open a fresh Cowork chat and type:
+
+> *"Set up the plugin for our team."*
+
+That activates the `onboarding` skill — a 9-step wizard (~15-20 min) that asks about your audience type, region, active verticals, primary competitors, CRM stack, **optional tools (Gamma, Wondercraft)**, voice preferences, **pricing book override**, and brand assets. At the end it writes your `distributor.config.yaml`, registers 12 scheduled tasks, and runs an initial content health audit.
+
+**Just want to try it without configuring?** Type *"just exploring"* (or *"use the example config"*) — loads Q-Mation defaults so you can start testing immediately. You can run real onboarding any time later.
+
+**Other onboarding triggers** if the phrase above doesn't activate it: *"onboard me"*, *"configure the plugin"*, *"walk me through setup"*, *"first-run"*, *"getting started"*, *"customize the plugin"*.
+
 ## What this plugin does
 
 Multi-agent pipeline architecture producing six artifact archetypes from one curated content layer:
